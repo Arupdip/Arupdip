@@ -103,8 +103,6 @@ class UserTypeController extends Controller
 		$type->status = 2;
 		$type->update();
 		
-		echo 'ok';
-		die;
 		
 		
 		return redirect('/admin/usertype')->with("success","User role type is successfully updated !!");
