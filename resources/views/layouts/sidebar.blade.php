@@ -16,6 +16,13 @@
                     </ul>
                 </li>
                 <li class="drop-menu">
+					<span class="drop-menu-head" onclick="toggleSubmenu(this)"><i class="priya-plus"></i> Manage Role Type<i class="priya-angle-right drop-icon"></i></span>
+                    <ul class="submenu collapse">
+						<li><a href="{{url('/')}}/admin/usertype/create"> Create</a> </li>
+                         <li><a href="{{url('/')}}/admin/usertype"> List</a> </li>
+                    </ul>
+                </li>
+                <li class="drop-menu">
                     <span class="drop-menu-head" onclick="toggleSubmenu(this)"><i class="priya-plus"></i> AMC Management <i class="priya-angle-right drop-icon"></i></span>
                     <ul class="submenu collapse">
                        <li><a href="{{url('/')}}/admin/amc/create"> Create</a> </li>

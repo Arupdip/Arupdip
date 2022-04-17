@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class AMC extends Model
 {
-   protected $table = "amc";
+	protected $table = "amc";
 
-       public function district()
-{
-  return $this->belongsTo('App\Models\District','district_id');
-}
-
-
+	public function district()
+	{
+		return $this->belongsTo('App\Models\District','district_id');
+	}
 }

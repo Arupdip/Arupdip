@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\MandalController;
 use App\Http\Controllers\admin\DesignationController;
 use App\Http\Controllers\admin\AMCController;
 use App\Http\Controllers\admin\LicensetypeController;
+use App\Http\Controllers\admin\UserTypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,21 +49,21 @@ Route::post('save-trader-details',[TraderController::class,'saveTraderDetails'])
 / Web Routes for ADMIN(super admin) with CaController 
 /
 */
-  Route::get('admin/login', function () {
-        return view('admin/login');
-    })->name("adminlogin");
-   Route::post('admin/post-login',[AuthController::class,'loginsubmit']);
-Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
-  
+Route::get('admin/login', function () {
+    return view('admin/login');
+})->name("adminlogin");
+Route::post('admin/post-login',[AuthController::class,'loginsubmit']);
+Route::group(['prefix' => 'admin','middleware'=>'auth'], function () { 
    
-    Route::get('/',[CaController::class,'dashboard']);
-    // For Manage mandal,district,state
+	Route::get('/',[CaController::class,'dashboard']);
+	    // For Manage mandal,district,state
 
-Route::resource('district', DistrictController::class);
-Route::resource('mandal', MandalController::class);
-Route::resource('designation', DesignationController::class);
-Route::resource('amc', AMCController::class);
-Route::resource('licensetype', LicensetypeController::class);
+	Route::resource('district', DistrictController::class);
+	Route::resource('mandal', MandalController::class);
+	Route::resource('designation', DesignationController::class);
+	Route::resource('amc', AMCController::class);
+	Route::resource('licensetype', LicensetypeController::class);
+	Route::resource('usertype', UserTypeController::class);
 
 
 });
