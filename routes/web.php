@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\DesignationController;
 use App\Http\Controllers\admin\AMCController;
 use App\Http\Controllers\admin\LicensetypeController;
 use App\Http\Controllers\admin\UserTypeController;
+use App\Http\Controllers\admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
 	Route::resource('amc', AMCController::class);
 	Route::resource('licensetype', LicensetypeController::class);
 	Route::resource('usertype', UserTypeController::class);
+	Route::resource('user', UserController::class);
 
 
 });

@@ -51,7 +51,7 @@
       </div>
     </div>
 </div>
-
+<a href="{{url('/')}}/admin/licensetype/create" class="float-btn" title="Add New">+</a>
 <script type="text/javascript">
     
     function deleteid(id)
