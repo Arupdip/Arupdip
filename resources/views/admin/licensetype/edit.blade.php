@@ -21,18 +21,42 @@
 
                         @method("put")
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>License Type<span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->name}}" />
                                 </div>
                             </div>                  
-                            <div class="col-md-4">
-                                
-                                <div class="text-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Registration Fees<span class="text-danger">*</span></label>
+                                    <input type="number" name="reg_fee" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->reg_fee}}" />
+                                </div>
+                            </div>                  
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>License Fees<span class="text-danger">*</span></label>
+                                    <input type="number" name="license_fee" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->license_fee}}"/>
+                                </div>
+                            </div>                  
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Renewal Penalty Fees<span class="text-danger">*</span></label>
+                                    <input type="number" name="penalty" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->penalty}}"/>
+                                </div>
+                            </div>                  
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>License Validity <small> (Years) </small><span class="text-danger">*</span></label>
+                                    <input type="number" name="validity" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->validity}}"/>
+                                </div>
+                            </div>                  
+                            <div class="col-md-6 ">
+                               
+                               
                                     <label>&nbsp;</label>
                                     <div><button class="btn" type="submit">Save</button></div>
-                                </div>
+                                
                             </div>
                         </div>
                     </form>

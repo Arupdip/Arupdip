@@ -204,7 +204,7 @@
                                 <li>
                                     <label><i class="priya-user"></i>Manage Other Users<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
                                     <ul class="collapse">
-                                        <li><a href="#">Add New</a></li>
+                                        <li><a href="{{url('/')}}/admin/user/create"">Add New</a></li>
                                         <li><a href="#">Manage Users</a></li>
                                     </ul>
                                 </li>
