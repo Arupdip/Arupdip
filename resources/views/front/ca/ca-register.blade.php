@@ -29,7 +29,7 @@
                 <form name="" id="ca-register-form" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('save-ca-details')}}" >
                     @csrf
                     <div class="form-section">
-                        <h6>Trader Details</h6>
+                        <h6>CA Details</h6>
                        
                         <div class="row">
                             <div class="col-md-4">
@@ -102,7 +102,11 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Is Minor<span class="text-danger">*</span></label>
-                                    <input type="text" name="is_minor" class="form-control pri-form" readonly />
+                                    <select name="is_minor" class="form-control pri-form">
+                                        <option value="">Select option</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
