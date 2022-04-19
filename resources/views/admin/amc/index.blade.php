@@ -54,6 +54,7 @@
       </div>
     </div>
 </div>
+<a href="{{url('/')}}/admin/amc/create" class="float-btn" title="Add New">+</a>
 
 <script type="text/javascript">
     

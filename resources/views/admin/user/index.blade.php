@@ -11,7 +11,7 @@
 		<div class="col-sm-9">
 			<div class="py-5 section">
 				<card class="card">
-					<h5 class="card-header">Role Type
+					<h5 class="card-header">User List
 						<div class="btn-grp">
 							<btn onclick="window.history.back()" title="Back">
 								<i class="priya-arrow-left"></i></btn>
@@ -29,9 +29,14 @@
 							<table class="table table-stripped table-bordered theme-tbl datatable">
 								<thead>
 									<tr>
-										<th>Sl.No.</th>
-										<th>Role Type Code </th>
-										<th>Role Type Name</th>
+										<th class="text-center">Sl.No.</th>
+										<th class="text-center">Name</th>
+										<th class="text-center">Email</th>
+										<th class="text-center">Phone</th>
+										<th class="text-center">Roll</th>
+										<th class="text-center">Designation</th>
+										<th class="text-center">Status</th>
+										<th class="text-center">Action</th>
 										<!--<th>Action</th>-->
 									</tr>
 								</thead>
@@ -40,11 +45,16 @@
 										$i=1;
 									@endphp
 									
-									@foreach ($usertype as $val)
+									@foreach ($users as $val)
 									<tr>
 										<td>{{$i++}}</td>
-										<td>{{$val->type}}</td>
 										<td>{{$val->name}}</td>
+										<td>{{$val->email}}</td>
+										<td>{{$val->phone}}</td>
+										<td>{{$val->phone}}</td>
+										<td>{{user_roll($val->user_type)}}</td>
+										<td>{{$val->phone}}</td>
+										<td>{{$val->phone}}</td>
 										<!--<td align="center">
 											<a href="{{url('/')}}/admin/usertype/{{$val->id}}/edit" class="btn btn-icon btn-info" title="Edit">
 												<i class="priya-edit"></i></a>
@@ -72,7 +82,7 @@
 
 			$.ajax({
 				type: "DELETE",
-				url: "{{url('/')}}/admin/usertype/"+id,
+				url: "{{url('/')}}/admin/user/"+id,
 				data: {_token: "{{csrf_token()}}", id: id}, // serializes the form's elements.
 				success: function(data) {
 					window.location.reload();

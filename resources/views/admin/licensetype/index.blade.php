@@ -20,10 +20,13 @@
                         <table class="table table-stripped table-bordered theme-tbl datatable">
                             <thead>
                                 <tr>
-                                    <th>Sl.No.</th>
-                                    <th>Name</th>
-                                    
-                                    <th>Action</th>
+                                    <th class="text-center">Sl.No.</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Registration Fees</th>
+                                    <th class="text-center">License Fees</th>
+                                    <th class="text-center">Renewal Penalty Fees</th>
+                                    <th class="text-center">License Validity</th>                                    
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,8 +36,12 @@
                                 <?php
                                 $i++; ?>
                                 <tr>
-                                  <td>{{$i}}</td>
+                                  <td class="text-center">{{$i}}</td>
                                   <td>{{$d->name}}</td>
+                                  <td class="text-center">{{number_format($d->reg_fee,2)}}</td>
+                                  <td class="text-center">{{number_format($d->license_fee,2)}}</td>
+                                  <td class="text-center">{{number_format($d->penalty,2)}}</td>
+                                  <td class="text-center">{{$d->validity}} Years</td>
                                  
                                   <td align="center">
                                       <a href="{{url('/')}}/admin/licensetype/{{$d->id}}/edit" class="btn btn-icon btn-info" title="Edit"><i class="priya-edit"></i></a> 
@@ -51,7 +58,7 @@
       </div>
     </div>
 </div>
-
+<a href="{{url('/')}}/admin/licensetype/create" class="float-btn" title="Add New">+</a>
 <script type="text/javascript">
     
     function deleteid(id)

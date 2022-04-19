@@ -51,6 +51,7 @@
       </div>
     </div>
 </div>
+<a href="{{url('/')}}/admin/mandal/create" class="float-btn" title="Add New">+</a>
 
 <script type="text/javascript">
     

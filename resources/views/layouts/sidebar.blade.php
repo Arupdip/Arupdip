@@ -1,6 +1,8 @@
 <card class="card p-2" style="max-height: 90vh; overflow: auto;">
             <!-- SIDE NAV -->
             <ul class="side-nav">
+				<li><a href="{{url('/')}}/admin/usertype"><i class="priya-arrow-right"></i> Role Type </a></li>
+               
                 <li class="drop-menu">
                     <span class="drop-menu-head" onclick="toggleSubmenu(this)"><i class="priya-plus"></i> License Management <i class="priya-angle-right drop-icon"></i></span>
                     <ul class="submenu collapse">
@@ -13,13 +15,6 @@
                     <ul class="submenu collapse">
                         <li><a href="{{url('/')}}/admin/designation/create"> Create</a> </li>
                          <li><a href="{{url('/')}}/admin/designation"> List</a> </li>
-                    </ul>
-                </li>
-                <li class="drop-menu">
-					<span class="drop-menu-head" onclick="toggleSubmenu(this)"><i class="priya-plus"></i> Manage Role Type<i class="priya-angle-right drop-icon"></i></span>
-                    <ul class="submenu collapse">
-						<li><a href="{{url('/')}}/admin/usertype/create"> Create</a> </li>
-                         <li><a href="{{url('/')}}/admin/usertype"> List</a> </li>
                     </ul>
                 </li>
                 <li class="drop-menu">

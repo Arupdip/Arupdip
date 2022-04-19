@@ -21,8 +21,7 @@
                             <thead>
                                 <tr>
                                     <th>Sl.No.</th>
-                                    <th>Name</th>
-                                    
+                                    <th>Name</th>                                    
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,7 +50,7 @@
       </div>
     </div>
 </div>
-
+<a href="{{url('/')}}/admin/designation/create" class="float-btn" title="Add New">+</a>
 <script type="text/javascript">
     
     function deleteid(id)
