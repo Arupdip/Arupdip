@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CAApply;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Tempuser;
 use App\Models\State;
 use App\Models\District;
-
+use App\Models\Licensetype;
+use App\Models\AMC;
+use DB;
+use Auth;
 class CaController extends Controller
 {
 
@@ -22,8 +27,10 @@ class CaController extends Controller
     public function caRegister(){
 
         $states = State::all();
+        $liscencetype = Licensetype::all();
+        $amc = AMC::all();
 
-        return view('front/ca/ca-register',['states' => $states]);
+        return view('front/ca/ca-register',compact('states', 'liscencetype','amc'));
 
     }
       /**
@@ -35,7 +42,7 @@ class CaController extends Controller
     public function dashboard(){
 
 
-        return view('admin.dashboard');
+        return view('front.ca.dashboard');
 
     }
     /**
@@ -45,9 +52,7 @@ class CaController extends Controller
      */
 
     public function fetchDistricts(Request $request){
-
-
-        $data['districts'] = District::where("state_id",$request->state_id)->get(["district_title", "districtid"]);
+        $data['districts'] = District::where("state_id",$request->state_id)->get(["name", "id"]);
         return response()->json($data);
 
     }
@@ -59,70 +64,140 @@ class CaController extends Controller
      */
 
     public function saveCaDetails(Request $request){
-        // dd($request->all());
-        $user_type = "CA";
-        $aadhar_no = $request->adhar_no;
-        $full_name = $request->name_of_applicant;
-        $age = $request->age;
-        $password = Hash::make($request->password);
-        $fathers_name = $request->fathersname;
-        $date_of_birth = $request->dateofbirth;
-        $isminor = $request->isminor;
-        $address = $request->address;
-        $mob_no = $request->mobno;
-        $pan_no = $request->panno;
-        $email = $request->email;
-        $state = State::getStateName($request->state);
-        $district = $request->district;
-        $gstin = $request->gstin;
-        $amcname = $request->amcname;
-        $name_in_power_attorney = $request->nameinpowerattorney;
-        $liscence_type = $request->liscencetype;
-        $market_name = $request->marketname;
+      
+        $returnArr = array("success" => false , "message" => "");
 
-    try {
+        
+        $checkaddhar = CAApply::where("aadhar_no","=",$request->aadhar_no)->count();
+        if($checkaddhar != 0 )
+        {
+           $returnArr['message']= "Aadhar card is already existed !!";
+           return $returnArr;
+        }
 
-        $user = new Tempuser;
-        $user->user_type = $user_type;
-        $user->email = $email;
-        $user->password = $password;
-        $user->full_name = $full_name;
-        $user->fathers_name = $fathers_name;
-        $user->date_of_birth = $date_of_birth;
-        $user->address = $address;
-        $user->mob_no = $mob_no;
-        $user->pan_no = $pan_no;
-        $user->state = $state;
-        $user->district = $district;
-        $user->gst_no = $gstin;
-        $user->liscence_type = $liscence_type;
-        $user->amc_name = $amcname;
-        $user->market_name = $market_name;
-        $user->aadhar_no = $aadhar_no;
-        $user->age = $age;
-        $user->name_in_power_attorney = $name_in_power_attorney;
+        $checkemail = User::where("email","=",$request->email)->count();
+        if($checkemail != 0 )
+        {
+           $returnArr['message']= "Email Id is already existed !!";
+           return $returnArr;
+        }
 
-        if($user->save()){
-            dd("success");
-        }else{
-            dd('not saved');
+        $checkmob = User::where("phone","=",$request->mobile)->count();
+        if($checkmob != 0 )
+        {
+           $returnArr['message']= "Mobile is already existed !!";
+           return $returnArr;
+        }
+
+        $checkpan = CAApply::where("pan_no","=",$request->pan_no)->count();
+        if($checkpan != 0 )
+        {
+           $returnArr['message']= "Pan No is already existed !!";
+           return $returnArr;
+        }
+
+        $checkpan = CAApply::where("pan_no","=",$request->pan_no)->count();
+        if($checkpan != 0 )
+        {
+           $returnArr['message']= "Pan No is already existed !!";
+           return $returnArr;
+        }
+
+        $checkgistin = CAApply::where("gstin","=",$request->gstin)->count();
+        if($checkgistin != 0 )
+        {
+           $returnArr['message']= "GSTIN No is already existed !!";
+           return $returnArr;
         }
 
 
+       $input = $request->all();
+       $randomid = Str::random(211);
+      $input['user_temp_id']=$randomid;
+        $input['updated_at'] = date('Y-m-d H:i:s');
+        unset($input['_token']);
+      if($file = $request->file('familymemberholdcafile')){
+        $input['familymemberholdcafile'] = rand(999999,9999999999).date('YmdHis').$file->getClientOriginalName();
+        $file-> move(public_path('public/Image'), $input['familymemberholdcafile']);
+     }
+
+     if($file = $request->file('upladedotherfirmfile')){
+        $input['upladedotherfirmfile'] = rand(999999,9999999999).date('YmdHis').$file->getClientOriginalName();
+        $file-> move(public_path('public/Image'), $input['upladedotherfirmfile']);
+     }
 
 
+    DB::table('temp_causer')->insertGetId($input);
 
-
-
-    } catch (\Throwable $th) {
-        throw $th;
-    }
-
-
+    $returnArr['success']= true;
+    $returnArr['message']=$randomid;
+    return $returnArr;
     
     }
 
 
+public function capayment($id)
+{
 
+    return view("front.ca.ca-payment", compact("id"));
+
+}
+
+
+
+public function caRegPaySuccess($id)
+{
+   $tempData =  DB::table('temp_causer')->where("user_temp_id","=",$id)->first();
+
+if(isset($tempData))
+{
+  
+    $count = User::where("email", "=", $tempData->email)->count();
+
+    if($count == 0)
+    {
+
+    $password = '12345678';
+    $userArr =  array(
+        "email" => $tempData->email,
+        "name" => $tempData->name,
+        "user_type" => 2,
+        "phone" => $tempData->mobile,
+        'password' => Hash::make($password),
+        'created_at' => date('Y-m-d H:i:s')
+    );
+
+    $user_id = User::insertGetId($userArr);
+   }
+   else
+   {
+       $user = User::where("email", "=", $tempData->email)->first();
+       $user_id = $user->id;
+   }
+
+   $result = [];
+   foreach ($tempData as $key => $value)
+   {
+       $result[$key] =  $value;
+   }
+
+   $result['user_id'] = $user_id;
+
+   $result['is_submit'] = 1; 
+   $result['is_reg_pay'] = 1; 
+   $result['application_id']  = Str::random(211);
+unset($result['id']);
+  CAApply::insert($result);
+Auth::loginUsingId($user_id);
+return redirect("/ca/approval-status/".$result['application_id']);
+}
+
+}
+
+public function approvalstatus($id)
+{
+    $data = CAApply::where("application_id",'=',$id)->get();
+     return view("front.ca.approval-status", compact('data'));
+}
 
 }

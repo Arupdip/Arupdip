@@ -10,6 +10,10 @@ use App\Http\Controllers\admin\DesignationController;
 use App\Http\Controllers\admin\AMCController;
 use App\Http\Controllers\admin\LicensetypeController;
 use App\Http\Controllers\admin\UserTypeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AMCController AS FAMCController;
+use App\Http\Controllers\ADController;
+use App\Http\Controllers\CommissionerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +39,9 @@ Route::get('ca-register',[CaController::class,'caRegister']);
 Route::post('save-ca-details',[CaController::class,'saveCaDetails']);
 Route::post('fetch-districts',[CaController::class,'fetchDistricts']);
 
+Route::get('ca-payment/{id}',[CaController::class,'capayment']);
+
+Route::get('ca-regpay-success/{id}',[CaController::class,'caRegPaySuccess']);
 
 /*
 / Web Routes for Trader with TraderController 
@@ -53,9 +60,11 @@ Route::get('admin/login', function () {
     return view('admin/login');
 })->name("adminlogin");
 Route::post('admin/post-login',[AuthController::class,'loginsubmit']);
-Route::group(['prefix' => 'admin','middleware'=>'auth'], function () { 
+
+
+Route::group(['prefix' => 'admin','middleware'=>'admin'], function () { 
    
-	Route::get('/',[CaController::class,'dashboard']);
+	Route::get('/',[HomeController::class,'dashboard']);
 	    // For Manage mandal,district,state
 
 	Route::resource('district', DistrictController::class);
@@ -69,6 +78,56 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
 });
 
 
+Route::group(['prefix' => 'ca','middleware'=>'ca'], function () { 
+   
+	Route::get('/',[CaController::class,'dashboard']);
+	    // For Manage mandal,district,state
+		Route::get('/approval-status/{app_id}',[CaController::class,'approvalstatus']);
+
+
+});
+
+
+
+
+
+
+Route::group(['prefix' => 'amc','middleware'=>'amc'], function () { 
+   
+	Route::get('/',[FAMCController::class,'dashboard']);
+	    // For Manage mandal,district,state
+		Route::get('/traderapplylist',[FAMCController::class,'traderapplylist']);
+		Route::get('/traderapproval/{id}',[FAMCController::class,'traderapproval']);
+
+		Route::get('/caapplylist',[FAMCController::class,'caapplylist']);
+		Route::get('/caapproval/{id}',[FAMCController::class,'caapproval']);
+
+});
+
+Route::group(['prefix' => 'ad','middleware'=>'ad'], function () { 
+   
+	Route::get('/',[ADController::class,'dashboard']);
+	    // For Manage mandal,district,state
+
+		Route::get('/traderapplylist',[ADController::class,'traderapplylist']);
+		Route::get('/traderapproval/{id}',[ADController::class,'traderapproval']);
+
+		Route::get('/caapplylist',[ADController::class,'caapplylist']);
+		Route::get('/caapproval/{id}',[ADController::class,'caapproval']);
+
+});
+
+Route::group(['prefix' => 'commissioner','middleware'=>'commissioner'], function () { 
+   
+	Route::get('/',[CommissionerController::class,'dashboard']);
+	    // For Manage mandal,district,state
+		Route::get('/traderapplylist',[CommissionerController::class,'traderapplylist']);
+		Route::get('/traderapproval/{id}',[CommissionerController::class,'traderapproval']);
+
+		Route::get('/caapplylist',[CommissionerController::class,'caapplylist']);
+		Route::get('/caapproval/{id}',[CommissionerController::class,'caapproval']);
+
+});
 
 
 

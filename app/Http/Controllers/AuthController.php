@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
 class AuthController extends Controller
 {
     public function loginsubmit(Request $request)
@@ -26,7 +25,10 @@ class AuthController extends Controller
        // dd(Auth::attempt($credentials));
 
          if(Auth::attempt($credentials)){
+            if(Auth::user()->user_type ==0)
             return redirect('admin');
+            if(Auth::user()->user_type ==4)
+            return redirect('amc');
          }
          return redirect("admin/login")->withSuccess('Oppes! You have entered invalid credentials');
 
