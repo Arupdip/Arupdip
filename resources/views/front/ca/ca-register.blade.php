@@ -102,7 +102,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Is Minor<span class="text-danger">*</span></label>
-                                    <input type="text" name="is_minor" class="form-control pri-form" readonly />
+                                    <input type="text" name="is_minor" class="form-control pri-form"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
