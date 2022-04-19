@@ -29,7 +29,7 @@
                 <form name="" id="ca-register-form" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('save-ca-details')}}" >
                     @csrf
                     <div class="form-section">
-                        <h6>Trader Details</h6>
+                        <h6>CA Details</h6>
                        
                         <div class="row">
                             <div class="col-md-4">
