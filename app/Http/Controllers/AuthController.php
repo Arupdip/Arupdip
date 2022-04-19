@@ -27,8 +27,14 @@ class AuthController extends Controller
          if(Auth::attempt($credentials)){
             if(Auth::user()->user_type ==0)
             return redirect('admin');
-            if(Auth::user()->user_type ==4)
+            if(Auth::user()->user_type ==3)
             return redirect('amc');
+
+            if(Auth::user()->user_type ==4)
+            return redirect('ad');
+
+            if(Auth::user()->user_type ==5)
+            return redirect('commissioner');
          }
          return redirect("admin/login")->withSuccess('Oppes! You have entered invalid credentials');
 
