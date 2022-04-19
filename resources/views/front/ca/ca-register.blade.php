@@ -102,7 +102,11 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Is Minor<span class="text-danger">*</span></label>
-                                    <input type="text" name="is_minor" class="form-control pri-form"  />
+                                    <select name="is_minor" class="form-control pri-form">
+                                        <option value="">Select option</option>
+                                        <option value="1">Yes</option>
+                                        <option value="2">No</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
