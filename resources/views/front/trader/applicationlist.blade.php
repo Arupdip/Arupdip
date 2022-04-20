@@ -1,4 +1,4 @@
-@extends('ad.layouts.app')
+@extends('front.trader.layouts.app')
 
 @section('content')
 
@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="py-5 section">
             <card class="card">
-                <h5 class="card-header">Trader Applications
+                <h5 class="card-header">My Applications
                     <div class="btn-grp"><btn onclick="window.history.back()" title="Back"><i class="priya-arrow-left"></i></btn><btn onclick="" title="Dashboard"><i class="priya-dashboard"></i></btn><btn onclick="helpModal('#add-dist-help')" title="Help"><i class="priya-info"></i></btn> <btn onclick="" title="History"><i class="priya-history"></i></btn></div>
                 </h5>
                 <div class="card-body">
@@ -19,7 +19,7 @@
                                     <th>Full Name</th>
                                     <th>Aadhar No.</th>
                                     <th>GSTIN</th>
-                                    <th>Status</th>
+                                    
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -32,19 +32,10 @@
                                   <td>{{$row->name}}</td>
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
-                                  @if($row->is_ad_approval == 1)
-                                  <td><span class="badge badge-success">Comply Solved</span></td>
-                                  @else
-                                  <td><span class="badge badge-warning">Comply Pending</span></td>
-                                  @endif
+                                 
                                   <td align="center">
-                                    <a href="javascript:helpModal('#view-trader-details')" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
+                                    <a href="{{url('/')}}/trader/approval-status/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
                                    
-                                    @if($row->is_ad_approval != 1)
-                                    <a href="{{url('/')}}/ad/traderapproval/{{$row->application_id}}" title="Approve" class="btn btn-icon btn-info"><i class="priya-check"></i> </a>
-                               
-                                  @endif
-                                  
 
                                   </td>
                                 </tr>

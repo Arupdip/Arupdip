@@ -72,19 +72,19 @@
                         </div> -->
                         <h3 style="color: #fff; border-bottom: 1px solid;padding-bottom: 10px; margin-bottom: 20px;"><i class="priya-sign-in"></i> Sign In</h3>
 
-                        <form id="loginfrm" name="loginfrm" action="AMC/dashboard.html" method="post">
-                            <input type="hidden" name="_token" value="E5YUxnb7Pm7Ohva9J8DFha9VCkNBpKCSyRTfQrpP">
+                        <form id="loginfrm" name="loginfrm" action="{{url('admin/post-login')}}" method="post">
+                          @csrf
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="priya-phone"></i></span>
-                                    <input type="text" id="mobileno" min="10" maxlength="10" name="mobileno"
-                                        class="form-control mobile" placeholder="Mobile Number">
+                                    <input type="email" id="mobileno" name="email"
+                                        class="form-control mobile" placeholder="Email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="priya-lock"></i></span>
-                                    <input type="password" id="loginpwd" name="pwd" class="form-control"
+                                    <input type="password" id="loginpwd" name="password" class="form-control"
                                         placeholder="Password" autocomplete="off">
                                     <div class="input-group-addon"><i class="priya-eye" aria-hidden="true"
                                             onmousedown="showPassword(this)" onmouseout="hidePassword(this)"></i></div>
@@ -143,7 +143,7 @@
     <footer class="main-footer text-center py-3">
         &copy;<script>document.write(new Date().getFullYear())</script> Department
     </footer>
-
+<!--
     <script type="text/javascript">
 
         $(document).on('keyup', '.mobile', function (event) {
@@ -245,7 +245,7 @@
         //     });
         // });
 
-    </script>
+    </script>  -->
 </body>
 
 </html>

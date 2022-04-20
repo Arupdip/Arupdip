@@ -14,6 +14,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AMCController AS FAMCController;
 use App\Http\Controllers\ADController;
 use App\Http\Controllers\CommissionerController;
+
+use App\Http\Controllers\admin\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +54,8 @@ Route::get('ca-regpay-success/{id}',[CaController::class,'caRegPaySuccess']);
 
 Route::get('trader-register',[TraderController::class,'traderregister']);
 Route::post('save-trader-details',[TraderController::class,'saveTraderDetails']);
+Route::get('trader-payment/{id}',[TraderController::class,'traderpayment']);
+Route::get('trader-regpay-success/{id}',[TraderController::class,'traderRegPaySuccess']);
 
 /*
 / Web Routes for ADMIN(super admin) with CaController 
@@ -60,21 +65,15 @@ Route::get('admin/login', function () {
     return view('admin/login');
 })->name("adminlogin");
 Route::post('admin/post-login',[AuthController::class,'loginsubmit']);
-
-
 Route::group(['prefix' => 'admin','middleware'=>'admin'], function () { 
-   
 	Route::get('/',[HomeController::class,'dashboard']);
-	    // For Manage mandal,district,state
-
 	Route::resource('district', DistrictController::class);
 	Route::resource('mandal', MandalController::class);
 	Route::resource('designation', DesignationController::class);
 	Route::resource('amc', AMCController::class);
 	Route::resource('licensetype', LicensetypeController::class);
 	Route::resource('usertype', UserTypeController::class);
-
-
+	Route::resource('user', UserController::class);
 });
 
 
@@ -84,10 +83,18 @@ Route::group(['prefix' => 'ca','middleware'=>'ca'], function () {
 	    // For Manage mandal,district,state
 		Route::get('/approval-status/{app_id}',[CaController::class,'approvalstatus']);
 
-
+		Route::get('/my-application-list',[CaController::class,'applicationlist']);
 });
 
+Route::group(['prefix' => 'trader','middleware'=>'trader'], function () { 
+   
+	Route::get('/',[TraderController::class,'dashboard']);
+	    // For Manage mandal,district,state
+		Route::get('/approval-status/{app_id}',[TraderController::class,'approvalstatus']);
+		Route::get('/my-application-list',[TraderController::class,'applicationlist']);
 
+
+});
 
 
 

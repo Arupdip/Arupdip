@@ -1,4 +1,4 @@
-@extends('ad.layouts.app')
+@extends('front.trader.layouts.app')
 
 @section('content')
 

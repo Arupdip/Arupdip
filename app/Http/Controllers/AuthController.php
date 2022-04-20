@@ -27,6 +27,14 @@ class AuthController extends Controller
          if(Auth::attempt($credentials)){
             if(Auth::user()->user_type ==0)
             return redirect('admin');
+
+            if(Auth::user()->user_type ==1)
+            return redirect('trader');
+
+            if(Auth::user()->user_type ==2)
+            return redirect('ca');
+
+
             if(Auth::user()->user_type ==3)
             return redirect('amc');
 

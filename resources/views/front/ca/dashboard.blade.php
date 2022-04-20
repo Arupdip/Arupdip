@@ -1,4 +1,4 @@
-@extends('ad.layouts.app')
+@extends('front.ca.layouts.app')
 
 @section('content')
 

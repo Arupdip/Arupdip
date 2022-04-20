@@ -21,16 +21,16 @@
                     <!-- <li class="priya-user" onclick="gotoForm(this)">User Details</li> -->
                     <li class="priya-inr" onclick="gotoForm(this)">Process Payment</li>
                 </ul>
-                <form name="" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('save-trader-details')}}" novalidate="novalidate">
-                    
+                <form name="" class="clearfix" id="trader-register-form" enctype="multipart/form-data" method="post" action="{{url('save-trader-details')}}" novalidate="novalidate">
+                    @csrf
                     <div class="form-section">
                         <h6>Trader Details</h6>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Type of Firm<span class="text-danger">*</span></label>
-                                    <select name="typeoffirm" class="form-control pri-form">
-                                        <option>-- Select --</option>
+                                    <select name="typeoffirm" required  class="form-control pri-form">
+                                        <option value="" >-- Select --</option>
                                         <option>Sole Proprietorship</option>
                                         <option>Partnership</option>
                                         <option>Corporation</option>
@@ -43,7 +43,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Full Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="nameofapplicant" id="name_of_applicant" name="name_of_applicant"
+                                    <input type="text" name="name" id="name_of_applicant" 
                                         class="form-control pri-form" aria-required="true" />
                                     <span class="text-danger" id="err_dup_error"></span>
                                 </div>
@@ -59,10 +59,10 @@
                                     <label>Gender<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
-                                            <input type="radio" name="r2" class="" value="m" onchange="priGroup(this)"><i></i> Male
+                                            <input type="radio" name="gender" class="" checked value="M" onchange="priGroup(this)"><i></i> Male
                                         </label>
                                         <label class="pri-radio ml-4">
-                                            <input type="radio" name="r2" class="" value="f" onchange="priGroup(this)"><i></i> Female
+                                            <input type="radio" name="gender" class="" value="F" onchange="priGroup(this)"><i></i> Female
                                         </label>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date" name="dateofbirth" class="form-control pri-form" />
+                                    <input type="date" name="dob" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -88,7 +88,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <select name="state" id="state-dd" class="form-control pri-form">
+                                    <select name="state_id" id="state-dd" class="form-control pri-form">
                                         @foreach($states as $state)
                                         <option value="{{$state->state_id}}">{{$state->state_title}}</option>
                                         @endforeach
@@ -98,7 +98,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>District<span class="text-danger">*</span></label>
-                                    <select name="district" id="district-dd" class="form-control pri-form">
+                                    <select name="district_id" id="district-dd" class="form-control pri-form">
                                         <option>-- Select --</option>
                                     </select>
                                 </div>
@@ -106,46 +106,48 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mandal<span class="text-danger">*</span></label>
-                                    <select name="mobile" class="form-control pri-form">
-                                        <option>-- Select --</option>
+                                    <select name="mandal_id" class="form-control pri-form">
+                                        @foreach($mandal as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhaar No.<span class="text-danger">*</span></label>
-                                    <input type="text" name="aadharno"
+                                    <input type="text" name="aadhar_no"
                                         class="form-control aadharNoCls pri-form" value="" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Aadhaar<span class="text-danger">*</span></label>
-                                    <input type="file" name="uploadedaadhar" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="aadhar_file" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="panno" class="form-control pri-form" />
+                                    <input type="text" name="pan_no" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload PAN<span class="text-danger">*</span></label>
-                                    <input type="file" name="ipladedpan" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="pan_file" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" name="mobno" class="form-control pri-form" maxlength="10" />
+                                    <input type="tel" name="mobile" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Alternate Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" name="alternatemobno" class="form-control pri-form" maxlength="10" />
+                                    <input type="tel" name="alternate_mobile" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -183,15 +185,18 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <select name="firmstate" class="form-control pri-form">
-                                        <option>-- Select --</option>
+                                    <select name="firm_state_id" id="firmstate_id" class="form-control pri-form">
+                                        <option value="">--Select state--</option>
+                                        @foreach($states as $state)
+                                        <option value="{{$state->state_id}}">{{$state->state_title}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>District<span class="text-danger">*</span></label>
-                                    <select name="firmdistrict" class="form-control pri-form">
+                                    <select name="firmdistrict_id" id="firmdistrict_id" class="form-control pri-form">
                                         <option>-- Select --</option>
                                     </select>
                                 </div>
@@ -199,21 +204,23 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>AMC Name<span class="text-danger">*</span></label>
-                                    <select name="firmamcname" class="form-control pri-form">
-                                        <option>-- Select --</option>
+                                    <select name="amc_id" class="form-control pri-form">
+                                        @foreach($amc as $row)
+                                        <option value="{{$row->id}}" >{{$row->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Firm Registration No<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmregisterationno" class="form-control aadharNoCls pri-form" />
+                                    <input type="text" name="firmregisteration_no" class="form-control aadharNoCls pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>GSTIN<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmgstin" class="form-control pri-form" />
+                                    <input type="text" name="gstin" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -225,19 +232,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Firm PAN<span class="text-danger">*</span></label>
-                                    <input type="file" name="firmuploadedpan" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="firmpan_file" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload GSTIN<span class="text-danger">*</span></label>
-                                    <input type="file" name="firmuploadedgst" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="gstin_file" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Declaration of Solvency<span class="text-danger">*</span></label>
-                                    <input type="file" name="firmdeclarationofsolvency" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="declarationofsolvency" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -249,52 +256,57 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bank Name<span class="text-danger">*</span></label>
-                                    <select name="firmbankmname" class="form-control pri-form">
+                                    <select name="bankname" class="form-control pri-form">
                                         <option>-- Select --</option>
+                                        <option value="sbi">State bank of india</option>
+                                        <option value="pnb">Punjab Natioanl Bank</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Account Holder Name as per Bank A/c No<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmaccholdername" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="account_holder" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bank Account No<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmbankaccno" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="account_no" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Confirm Account No<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmbankconfirmaccountno" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="c_account_no" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>IFSC Code<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmbankifsc" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="ifsc" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Confirm IFSC Code<span class="text-danger">*</span></label>
-                                    <input type="text" name="firmbankconfirmifsc" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="c_ifsc" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Copy of Bank Passbook<span class="text-danger">*</span></label>
-                                    <input type="file" name="uploadedfirmbankpassbook" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="account_file" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             
                         </div>
                         <div class="mt-2 text-center">
+                            <p class="complain errorstatus" style="display:none"></p>
+
                             <button class="btn" type="button" onclick="prevForm(this)"><i class="priya-angle-left"></i> Prev</button>
-                            <button class="btn" type="button" onclick="nextForm(this)">Next <i class="priya-angle-right"></i></button>
+                            {{-- <button class="btn" type="button" onclick="nextForm(this)">Next <i class="priya-angle-right"></i></button> --}}
+                            <button class="btn" type="submit" >Submit <i class="priya-angle-right"></i></button>
                         </div>
                     </div>
                     <!-- <div class="form-section" style="display: none;">
@@ -372,6 +384,8 @@
 
 {{-- To auto select state and sistrict --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
 <script>
    $(document).ready(function () {
           
@@ -390,11 +404,67 @@
                         $('#district-dd').html('<option value="">Select City</option>');
                         $.each(res.districts, function (key, value) {
                             $("#district-dd").append('<option value="' + value
-                                .districtid + '">' + value.district_title + '</option>');
+                                .id + '">' + value.name + '</option>');
                         });
                     }
                 });
             });
+
+            $('#firmstate_id').on('change', function () {
+                var idState = this.value;
+                $("firmdistrict_id").html('');
+                $.ajax({
+                    url: "{{url('fetch-districts')}}",
+                    type: "POST",
+                    data: {
+                        state_id: idState,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        $('#firmdistrict_id').html('<option value="">Select City</option>');
+                        $.each(res.districts, function (key, value) {
+                            $("#firmdistrict_id").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+
+
+            $("#trader-register-form").submit(function(e) {
+
+$(".errorstatus").hide();
+$(".errorstatus").html("");
+e.preventDefault(); // avoid to execute the actual submit of the form.
+
+var form = $(this);
+var formdata = new FormData(this);
+
+$.ajax({
+type: "POST",
+url: "{{url('save-trader-details')}}",
+data: formdata, // serializes the form's elements.
+cache: false,
+contentType: false,
+processData: false,
+success: function(data)
+{
+if(data.success == true)
+{
+ window.location.href = "{{url('/')}}/trader-payment/"+data.message;
+}
+else
+{
+$(".errorstatus").show();
+$(".errorstatus").html(data.message);
+}
+}
+});
+
+});
+
         });
 </script>
 @stop

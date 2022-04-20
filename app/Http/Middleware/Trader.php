@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Auth;
 use Closure;
-class CA 
+class Trader 
 {
     /**
      * Get the path the user should be redirected to when they are not authenticated.

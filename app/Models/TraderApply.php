@@ -19,6 +19,11 @@ class TraderApply extends Model
 		return $this->belongsTo('App\Models\District','district_id');
 	}
 
+	public function mandal()
+	{
+		return $this->belongsTo('App\Models\Mandal','mandal_id');
+	}
+
 	public function amc()
 	{
 		return $this->belongsTo('App\Models\AMC','amc_id');
