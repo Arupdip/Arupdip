@@ -77,42 +77,48 @@ class CaController extends Controller
     public function saveCaDetails(Request $request)
     {
 
-        $returnArr = array("success" => false, "message" => "");
+        $returnArr = array("success" => false, "message" => "", "id"=>"");
 
 
         $checkaddhar = CAApply::where("aadhar_no", "=", $request->aadhar_no)->count();
         if ($checkaddhar != 0) {
             $returnArr['message'] = "Aadhar card is already existed !!";
+            $returnArr['id'] = "aadhar_no";
             return $returnArr;
         }
 
         $checkemail = User::where("email", "=", $request->email)->count();
         if ($checkemail != 0) {
             $returnArr['message'] = "Email Id is already existed !!";
+            $returnArr['id'] = "aadhar_no";
             return $returnArr;
         }
 
         $checkmob = User::where("phone", "=", $request->mobile)->count();
         if ($checkmob != 0) {
             $returnArr['message'] = "Mobile is already existed !!";
+            $returnArr['id'] = "aadhar_no";
             return $returnArr;
         }
 
         $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->count();
         if ($checkpan != 0) {
             $returnArr['message'] = "Pan No is already existed !!";
+            $returnArr['id'] = "aadhar_no";
             return $returnArr;
         }
 
         $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->count();
         if ($checkpan != 0) {
             $returnArr['message'] = "Pan No is already existed !!";
+            $returnArr['id'] = "pan_no";
             return $returnArr;
         }
 
         $checkgistin = CAApply::where("gstin", "=", $request->gstin)->count();
         if ($checkgistin != 0) {
             $returnArr['message'] = "GSTIN No is already existed !!";
+            $returnArr['id'] = "gstin";
             return $returnArr;
         }
 

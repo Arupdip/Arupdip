@@ -69,34 +69,34 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
-                                    <input type="text" required id="aadhar_no" name="aadhar_no"
+                                    <input type="text"  id="aadhar_no" name="aadhar_no"
                                         class="form-control aadharNoCls pri-form" maxlength="16" value="" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Full Name<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" required name="name"
-                                        class="form-control pri-form" aria-required="true" />
+                                    <input type="text" id="name"  name="name"
+                                        class="form-control pri-form" aria-="true" />
                                     <span class="text-danger" id="err_dup_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Age<span class="text-danger">*</span></label>
-                                    <input type="number" required name="age" maxlength="2" class="form-control pri-form" >
+                                    <input type="number"  name="age" maxlength="2" class="form-control pri-form" >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Father's Name<span class="text-danger">*</span></label>
-                                    <input type="text" required name="fathersname" class="form-control pri-form" />
+                                    <input type="text"  name="fathersname" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date" required name="dob" class="form-control pri-form" />
+                                    <input type="date"  name="dob" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -112,37 +112,37 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <textarea name="address" required class="form-control pri-form"></textarea>
+                                    <textarea name="address"  class="form-control pri-form"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" required name="mobile" class="form-control pri-form" maxlength="10" />
+                                    <input type="tel"  name="mobile" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
-                                    <input type="text" required name="pan_no" class="form-control pri-form" />
+                                    <input type="text"  name="pan_no" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email ID<span class="text-danger">*</span></label>
-                                    <input type="email" required name="email" class="form-control pri-form" />
+                                    <input type="email"  name="email" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Market Name <span class="text-danger">*</span></label>
-                                    <input type="text" required name="marketname" class="form-control pri-form" />
+                                    <input type="text"  name="marketname" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <select name="state_id" required id="state-dd" class="form-control pri-form">
+                                    <select name="state_id"  id="state-dd" class="form-control pri-form">
                                         <option value="">-- Select --</option>
                                          @foreach($states as $state)
                                         <option value="{{$state->state_id}}">{{$state->state_title}}</option>
@@ -153,7 +153,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>District<span class="text-danger">*</span></label>
-                                    <select name="district_id" required  id="district-dd" class="form-control pri-form">
+                                    <select name="district_id"   id="district-dd" class="form-control pri-form">
                                         <option value="">-- Select --</option>
                                     </select>
                                 </div>
@@ -161,13 +161,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>GSTIN<span class="text-danger">*</span></label>
-                                    <input type="text" name="gstin" required class="form-control pri-form" />
+                                    <input type="text" name="gstin"  class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>License Type<span class="text-danger">*</span></label>
-                                    <select name="liscencetype_id" required class="form-control pri-form">
+                                    <select name="liscencetype_id"  class="form-control pri-form">
                                         <option value="">-- Select --</option>
                                          @foreach($liscencetype as $r)
                                         <option value="{{$r->id}}">{{$r->name}}</option>
@@ -178,7 +178,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>AMC Name<span class="text-danger">*</span></label>
-                                    <select name="amc_id" required class="form-control pri-form">
+                                    <select name="amc_id"  class="form-control pri-form">
                                         <option value="">-- Select --</option>
                                           @foreach($amc as $r)
                                         <option value="{{$r->id}}">{{$r->name}}</option>
@@ -189,7 +189,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Name in Power Of Attorney<span class="text-danger">*</span></label>
-                                    <input type="text" required name="power_attorney" class="form-control pri-form" />
+                                    <input type="text"  name="power_attorney" class="form-control pri-form" />
                                 </div>
                             </div>
                             
@@ -236,14 +236,50 @@
 
 
 
-    $("#ca-register-form").submit(function(e) {
 
-        $(".errorstatus").hide();
+
+//for form validation
+$("#ca-register-form").validate({
+                rules: {
+                    isfamilymemberholdca: "required",
+                    familymemberholdcafile: "required",
+                    isotherfirm: "required",
+                    upladedotherfirmfile: "required",
+                    aadhar_no: "required",
+                    name: "required",
+                    age: "required",
+                    fathersname: "required",
+                    dob: "required",
+                    is_minor: "required",
+                    address: "required",
+                    mobile: "required",
+                    pan_no: "required",
+                    email:  {
+                                required : true,
+                                email : true
+                                },
+                    marketname: "required",
+                    state_id: "required",
+                    district_id: "required",
+                    gstin: "required",
+                    liscencetype_id: "required",
+                    amc_id: "required",
+                    power_attorney: "required",
+                                   
+                },
+                messages : {
+                                 aadhar_no : "Please enter your Aadhar no",
+                                email :{
+                                required : "Please enter your eamail",
+                                email : "Please provide valid email address"
+                                },
+                                
+                                },
+                submitHandler : function(form) {
+                    $(".errorstatus").hide();
         $(".errorstatus").html("");
-e.preventDefault(); // avoid to execute the actual submit of the form.
 
-var form = $(this);
-var formdata = new FormData(this);
+var formdata = new FormData(form);
 
 $.ajax({
     type: "POST",
@@ -265,8 +301,11 @@ $.ajax({
      }
     }
 });
+                    }
 
-});
+            });
+
+
 
         });
 

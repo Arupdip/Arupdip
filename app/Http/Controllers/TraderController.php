@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\TraderApply;
 use Auth;
+use App\Models\CAApply;
 class TraderController extends Controller
 {
     /**
@@ -56,7 +57,7 @@ class TraderController extends Controller
         $returnArr = array("success" => false, "message" => "");
 
 
-        $checkaddhar = CAApply::where("aadhar_no", "=", $request->aadhar_no)->count();
+        $checkaddhar = TraderApply::where("aadhar_no", "=", $request->aadhar_no)->count();
         if ($checkaddhar != 0) {
             $returnArr['message'] = "Aadhar card is already existed !!";
             return $returnArr;
@@ -74,19 +75,19 @@ class TraderController extends Controller
             return $returnArr;
         }
 
-        $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->count();
+        $checkpan = TraderApply::where("pan_no", "=", $request->pan_no)->count();
         if ($checkpan != 0) {
             $returnArr['message'] = "Pan No is already existed !!";
             return $returnArr;
         }
 
-        $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->count();
+        $checkpan = TraderApply::where("pan_no", "=", $request->pan_no)->count();
         if ($checkpan != 0) {
             $returnArr['message'] = "Pan No is already existed !!";
             return $returnArr;
         }
 
-        $checkgistin = CAApply::where("gstin", "=", $request->gstin)->count();
+        $checkgistin = TraderApply::where("gstin", "=", $request->gstin)->count();
         if ($checkgistin != 0) {
             $returnArr['message'] = "GSTIN No is already existed !!";
             return $returnArr;

@@ -1,7 +1,11 @@
 @extends('layouts.frontlayout')
 
 @section('content')
-
+<style>
+.error{
+    color: red;
+}
+</style>
 <div class="container-fluid bdy">
     <div class="card my-5">
         <div class="card-head">
@@ -29,7 +33,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Type of Firm<span class="text-danger">*</span></label>
-                                    <select name="typeoffirm" required  class="form-control pri-form">
+                                    <select name="typeoffirm" required  class="form-control pri-form f1">
                                         <option value="" >-- Select --</option>
                                         <option>Sole Proprietorship</option>
                                         <option>Partnership</option>
@@ -44,14 +48,14 @@
                                 <div class="form-group">
                                     <label>Full Name<span class="text-danger">*</span></label>
                                     <input type="text" name="name" id="name_of_applicant" 
-                                        class="form-control pri-form" aria-required="true" />
+                                        class="form-control pri-form f1" aria-required="true" />
                                     <span class="text-danger" id="err_dup_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Father's Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="fathersname" class="form-control pri-form" />
+                                    <input type="text" name="fathersname" class="form-control pri-form f1" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -70,25 +74,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <textarea name="address" class="form-control pri-form"></textarea>
+                                    <textarea name="address" class="form-control pri-form f1"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date" name="dob" class="form-control pri-form" />
+                                    <input type="date" name="dob" class="form-control pri-form f1" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PIN Code<span class="text-danger">*</span></label>
-                                    <input type="text" name="pincode" class="form-control pri-form" />
+                                    <input type="text" name="pincode" class="form-control pri-form f1" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
-                                    <select name="state_id" id="state-dd" class="form-control pri-form">
+                                    <select name="state_id" id="state-dd" class="form-control pri-form f1">
                                         @foreach($states as $state)
                                         <option value="{{$state->state_id}}">{{$state->state_title}}</option>
                                         @endforeach
@@ -98,7 +102,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>District<span class="text-danger">*</span></label>
-                                    <select name="district_id" id="district-dd" class="form-control pri-form">
+                                    <select name="district_id" id="district-dd" class="form-control pri-form f1">
                                         <option>-- Select --</option>
                                     </select>
                                 </div>
@@ -106,7 +110,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mandal<span class="text-danger">*</span></label>
-                                    <select name="mandal_id" class="form-control pri-form">
+                                    <select name="mandal_id" class="form-control pri-form f1">
                                         @foreach($mandal as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                         @endforeach
@@ -117,48 +121,48 @@
                                 <div class="form-group">
                                     <label>Aadhaar No.<span class="text-danger">*</span></label>
                                     <input type="text" name="aadhar_no"
-                                        class="form-control aadharNoCls pri-form" value="" />
+                                        class="form-control aadharNoCls pri-form f1" value="" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Aadhaar<span class="text-danger">*</span></label>
-                                    <input type="file" name="aadhar_file" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="aadhar_file" class="form-control pri-form f1"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="pan_no" class="form-control pri-form" />
+                                    <input type="text" name="pan_no" class="form-control pri-form f1" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload PAN<span class="text-danger">*</span></label>
-                                    <input type="file" name="pan_file" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="pan_file" class="form-control pri-form f1"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" name="mobile" class="form-control pri-form" maxlength="10" />
+                                    <input type="tel" name="mobile" class="form-control pri-form f1" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Alternate Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" name="alternate_mobile" class="form-control pri-form" maxlength="10" />
+                                    <input type="tel" name="alternate_mobile" class="form-control pri-form f1" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email<span class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control pri-form" maxlength="10" />
+                                    <input type="email" name="email" class="form-control pri-form f1"  />
                                 </div>
                             </div>
                         </div>
                         <div class="mt-2 text-center">
-                            <button class="btn" type="button" onclick="nextForm(this)">Next <i class="priya-angle-right"></i></button>
+                            <button class="btn" type="button" onclick="nextForm2(this)">Next <i class="priya-angle-right"></i></button>
                         </div>
                     </div>
                     <div class="form-section" style="display: none;">
@@ -232,25 +236,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Firm PAN<span class="text-danger">*</span></label>
-                                    <input type="file" name="firmpan_file" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="firmpan_file" class="form-control pri-form"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload GSTIN<span class="text-danger">*</span></label>
-                                    <input type="file" name="gstin_file" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="gstin_file" class="form-control pri-form"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Declaration of Solvency<span class="text-danger">*</span></label>
-                                    <input type="file" name="declarationofsolvency" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="declarationofsolvency" class="form-control pri-form"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bank Guarantee Copy<span class="text-danger">*</span></label>
-                                    <input type="file" name="uploadedbankguaranteetype" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="uploadedbankguaranteetype" class="form-control pri-form"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -296,7 +300,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Copy of Bank Passbook<span class="text-danger">*</span></label>
-                                    <input type="file" name="account_file" class="form-control pri-form" maxlength="10" />
+                                    <input type="file" name="account_file" class="form-control pri-form" />
                                 </div>
                             </div>
                             
@@ -306,7 +310,7 @@
 
                             <button class="btn" type="button" onclick="prevForm(this)"><i class="priya-angle-left"></i> Prev</button>
                             {{-- <button class="btn" type="button" onclick="nextForm(this)">Next <i class="priya-angle-right"></i></button> --}}
-                            <button class="btn" type="submit" >Submit <i class="priya-angle-right"></i></button>
+                            <button class="btn" type="submit">Submit <i class="priya-angle-right"></i></button>
                         </div>
                     </div>
                     <!-- <div class="form-section" style="display: none;">
@@ -433,14 +437,66 @@
 
 
 
-            $("#trader-register-form").submit(function(e) {
 
+
+                $("#trader-register-form").validate({
+                rules: {
+                    name: "required",
+                    fathersname: "required",
+                    gender: "required",
+                    address: "required",
+                    dob: "required",
+                    pincode: "required",
+                    state_id: "required",
+                    district_id: "required",
+                    mandal_id: "required",
+                    aadhar_no: "required",
+                    aadhar_file: {required : true,
+                                },
+                    pan_no: "required",
+                    pan_file: "required",
+                    mobile: "required",
+                    email:  {
+                                required : true,
+                                email : true
+                                },
+                    firmname: "required",
+                    firmaddress: "required",
+                    firmpincode: "required",
+                    firm_state_id: "required",
+                    firmdistrict_id: "required",
+                    amc_id: "required",
+                    firmregisteration_no: "required",
+                    gstin: "required",
+                    firmpanno: "required",
+                    firmpan_file: "required",
+                    gstin_file: "required",
+                    declarationofsolvency: "required",
+                    uploadedbankguaranteetype: "required",
+                    bankname: "required",
+                    account_holder: "required",
+                    account_no: "required",
+                    c_account_no: "required",
+                    ifsc: "required",
+                    c_ifsc: "required",
+                    account_file: "required",                  
+                },
+
+                messages : {
+                                 aadhar_no : "Please enter your Aadhar no",
+                                email :{
+                                required : "Please enter your eamail",
+                                email : "Please provide valid email address"
+                                },
+                                
+                                },
+             submitHandler: function(form) {
+       
 $(".errorstatus").hide();
 $(".errorstatus").html("");
-e.preventDefault(); // avoid to execute the actual submit of the form.
 
-var form = $(this);
-var formdata = new FormData(this);
+
+var formdata = new FormData(form);
 
 $.ajax({
 type: "POST",
@@ -462,9 +518,43 @@ $(".errorstatus").html(data.message);
 }
 }
 });
+    }
+        
+           
+            });
 
-});
+
+
 
         });
+
+
+         
+function nextForm2(d){
+var t1= true;
+    $(".f1").each(function() {
+   if($(this).val()=='')
+   t1 = false;
+});
+
+if(t1 == true)
+{
+    var cur = $(d).parents('.form-section');
+	let	nextStep = $(d).parents('.form-section').next();
+		$("#progressbar li").eq($(".form-section").index(nextStep)).addClass("active current").siblings().removeClass("current");
+		nextStep.show();
+		cur.hide();
+}
+else
+{
+    $("#trader-register-form").valid()
+}
+
+   
+
+
+
+   
+}
 </script>
 @stop
