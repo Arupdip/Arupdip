@@ -37,10 +37,11 @@
                                     <label>Does any of your family members hold Commission Agent License<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
-                                            <input type="radio" name="isfamilymemberholdca" class="commodity_wether_cls" value="1" onchange="priGroup(this)"><i></i> Yes
+                                            <input type="radio" name="isfamilymemberholdca" class="commodity_wether_cls" value="1"  onchange="priGroup(this)"><i></i> Yes
                                         </label>
                                         <label class="pri-radio ml-4">
-                                            <input type="radio" CHECKED name="isfamilymemberholdca" class="commodity_wether_cls" value="0" onchange="priGroup(this)"><i></i> No
+											<input type="radio" name="isfamilymemberholdca" class="commodity_wether_cls redioGroup" value="0"  onchange="priGroup(this)">
+											<i></i> No
                                         </label>
                                     </div>
                                     <div class="pri-collapsed">
@@ -57,7 +58,7 @@
                                             <input type="radio" name="isotherfirm" class="commodity_wether_cls" value="1" onchange="priGroup(this)"><i></i> Yes
                                         </label>
                                         <label class="pri-radio ml-4">
-                                            <input type="radio" CHECKED  name="isotherfirm" class="commodity_wether_cls" value="0" onchange="priGroup(this)"><i></i> No
+                                            <input type="radio"  name="isotherfirm" class="commodity_wether_cls" value="0" onchange="priGroup(this)"><i></i> No
                                         </label>
                                     </div>
                                     <div class="pri-collapsed">
@@ -69,8 +70,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" id="aadhar_no" name="aadhar_no"
-                                        class="form-control aadharNoCls pri-form aadhar_no" maxlength="16" value="" />
+                                    <input type="text" id="aadhar_no" name="aadhar_no"
+                                        class="form-control  pri-form aadhar_no" maxlength="16" value="" />
                                         <label id="aadharerror" style="display: none"  class="error" >Please enter valid Aadhar Number</label>
                                 </div>
                             </div>
@@ -85,7 +86,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Age<span class="text-danger">*</span></label>
-                                    <input type="tel"  name="age" maxlength="2" class="form-control pri-form" >
+                                    <input type="text"  name="age" maxlength="2" class="form-control pri-form" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -97,7 +98,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date"  name="dob" class="form-control pri-form" />
+                                    <input type="text"  name="dob" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -119,20 +120,20 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="mobile" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="mobile" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
-                                    <input type="text"  name="pan_no" class="form-control pri-form pan_no" />
+									<input type="text"  name="pan_no" class="form-control pri-form pan_no" maxlength="10" />
                                     <label id="pannoerror" style="display: none"  class="error" >Please enter valid Pan Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email ID<span class="text-danger">*</span></label>
-                                    <input type="email"  name="email" class="form-control pri-form" />
+                                    <input type="text"  name="email" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -163,10 +164,10 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>GSTIN<span class="text-danger">*</span></label>
-                                    <input type="text" name="gstin"  class="form-control pri-form" />
+									<input type="text" name="gstin"  class="form-control pri-form"  maxlength="15"/>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <!--<div class="col-md-4">
                                 <div class="form-group">
                                     <label>License Type<span class="text-danger">*</span></label>
                                     <select name="liscencetype_id"  class="form-control pri-form">
@@ -176,7 +177,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>AMC Name<span class="text-danger">*</span></label>
@@ -199,7 +200,7 @@
                         </div>
                         <div class="mt-2 text-center">
                             <p class="complain errorstatus" style="display:none"></p>
-                            <button class="btn" type="submit">Submit</button>
+							<button class="btn submit_btn" type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -209,129 +210,181 @@
     </div>
 </div>
 {{-- To auto select state and sistrict --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"> </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"> </script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <script>
    $(document).ready(function () {
-          
-        //to validate pan number
-        $(".pan_no").change(function () {      
-                    var inputvalues = $(this).val();      
-                    var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
-                    if(!regex.test(inputvalues)){      
-                    $(".pan_no").val("");   
-                    $("#pannoerror").show();   
-                    return regex.test(inputvalues);    
-                    }    
-                    });  
-
-    //To validat aadhar number
-            $(".aadhar_no").change(function () {      
-            var inputvalues = $(this).val();      
-            // var regex = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
-            var regex = /^\d{12}$/;  
-            if(!regex.test(inputvalues)){      
-            $(".aadhar_no").val("");   
-            $("#aadharerror").show();   
-            return regex.test(inputvalues);    
-            }    
-            });  
-
-
-            $('#state-dd').on('change', function () {
-                var idState = this.value;
-                $("#district-dd").html('');
-                $.ajax({
-                    url: "{{url('fetch-districts')}}",
-                    type: "POST",
-                    data: {
-                        state_id: idState,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        $('#district-dd').html('<option value="">Select City</option>');
-                        $.each(res.districts, function (key, value) {
-                            $("#district-dd").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            });
+	   	$('#ca-register-form input[type=text]').attr("disabled",true);
+	   	$('#ca-register-form textarea').attr('disabled', true);
+	   	$('#ca-register-form select').attr('disabled', true);
+		$('.submit_btn').attr('disabled', true);
+	   	
+	   	redioGroup();
+	   	$('.commodity_wether_cls').click(function(){
+			redioGroup();
+	   	})
+   		
+   		function redioGroup(){
+		   if ($('input[name="isfamilymemberholdca"]:checked').val() == 1 && $('input[name="isotherfirm"]:checked').val() == 1) {
+			   $('#ca-register-form input[type=text]').attr("disabled",false);
+			   $('#ca-register-form textarea').attr('disabled', false);
+			   $('#ca-register-form select').attr('disabled', false);
+			   $('.submit_btn').attr('disabled', false);			 
+		   } else {
+			   $('#ca-register-form input[type=text]').attr("disabled",true);
+			   $('#ca-register-form textarea').attr('disabled', true);
+			   $('#ca-register-form select').attr('disabled', true);
+			   $('.submit_btn').attr('disabled', true);
+			   $('label.error').remove();
+		   }
+   		}
 
 
+		$('input[name="dob"]').daterangepicker({
+		   singleDatePicker: true,
+		   showDropdowns: true,
+		   minYear: 1901,
+		   maxDate: new Date(),
+		   maxYear: parseInt(moment().format('YYYY'),10),
+		   autoUpdateInput: false,
+		   locale: {
+			   cancelLabel: 'Clear'
+		   }
+		});
+	   
+		$('input[name="dob"]').on('apply.daterangepicker', function(ev, picker) {
+		   $(this).val(picker.startDate.format('DD/MM/YYYY'));
+		});
+
+		$('input[name="dob"]').on('cancel.daterangepicker', function(ev, picker) {
+		   $(this).val('');
+		});
+
+		$('#state-dd').on('change', function () {
+		    var idState = this.value;
+		    $("#district-dd").html('');
+		    $.ajax({
+		        url: "{{url('fetch-districts')}}",
+		        type: "POST",
+		        data: {
+		            state_id: idState,
+		            _token: '{{csrf_token()}}'
+		        },
+		        dataType: 'json',
+		        success: function (res) {
+		            $('#district-dd').html('<option value="">Select City</option>');
+		            $.each(res.districts, function (key, value) {
+		                $("#district-dd").append('<option value="' + value
+		                    .id + '">' + value.name + '</option>');
+		            });
+		        }
+		    });
+		});
 
 
-//for form validation
-$("#ca-register-form").validate({
-                rules: {
-                    isfamilymemberholdca: "required",
-                    familymemberholdcafile: "required",
-                    isotherfirm: "required",
-                    upladedotherfirmfile: "required",
-                    aadhar_no: "required",
-                    name: "required",
-                    age: "required",
-                    fathersname: "required",
-                    dob: "required",
-                    is_minor: "required",
-                    address: "required",
-                    mobile: "required",
-                    pan_no: "required",
-                    email:  {
-                                required : true,
-                                email : true
-                                },
-                    marketname: "required",
-                    state_id: "required",
-                    district_id: "required",
-                    gstin: "required",
-                    liscencetype_id: "required",
-                    amc_id: "required",
-                    power_attorney: "required",
-                                   
-                },
-                messages : {
-                                 aadhar_no : "Please enter your Aadhar no",
-                                email :{
-                                required : "Please enter your eamail",
-                                email : "Please provide valid email address"
-                                },
-                                
-                                },
-                submitHandler : function(form) {
-                    $(".errorstatus").hide();
-        $(".errorstatus").html("");
+		var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+		$.validator.addMethod("pan_no", function(value, element) {
+			return this.optional( element ) || regpan.test( $('input[name="pan_no"]').val() );
+		}, "Please enter valid 10 digit PAN number");
 
-var formdata = new FormData(form);
+		//for form validation
+		
+		$("#ca-register-form").validate({
+		    rules: {
+		        isfamilymemberholdca: "required",
+		        familymemberholdcafile: "required",
+		        isotherfirm: "required",
+		        upladedotherfirmfile: "required",
+				aadhar_no:  {
+					required : true,
+					number: true,
+					maxlength: 16,
+					minlength : 16,
+				},
+		        name: "required",
+		        age: {
+		        	required : true,
+		        	number: true
+				},
+		        fathersname: "required",
+		        dob: "required",
+		        is_minor: "required",
+		        address: "required",
+		        mobile: "required",
+				pan_no:{
+					required : true,
+				}, 
+		        email: {
+                    required : true,
+                    email : true
+		        },
+		        marketname: "required",
+		        state_id: "required",
+		        district_id: "required",
+				gstin:  {
+					required : true,
+					number: true,
+					maxlength: 15,
+					minlength : 15,
+				},
+		        liscencetype_id: "required",
+		        amc_id: "required",
+		        power_attorney: "required",
+		                       
+		    },
+		    messages : {
+				gstin :{
+					required : "Please enter your GST number",
+					maxlength: "Please enter valid GST number",
+					minlength : "Please enter valid GST number",
+		        } ,
+		        aadhar_no :{
+					required : "Please enter your aadhaar number",
+					maxlength: "Please enter valid aadhaar number",
+					minlength : "Please enter valid aadhaar number",
+		        } ,
+		        email :{
+			        required : "Please enter your email",
+			        email : "Please provide valid email address"
+				},
+				pan_no:{
+					required : "Please enter your PAN number",
+				}
+		        
+			},
+        	submitHandler : function(form) {
+	            $(".errorstatus").hide();
+				$(".errorstatus").html("");
 
-$.ajax({
-    type: "POST",
-    url: "{{url('save-ca-details')}}",
-    data: formdata, // serializes the form's elements.
-    cache: false,
-    contentType: false,
-    processData: false,
-    success: function(data)
-    {
-     if(data.success == true)
-     {
-         window.location.href = "{{url('/')}}/ca-payment/"+data.message;
-     }
-     else
-     {
-        $(".errorstatus").show();
-        $(".errorstatus").html(data.message);
-     }
-    }
+				var formdata = new FormData(form);
+
+				$.ajax({
+				    type: "POST",
+				    url: "{{url('save-ca-details')}}",
+				    data: formdata, // serializes the form's elements.
+				    cache: false,
+				    contentType: false,
+				    processData: false,
+				    success: function(data){
+			    		if(data.success == true){
+			         		window.location.href = "{{url('/')}}/ca-payment/"+data.message;
+			     		}else{
+					        $(".errorstatus").show();
+					        $(".errorstatus").html(data.message);
+			     		}
+			    	}
+				});
+        	}
+
+    	});
+
+
+
 });
-                    }
-
-            });
-
-
-
-        });
 
 
 </script>
