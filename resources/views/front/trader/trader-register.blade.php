@@ -86,7 +86,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PIN Code<span class="text-danger">*</span></label>
-                                    <input type="tel" maxlength="6" name="pincode" class="form-control pri-form f1" />
+                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="6" name="pincode" class="form-control pri-form f1" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -120,8 +120,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhaar No.<span class="text-danger">*</span></label>
-                                    <input type="text" name="aadhar_no"
+                                    <input type="text" name="aadhar_no" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                                         class="form-control aadharNoCls pri-form f1 aadhar_no" value="" maxlength="12" />
+                                        <label id="aadharerror" style="display: none"  class="error" >Please enter valid Aadhar Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -134,6 +135,7 @@
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
                                     <input maxlength="10" type="text" name="pan_no" class="form-control pri-form f1 pan" />
+                                    <label id="pannoerror" style="display: none"  class="error">Please enter valid Pan Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -145,13 +147,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" maxlength="10" name="mobile" class="form-control pri-form f1" maxlength="10" />
+                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="10" name="mobile" class="form-control pri-form f1" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Alternate Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" maxlength="10" name="alternate_mobile" class="form-control pri-form f1" maxlength="10" />
+                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="10" name="alternate_mobile" class="form-control pri-form f1" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -183,7 +185,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PIN Code<span class="text-danger">*</span></label>
-                                    <input type="tel" max="6" name="firmpincode" class="form-control pri-form" />
+                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" max="6" name="firmpincode" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -231,6 +233,7 @@
                                 <div class="form-group">
                                     <label>Firm Pan No<span class="text-danger ">*</span></label>
                                     <input type="text" name="firmpanno" class="form-control pri-form firmpanno" maxlength="10" />
+                                    <label id="firmpanerror" style="display: none"  class="error" >Please enter valid Firm Pan Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -400,7 +403,7 @@
             var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
             if(!regex.test(inputvalues)){      
             $(".pan").val("");    
-            alert("invalid PAN no");  
+            $("#pannoerror").show();   
             return regex.test(inputvalues);    
             }    
             });  
@@ -411,8 +414,8 @@
             var inputvalues = $(this).val();      
             var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
             if(!regex.test(inputvalues)){      
-            $(".firmpanno").val("");    
-            alert("invalid PAN no");  
+            $(".firmpanno").val(""); 
+            $("#firmpanerror").show();     
             return regex.test(inputvalues);    
             }    
             });  
@@ -424,8 +427,8 @@ $(".aadhar_no").change(function () {
             // var regex = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
             var regex = /^\d{12}$/;  
             if(!regex.test(inputvalues)){      
-            $(".aadhar_no").val("");    
-            alert("Please Enter valid aadhar number");  
+            $(".aadhar_no").val("");   
+            $("#aadharerror").show();  
             return regex.test(inputvalues);    
             }    
             });  

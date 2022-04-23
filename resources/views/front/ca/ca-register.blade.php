@@ -69,8 +69,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
-                                    <input type="tel"  id="aadhar_no" name="aadhar_no"
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" id="aadhar_no" name="aadhar_no"
                                         class="form-control aadharNoCls pri-form aadhar_no" maxlength="16" value="" />
+                                        <label id="aadharerror" style="display: none"  class="error" >Please enter valid Aadhar Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -118,13 +119,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel"  name="mobile" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="mobile" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
                                     <input type="text"  name="pan_no" class="form-control pri-form pan_no" />
+                                    <label id="pannoerror" style="display: none"  class="error" >Please enter valid Pan Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -217,8 +219,8 @@
                     var inputvalues = $(this).val();      
                     var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
                     if(!regex.test(inputvalues)){      
-                    $(".pan_no").val("");    
-                    alert("invalid PAN no");  
+                    $(".pan_no").val("");   
+                    $("#pannoerror").show();   
                     return regex.test(inputvalues);    
                     }    
                     });  
@@ -229,8 +231,8 @@
             // var regex = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
             var regex = /^\d{12}$/;  
             if(!regex.test(inputvalues)){      
-            $(".aadhar_no").val("");    
-            alert("Please Enter valid aadhar number");  
+            $(".aadhar_no").val("");   
+            $("#aadharerror").show();   
             return regex.test(inputvalues);    
             }    
             });  
