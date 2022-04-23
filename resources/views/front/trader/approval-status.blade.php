@@ -137,7 +137,12 @@
                                 <li @if($row->is_amc_approval == 1) class="approved" @endif >AMC Approval <a href="compliance-recheck.php" class="badge badge-warning">Recheck</a></li>
                                 <li  @if($row->is_ad_approval == 1) class="approved" @endif >Head Office AD Approval</li>
                                 <li @if($row->is_commisioner_approval == 1) class="approved" @endif>Commissioner Approval</li>
-                                <li><a href="#">Final Payment</a></li>
+                                @if($row->is_commisioner_approval ==1 && $row->is_final_pay == 0)
+                                <li><a href="#">Final Payment</a> <a href="{{url('trader-final-payment/'.$row->application_id)}}" class="badge badge-warning">Pay now</a></li>
+                                @endif
+                                @if($row->is_final_pay == 1)
+                                <li  class="approved">Final Payment <a href="" class="badge badge-success">Success</a></li>
+                                @endif
                                 <li>AMC Capture Digital Signature</li>
                                 <li>Trader License Generated</li>
                             </ul>

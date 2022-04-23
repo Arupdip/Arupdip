@@ -69,8 +69,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
-                                    <input type="text"  id="aadhar_no" name="aadhar_no"
-                                        class="form-control aadharNoCls pri-form" maxlength="16" value="" />
+                                    <input type="tel"  id="aadhar_no" name="aadhar_no"
+                                        class="form-control aadharNoCls pri-form aadhar_no" maxlength="16" value="" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -84,7 +84,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Age<span class="text-danger">*</span></label>
-                                    <input type="number"  name="age" maxlength="2" class="form-control pri-form" >
+                                    <input type="tel"  name="age" maxlength="2" class="form-control pri-form" >
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -124,7 +124,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
-                                    <input type="text"  name="pan_no" class="form-control pri-form" />
+                                    <input type="text"  name="pan_no" class="form-control pri-form pan_no" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -212,6 +212,30 @@
 <script>
    $(document).ready(function () {
           
+        //to validate pan number
+        $(".pan_no").change(function () {      
+                    var inputvalues = $(this).val();      
+                    var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
+                    if(!regex.test(inputvalues)){      
+                    $(".pan_no").val("");    
+                    alert("invalid PAN no");  
+                    return regex.test(inputvalues);    
+                    }    
+                    });  
+
+    //To validat aadhar number
+            $(".aadhar_no").change(function () {      
+            var inputvalues = $(this).val();      
+            // var regex = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+            var regex = /^\d{12}$/;  
+            if(!regex.test(inputvalues)){      
+            $(".aadhar_no").val("");    
+            alert("Please Enter valid aadhar number");  
+            return regex.test(inputvalues);    
+            }    
+            });  
+
+
             $('#state-dd').on('change', function () {
                 var idState = this.value;
                 $("#district-dd").html('');
@@ -232,8 +256,6 @@
                     }
                 });
             });
-
-
 
 
 

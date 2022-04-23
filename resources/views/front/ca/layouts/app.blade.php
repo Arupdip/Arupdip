@@ -163,91 +163,15 @@
                     <div class="col-md-3">
                         <ul class="ico-menu">
                             <li>
-                                <label><i class="priya-dashboard"></i> <a href="#">Dashboard</a><input type="checkbox" /></label>
+                                <label><i class="priya-dashboard"></i> <a href="{{url('/')}}/ca">Dashboard</a><input type="checkbox" /></label>
                             </li>
                             <li>
-                                <label><i class="priya-truck"></i>Manage Traders<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <!-- <li><a href="./dashboard/add-Trader">Add New</a></li> -->
-                                    <li><a href="#">Traders Application List</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label><i class="priya-user"></i>Manage Other Users<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <li><a href="#">Add New</a></li>
-                                    <li><a href="#">Manage Users</a></li>
-                                </ul>
+                                <label><i class="priya-dashboard"></i> <a href="{{url('/')}}/ca/my-application-list">Application List</a><input type="checkbox" /></label>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-3">
-                        <ul class="ico-menu">
-                            <li>
-                                <label><i class="priya-download"></i> <a href="../download/ca.pdf" download="ca-license.pdf">CA License</a></label>
-                            </li>
-                            <li>
-                                <label><i class="priya-cube"></i>Inventory<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <li><a href="#">Requisition</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label><i class="priya-user"></i>Human Resource<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <li><a href="#">Employee Registration</a></li>
-                                    <li><a href="#">Leave Application</a></li>
-                                    <li><a href="#">Attendance</a></li>
-                                    <li><a href="#">Payroll</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <ul class="ico-menu">
-                            <li>
-                                <label><i class="priya-money"></i>Prices<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <li><a href="">Add Daily Price</a></li>
-                                    <li><a href="">Daily Price List</a></li>
-                                    <li><a href="">Prices History</a></li>
-                                   
-                                </ul>
-                            </li>
-                          
-                            <li>
-                                <label><i class="priya-cube"></i>Manage Assets<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <li><a href="">Add Asset</a></li>
-                                    <li><a href="">Manage Asset</a></li>
-                                    <li><a href="">Asset Transactions</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label><i class="priya-comments"></i>Manage Complaint<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">
-                                    <li><a href="#">Add Complaint</a></li>
-                                    <li><a href="#">Manage Complaint</a></li>
-                                    <li><a href="#">Resolved Complaint</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <ul class="ico-menu">
-                            <li>
-                                <label><i class="priya-money"></i>Finance<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
-                                <ul class="collapse">                                    
-                                    <li><a href="#">Other Collection</a></li>
-                                    <li><a href="#">Rent Collection</a></li>
-                                    <li><a href="#">Expenditure</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label><i class="priya-gears"></i> <a href="#">Setting</a><input type="checkbox" /></label>
-                            </li>
-                        </ul>
-                    </div>
+                  
+                  
                 </div>
             </div>
         </header>

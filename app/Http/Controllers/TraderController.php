@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\TraderApply;
 use Auth;
 use App\Models\CAApply;
+
 class TraderController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class TraderController extends Controller
     {
         $data = TraderApply::where("user_id", '=', Auth::user()->id)->get();
 
-        return view('front.trader.applicationlist',compact('data'));
+        return view('front.trader.applicationlist', compact('data'));
     }
 
 
@@ -139,6 +140,7 @@ class TraderController extends Controller
         $returnArr['message'] = $randomid;
         return $returnArr;
     }
+
     public function traderpayment($id)
     {
 
@@ -152,7 +154,7 @@ class TraderController extends Controller
 
 
 
-    
+
     public function traderRegPaySuccess($id)
     {
         $tempData =  DB::table('temp_traderuser')->where("user_temp_id", "=", $id)->first();
@@ -198,12 +200,33 @@ class TraderController extends Controller
 
     public function approvalstatus($id)
     {
-   
+
         $data = TraderApply::where("application_id", '=', $id)->get();
         return view("front.trader.approval-status", compact('data'));
     }
 
 
+
+    //trader final payment 
+    public function traderFinalPay($id)
+    {
+
+        return view("front.trader.trader-final-payment", compact("id"));
+    }
+
+
+    //trader final payment done
+    public function traderFinalPaySuccess($id)
+    {
+        $data = TraderApply::where("application_id", '=', $id)->get();
+
+        if ($data->count() > 0) {
+            TraderApply::where("application_id", '=', $id)->update(['is_final_pay' => 1]);
+
+            return redirect()->to('trader/approval-status/'.$id);
+
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

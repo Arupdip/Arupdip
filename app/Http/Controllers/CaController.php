@@ -39,7 +39,7 @@ class CaController extends Controller
     {
         $data = CAApply::where("user_id", '=', Auth::user()->id)->get();
 
-        return view('front.ca.applicationlist',compact('data'));
+        return view('front.ca.applicationlist', compact('data'));
     }
 
 
@@ -77,7 +77,7 @@ class CaController extends Controller
     public function saveCaDetails(Request $request)
     {
 
-        $returnArr = array("success" => false, "message" => "", "id"=>"");
+        $returnArr = array("success" => false, "message" => "", "id" => "");
 
 
         $checkaddhar = CAApply::where("aadhar_no", "=", $request->aadhar_no)->count();
@@ -104,21 +104,14 @@ class CaController extends Controller
         $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->count();
         if ($checkpan != 0) {
             $returnArr['message'] = "Pan No is already existed !!";
-            $returnArr['id'] = "aadhar_no";
-            return $returnArr;
-        }
-
-        $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->count();
-        if ($checkpan != 0) {
-            $returnArr['message'] = "Pan No is already existed !!";
-            $returnArr['id'] = "pan_no";
+            $returnArr['id'] = "pan";
             return $returnArr;
         }
 
         $checkgistin = CAApply::where("gstin", "=", $request->gstin)->count();
         if ($checkgistin != 0) {
             $returnArr['message'] = "GSTIN No is already existed !!";
-            $returnArr['id'] = "gstin";
+            $returnArr['id'] = "gstin_error";
             return $returnArr;
         }
 
@@ -202,5 +195,25 @@ class CaController extends Controller
     {
         $data = CAApply::where("application_id", '=', $id)->get();
         return view("front.ca.approval-status", compact('data'));
+    }
+
+
+    // Ca final payment
+    public function caFinalPay($id)
+    {
+        return view("front.ca.ca-final-payment", compact("id"));
+    }
+
+
+    //Ca final payment done
+    public function caFinalPaySuccess($id)
+    {
+        $data = CAApply::where("application_id", '=', $id)->get();
+
+        if ($data->count() > 0) {
+            CAApply::where("application_id", '=', $id)->update(['is_final_pay' => 1]);
+
+            return redirect()->to('ca/approval-status/'.$id);
+        }
     }
 }
