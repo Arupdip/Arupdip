@@ -66,12 +66,7 @@
                                 <dd>{{$cadata->fathersname}}</dd>
                             </dl>
                         </div>
-                        <div class="col-md-4">
-                            <dl>
-                                <dt>Gender</dt>
-                                <dd>{{$cadata->gender}}</dd>
-                            </dl>
-                        </div>
+                       
                         <div class="col-md-4">
                             <dl>
                                 <dt>Date of Birth</dt>
@@ -92,7 +87,7 @@
                         <div class="col-md-4">
                             <dl>
                                 <dt>Is Minor</dt>
-                                <dd>{{$cadata->is_minor}}</dd>
+                                <dd>@if($cadata->is_minor == 1){{$cadata->is_minor}} @else No @endif</dd>
                                 <!-- <label class="give-comply">
                                     <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                                     <input type="radio" />
@@ -108,10 +103,11 @@
                         </div>
                         <div class="col-md-4">
                             <dl>
-                                <dt>Pin Code</dt>
-                                <dd>{{$cadata->pincode}}</dd>
+                                <dt>AMC Name</dt>
+                                <dd>{{$cadata->amc->name}}</dd>
                             </dl>
                         </div>
+                       
                         <div class="col-md-4">
                             <dl>
                                 <dt>State</dt>
@@ -145,12 +141,7 @@
                                 <dd>{{$cadata->mobile}}</dd>
                             </dl>
                         </div>
-                        <div class="col-md-4">
-                            <dl>
-                                <dt>Alternate Mobile No.</dt>
-                                <dd>{{$cadata->alternate_mobile}}</dd>
-                            </dl>
-                        </div>
+                        
                         <div class="col-md-4">
                             <dl>
                                 <dt>Email</dt>
@@ -167,7 +158,7 @@
                         </div>
                         <div class="col-md-4">
                             <dl>
-                                <dt>Power of Attorney</dt>
+                                <dt>Name in Power Of Attorney</dt>
                                 <dd>{{$cadata->power_attorney}}</dd>
                             </dl>
                         </div>
@@ -186,7 +177,7 @@
                         </div>
                         <div class="col-md-4">
                             <dl>
-                                <dt>Is Other Firm</dt>
+                                <dt>Other Firm</dt>
                                 <dd>@if($cadata->isotherfirm == 1) Yes @else No @endif</dd>
                                 @if($cadata->isotherfirm == 1) <a href="{{url('/')}}/public/uploads/{{$cadata->upladedotherfirmfile}}" class="priya-download" download="pan"></a> @endif
                             </dl>
@@ -196,6 +187,7 @@
                     </div>
                 </div>
             </card>
+          
           
             <div class="mt-3 text-center">
                 @if($cadata->is_ad_approval == 0)   <button class="btn btn-warning" type="button" onclick="helpModal('#comply-pop')"><i class="priya-mail-reply"></i> Comply</button>
