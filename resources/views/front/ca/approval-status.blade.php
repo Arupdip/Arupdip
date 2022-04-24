@@ -4,7 +4,7 @@
 <div class="container-fluid bdy">
     <div class="card my-5">
         <div class="card-head">
-            <h4 class="m-0 px-4 pt-3">Online License Management System
+			<h4 class="m-0 px-4 pt-3">Online License Management System (Commission Agent)
                 <div class="btn-grp">
                     <btn onclick="window.history.back()" title="Back"><i class="priya-arrow-left"></i></btn>
                     <btn onclick="helpModal('#add-dist-help')" title="Help"><i class="priya-info"></i></btn>
@@ -161,11 +161,11 @@
                             <ul>
                                 <li @if($row->is_submit == 1) class="approved" @endif >Details Submitted</li>
                                 <li @if($row->is_reg_pay == 1) class="approved" @endif>Registration Fee Paid</li>
-                                <li  @if($row->is_amc_approval == 1) class="approved" @endif>AMC Approval <a href="#" class="badge badge-warning">Recheck</a></li>
+                                <li  @if($row->is_amc_approval == 1) class="approved" @endif>AMC Approval <!--<a href="#" class="badge badge-warning">Recheck</a>--></li>
                                 <li  @if($row->is_ad_approval == 1) class="approved" @endif>AD Approval</li>
                                 <li  @if($row->is_commisioner_approval == 1) class="approved" @endif>Commissioner Approval</li>
                                 @if($row->is_commisioner_approval ==1 && $row->is_final_pay == 0)
-                                <li><a href="#">Final Payment</a> <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay now</a></li>
+                                <li><a href="#">Final Payment</a> <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a></li>
                                 @endif
                                 @if($row->is_final_pay == 1)
                                 <li  class="approved">Final Payment <a href="" class="badge badge-success">Success</a></li>

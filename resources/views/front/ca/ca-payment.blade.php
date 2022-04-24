@@ -4,7 +4,7 @@
 <div class="container-fluid bdy">
     <div class="card my-5">
         <div class="card-head">
-            <h4 class="m-0 px-4 pt-3">Online License Management System
+			<h4 class="m-0 px-4 pt-3">Online License Management System (Commission Agent)
                 <div class="btn-grp">
                     <btn onclick="window.history.back()" title="Back"><i class="priya-arrow-left"></i></btn>
                     <btn onclick="helpModal('#add-dist-help')" title="Help"><i class="priya-info"></i></btn>
