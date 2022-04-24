@@ -98,7 +98,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="text"  name="dob" class="form-control pri-form" />
+                                    <input type="text"  name="dob" class="form-control pri-form" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -217,72 +217,73 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script>
-   $(document).ready(function () {
-	   	$('#ca-register-form input[type=text]').attr("disabled",true);
-	   	$('#ca-register-form textarea').attr('disabled', true);
-	   	$('#ca-register-form select').attr('disabled', true);
+	$(document).ready(function () {
+		$('#ca-register-form input[type=text]').attr("disabled",true);
+		$('#ca-register-form textarea').attr('disabled', true);
+		$('#ca-register-form select').attr('disabled', true);
 		$('.submit_btn').attr('disabled', true);
-	   	
-	   	redioGroup();
-	   	$('.commodity_wether_cls').click(function(){
+
+		redioGroup();
+		$('.commodity_wether_cls').click(function() {
 			redioGroup();
-	   	})
-   		
-   		function redioGroup(){
-		   if ($('input[name="isfamilymemberholdca"]:checked').val() == 1 && $('input[name="isotherfirm"]:checked').val() == 1) {
-			   $('#ca-register-form input[type=text]').attr("disabled",false);
-			   $('#ca-register-form textarea').attr('disabled', false);
-			   $('#ca-register-form select').attr('disabled', false);
-			   $('.submit_btn').attr('disabled', false);			 
-		   } else {
-			   $('#ca-register-form input[type=text]').attr("disabled",true);
-			   $('#ca-register-form textarea').attr('disabled', true);
-			   $('#ca-register-form select').attr('disabled', true);
-			   $('.submit_btn').attr('disabled', true);
-			   $('label.error').remove();
-		   }
-   		}
+		})
+
+		function redioGroup()
+		{
+			if ($('input[name="isfamilymemberholdca"]:checked').val() == 1 && $('input[name="isotherfirm"]:checked').val() == 1) {
+				$('#ca-register-form input[type=text]').attr("disabled",false);
+				$('#ca-register-form textarea').attr('disabled', false);
+				$('#ca-register-form select').attr('disabled', false);
+				$('.submit_btn').attr('disabled', false);
+			} else {
+				$('#ca-register-form input[type=text]').attr("disabled",true);
+				$('#ca-register-form textarea').attr('disabled', true);
+				$('#ca-register-form select').attr('disabled', true);
+				$('.submit_btn').attr('disabled', true);
+				$('label.error').remove();
+			}
+		}
 
 
 		$('input[name="dob"]').daterangepicker({
-		   singleDatePicker: true,
-		   showDropdowns: true,
-		   minYear: 1901,
-		   maxDate: new Date(),
-		   maxYear: parseInt(moment().format('YYYY'),10),
-		   autoUpdateInput: false,
-		   locale: {
-			   cancelLabel: 'Clear'
-		   }
+			singleDatePicker: true,
+			showDropdowns: true,
+			minYear: 1901,
+			maxDate: new Date(),
+			maxYear: parseInt(moment().format('YYYY'),10),
+			autoUpdateInput: false,
+			locale: {
+				cancelLabel: 'Clear'
+			}
 		});
-	   
+
 		$('input[name="dob"]').on('apply.daterangepicker', function(ev, picker) {
-		   $(this).val(picker.startDate.format('DD/MM/YYYY'));
+			$(this).val(picker.startDate.format('DD/MM/YYYY'));
 		});
 
 		$('input[name="dob"]').on('cancel.daterangepicker', function(ev, picker) {
-		   $(this).val('');
+			$(this).val('');
 		});
 
 		$('#state-dd').on('change', function () {
-		    var idState = this.value;
-		    $("#district-dd").html('');
-		    $.ajax({
-		        url: "{{url('fetch-districts')}}",
-		        type: "POST",
-		        data: {
-		            state_id: idState,
-		            _token: '{{csrf_token()}}'
-		        },
-		        dataType: 'json',
-		        success: function (res) {
-		            $('#district-dd').html('<option value="">Select City</option>');
-		            $.each(res.districts, function (key, value) {
-		                $("#district-dd").append('<option value="' + value
-		                    .id + '">' + value.name + '</option>');
-		            });
-		        }
-		    });
+			var idState = this.value;
+			$("#district-dd").html('');
+			$.ajax({
+				url: "{{url('fetch-districts')}}",
+				type: "POST",
+				data: {
+					state_id: idState,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('#district-dd').html('<option value="">Select City</option>');
+					$.each(res.districts, function (key, value) {
+						$("#district-dd").append('<option value="' + value
+						.id + '">' + value.name + '</option>');
+					});
+				}
+			});
 		});
 
 
@@ -292,99 +293,98 @@
 		}, "Please enter valid 10 digit PAN number");
 
 		//for form validation
-		
+
 		$("#ca-register-form").validate({
-		    rules: {
-		        isfamilymemberholdca: "required",
-		        familymemberholdcafile: "required",
-		        isotherfirm: "required",
-		        upladedotherfirmfile: "required",
+			rules: {
+				isfamilymemberholdca: "required",
+				familymemberholdcafile: "required",
+				isotherfirm: "required",
+				upladedotherfirmfile: "required",
 				aadhar_no:  {
 					required : true,
 					number: true,
-					maxlength: 16,
-					minlength : 16,
+					maxlength: 12,
+					minlength : 12,
 				},
-		        name: "required",
-		        age: {
-		        	required : true,
-		        	number: true
+				name: "required",
+				age: {
+					required : true,
+					number: true
 				},
-		        fathersname: "required",
-		        dob: "required",
-		        is_minor: "required",
-		        address: "required",
-		        mobile: "required",
+				fathersname: "required",
+				dob: "required",
+				is_minor: "required",
+				address: "required",
+				mobile: "required",
 				pan_no:{
 					required : true,
-				}, 
-		        email: {
-                    required : true,
-                    email : true
-		        },
-		        marketname: "required",
-		        state_id: "required",
-		        district_id: "required",
+				},
+				email: {
+					required : true,
+					email : true
+				},
+				marketname: "required",
+				state_id: "required",
+				district_id: "required",
 				gstin:  {
 					required : true,
-					number: true,
 					maxlength: 15,
 					minlength : 15,
 				},
-		        liscencetype_id: "required",
-		        amc_id: "required",
-		        power_attorney: "required",
-		                       
-		    },
-		    messages : {
+				liscencetype_id: "required",
+				amc_id: "required",
+				power_attorney: "required",
+
+			},
+			messages : {
 				gstin :{
 					required : "Please enter your GST number",
 					maxlength: "Please enter valid GST number",
 					minlength : "Please enter valid GST number",
-		        } ,
-		        aadhar_no :{
+				} ,
+				aadhar_no :{
 					required : "Please enter your aadhaar number",
 					maxlength: "Please enter valid aadhaar number",
 					minlength : "Please enter valid aadhaar number",
-		        } ,
-		        email :{
-			        required : "Please enter your email",
-			        email : "Please provide valid email address"
+				} ,
+				email :{
+					required : "Please enter your email",
+					email : "Please provide valid email address"
 				},
 				pan_no:{
 					required : "Please enter your PAN number",
 				}
-		        
+
 			},
-        	submitHandler : function(form) {
-	            $(".errorstatus").hide();
+			submitHandler : function(form) {
+				$(".errorstatus").hide();
 				$(".errorstatus").html("");
 
 				var formdata = new FormData(form);
 
 				$.ajax({
-				    type: "POST",
-				    url: "{{url('save-ca-details')}}",
-				    data: formdata, // serializes the form's elements.
-				    cache: false,
-				    contentType: false,
-				    processData: false,
-				    success: function(data){
-			    		if(data.success == true){
-			         		window.location.href = "{{url('/')}}/ca-payment/"+data.message;
-			     		}else{
-					        $(".errorstatus").show();
-					        $(".errorstatus").html(data.message);
-			     		}
-			    	}
+					type: "POST",
+					url: "{{url('save-ca-details')}}",
+					data: formdata, // serializes the form's elements.
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data) {
+						if (data.success == true) {
+							window.location.href = "{{url('/')}}/ca-payment/"+data.message;
+						} else {
+							$(".errorstatus").show();
+							$(".errorstatus").html(data.message);
+						}
+					}
 				});
-        	}
+			}
 
-    	});
+		});
 
 
 
-});
+	});
 
 
 </script>

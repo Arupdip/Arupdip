@@ -63,7 +63,7 @@
                                     <label>Gender<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
-                                            <input type="radio" name="gender" class="" checked value="M" onchange="priGroup(this)"><i></i> Male
+                                            <input type="radio" name="gender" class="" value="M" onchange="priGroup(this)"><i></i> Male
                                         </label>
                                         <label class="pri-radio ml-4">
                                             <input type="radio" name="gender" class="" value="F" onchange="priGroup(this)"><i></i> Female
@@ -80,7 +80,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date" name="dob" class="form-control pri-form f1" />
+                                    <input type="text" name="dob" class="form-control pri-form f1" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -93,6 +93,7 @@
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
                                     <select name="state_id" id="state-dd" class="form-control pri-form f1">
+										<option value="" >-- Select --</option>
                                         @foreach($states as $state)
                                         <option value="{{$state->state_id}}">{{$state->state_title}}</option>
                                         @endforeach
@@ -111,6 +112,7 @@
                                 <div class="form-group">
                                     <label>Mandal<span class="text-danger">*</span></label>
                                     <select name="mandal_id" class="form-control pri-form f1">
+										<option value="" >-- Select --</option>
                                         @foreach($mandal as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                         @endforeach
@@ -120,9 +122,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhaar No.<span class="text-danger">*</span></label>
-                                    <input type="text" name="aadhar_no" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                        class="form-control aadharNoCls pri-form f1 aadhar_no" value="" maxlength="12" />
-                                        <label id="aadharerror" style="display: none"  class="error" >Please enter valid Aadhar Number</label>
+                                    <input type="text" name="aadhar_no" class="form-control aadharNoCls pri-form f1 aadhar_no" value="" maxlength="12" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -135,7 +135,6 @@
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
                                     <input maxlength="10" type="text" name="pan_no" class="form-control pri-form f1 pan" />
-                                    <label id="pannoerror" style="display: none"  class="error">Please enter valid Pan Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -211,6 +210,7 @@
                                 <div class="form-group">
                                     <label>AMC Name<span class="text-danger">*</span></label>
                                     <select name="amc_id" class="form-control pri-form">
+										<option>-- Select --</option>
                                         @foreach($amc as $row)
                                         <option value="{{$row->id}}" >{{$row->name}}</option>
                                         @endforeach
@@ -226,13 +226,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>GSTIN<span class="text-danger">*</span></label>
-                                    <input type="text" name="gstin" class="form-control pri-form" />
+									<input type="text" name="gstin" class="form-control pri-form" maxlength="15"  />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Firm Pan No<span class="text-danger ">*</span></label>
-                                    <input type="text" name="firmpanno" class="form-control pri-form firmpanno" maxlength="10" />
+                                    <input type="text" name="firmpanno" class="form-control pri-form " maxlength="10" />
                                     <label id="firmpanerror" style="display: none"  class="error" >Please enter valid Firm Pan Number</label>
                                 </div>
                             </div>
@@ -291,13 +291,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>IFSC Code<span class="text-danger">*</span></label>
-                                    <input type="text" name="ifsc" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="ifsc" class="form-control pri-form" maxlength="11" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Confirm IFSC Code<span class="text-danger">*</span></label>
-                                    <input type="text" name="c_ifsc" class="form-control pri-form" maxlength="10" />
+									<input type="text" name="c_ifsc" class="form-control pri-form" id="c_ifsc" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -390,256 +390,281 @@
 </div>
 
 {{-- To auto select state and sistrict --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"> </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"> </script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script>
-   $(document).ready(function () {
+	$(document).ready(function () {
+		$('input[name="dob"]').daterangepicker({
+			singleDatePicker: true,
+			showDropdowns: true,
+			minYear: 1901,
+			maxDate: new Date(),
+			maxYear: parseInt(moment().format('YYYY'),10),
+			autoUpdateInput: false,
+			locale: {
+				cancelLabel: 'Clear'
+			}
+		});
+		
+		$('input[name="dob"]').on('apply.daterangepicker', function(ev, picker) {
+			$(this).val(picker.startDate.format('DD/MM/YYYY'));
+		});
 
-//to validate pan number
-         $(".pan").change(function () {      
-            var inputvalues = $(this).val();      
-            var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
-            if(!regex.test(inputvalues)){      
-            $(".pan").val("");    
-            $("#pannoerror").show();   
-            return regex.test(inputvalues);    
-            }    
-            });  
+		$('input[name="dob"]').on('cancel.daterangepicker', function(ev, picker) {
+			$(this).val('');
+		});
 
+		
 
-            //to validate firm  pan number
-         $(".firmpanno").change(function () {      
-            var inputvalues = $(this).val();      
-            var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;    
-            if(!regex.test(inputvalues)){      
-            $(".firmpanno").val(""); 
-            $("#firmpanerror").show();     
-            return regex.test(inputvalues);    
-            }    
-            });  
-//to aadhar pan number
+		$('#state-dd').on('change', function () {
+			var idState = this.value;
+			$("#district-dd").html('');
+			$.ajax({
+				url: "{{url('fetch-districts')}}",
+				type: "POST",
+				data: {
+					state_id: idState,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('#district-dd').html('<option value="">Select City</option>');
+					$.each(res.districts, function (key, value) {
+						$("#district-dd").append('<option value="' + value
+						.id + '">' + value.name + '</option>');
+					});
+				}
+			});
+		});
 
-
-$(".aadhar_no").change(function () {      
-            var inputvalues = $(this).val();      
-            // var regex = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
-            var regex = /^\d{12}$/;  
-            if(!regex.test(inputvalues)){      
-            $(".aadhar_no").val("");   
-            $("#aadharerror").show();  
-            return regex.test(inputvalues);    
-            }    
-            });  
-            
-  
-
-          
-            $('#state-dd').on('change', function () {
-                var idState = this.value;
-                $("#district-dd").html('');
-                $.ajax({
-                    url: "{{url('fetch-districts')}}",
-                    type: "POST",
-                    data: {
-                        state_id: idState,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        $('#district-dd').html('<option value="">Select City</option>');
-                        $.each(res.districts, function (key, value) {
-                            $("#district-dd").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            });
-
-            $('#firmstate_id').on('change', function () {
-                var idState = this.value;
-                $("firmdistrict_id").html('');
-                $.ajax({
-                    url: "{{url('fetch-districts')}}",
-                    type: "POST",
-                    data: {
-                        state_id: idState,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        $('#firmdistrict_id').html('<option value="">Select City</option>');
-                        $.each(res.districts, function (key, value) {
-                            $("#firmdistrict_id").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            });
+		$('#firmstate_id').on('change', function () {
+			var idState = this.value;
+			$("firmdistrict_id").html('');
+			$.ajax({
+				url: "{{url('fetch-districts')}}",
+				type: "POST",
+				data: {
+					state_id: idState,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('#firmdistrict_id').html('<option value="">Select City</option>');
+					$.each(res.districts, function (key, value) {
+						$("#firmdistrict_id").append('<option value="' + value
+						.id + '">' + value.name + '</option>');
+					});
+				}
+			});
+		});
 
 
+		var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+		$.validator.addMethod("pan_no_valid", function(value, element) {
+			return this.optional( element ) || regpan.test( $('input[name="pan_no"]').val() );
+		}, "Please enter valid 10 digit PAN number");
+		
+		$.validator.addMethod("firm_pan_no_valid", function(value, element) {
+			return this.optional( element ) || regpan.test( $('input[name="pan_no"]').val() );
+		}, "Please enter valid 10 digit PAN number");
 
-                $("#trader-register-form").validate({
-                rules: {
-                    typeoffirm: "required",
-                    name: "required",
-                    fathersname: "required",
-                    gender: "required",
-                    address: "required",
-                    dob: "required",
-                    pincode: "required",
-                    state_id: "required",
-                    district_id: "required",
-                    mandal_id: "required",
-                    aadhar_no:{
-                                required:true
-                            },
+		var ifsc_type = /^([A-Za-z0]{4})(0\d{6})$/;
+		$.validator.addMethod("ifsc_valid", function(value, element) {
+			return this.optional( element ) || ifsc_type.test( $('input[name="ifsc"]').val() );
+		}, "Please enter valid 11 digit bank IFSC code");
 
-                    aadhar_file: {required : true,
-                                },
-                    pan_no: "required",
-                    pan_file: "required",
-                    mobile:{
-                                required:true,
-                              minlength:10,
-                                maxlength:10,
-                            number: true
-                            },
-                    email:  {
-                                required : true,
-                                email : true
-                                },
-                    firmname: "required",
-                    firmaddress: "required",
-                    firmpincode: "required",
-                    firm_state_id: "required",
-                    firmdistrict_id: "required",
-                    amc_id: "required",
-                    firmregisteration_no: "required",
-                    gstin: "required",
-                    firmpanno: "required",
-                    firmpan_file: "required",
-                    gstin_file: "required",
-                    declarationofsolvency: "required",
-                    uploadedbankguaranteetype: "required",
-                    bankname: "required",
-                    account_holder: "required",
-                    account_no: "required",
-                    c_account_no: "required",
-                    ifsc: "required",
-                    c_ifsc: "required",
-                    account_file: "required",                  
-                },
+		$("#trader-register-form").validate({
+			rules: {
+				typeoffirm: "required",
+				name: "required",
+				fathersname: "required",
+				gender: "required",
+				address: "required",
+				dob: "required",
+				pincode: "required",
+				state_id: "required",
+				district_id: "required",
+				mandal_id: "required",
+				aadhar_no:{
+					required : true,
+					number: true,
+					maxlength: 12,
+					minlength : 12,
+				},
 
-                messages : {    
-                                 typeoffirm : "Please select type of firm",
-                                name : "Please enter your full name",
-                                fathersname : "Father's name is required",
-                                gender : "Please choose gender",
-                                address : "Please enter your Address",
-                                dob : "Please select date of birth",
-                                pincode : "Please enter your Pincode",
-                                state_id : "Please select your Sate",
-                                district_id : "Please select your District",
-                                mandal_id : "Please select your Mandal",
-                                aadhar_file : "Please upload aadhar card",
-                                pan_no : "Please enter  your PAN No",
-                                pan_file : "Please upload your Pan card",
-                                aadhar_no :{
-                                    required : "Please enter your Aadhar no"
-                                },
-                                email :{
-                                        required : "Please enter your email",
-                                        email : "Please provide valid email address"
-                                },
-                                mobile :{
-                                        required : "Please enter Mobile number",
-                                        number : "Please provide number only"
-                                },
-                                firmname : "Please provide firm name",
-                                firmaddress : "Please provide firm Address",
-                                firmpincode : "Please provide firm pin code",
-                                firm_state_id : "Please selec firm state",
-                                firmdistrict_id : "Please select firm district",
-                                amc_id : "Please provide AMC name",
-                                firmregisteration_no : "Please provide firm registration number",
-                                gstin : "Please provide firm GSTIN",
-                                firmpanno : "Please provide firm PAN no",
-                                firmpan_file : "Please upload firm pan file",
-                                gstin_file : "Please upload gst file",
-                                declarationofsolvency : "Please provide declaration solvency",
-                                uploadedbankguaranteetype : "Please upload bank guarantee",
-                                bankname : "Please provide bank name",
-                                uploadedbankguaranteetype : "Please upload bank guarantee",
-                                account_holder : "Please provide account holder name",
-                                account_no : "Please provide account number",
-                                c_account_no : "Please provide confirm account number",
-                                ifsc : "Please provide IFSC number",
-                                c_ifsc : "Please confirm IFSC number",
-                                account_file : "Please provide account number",
-                                
-                                },
-             submitHandler: function(form) {
-       
-$(".errorstatus").hide();
-$(".errorstatus").html("");
+				aadhar_file: {
+					required : true,
+				},
+				pan_no:{
+					required : true,
+					pan_no_valid: true
+				},
+				pan_file: "required",
+				mobile:{
+					required:true,
+					minlength:10,
+					maxlength:10,
+					number: true
+				},
+				alternate_mobile:{
+					required:true,
+					minlength:10,
+					maxlength:10,
+					number: true
+				},
+				email:  {
+					required : true,
+					email : true
+				},
+				firmname: "required",
+				firmaddress: "required",
+				firmpincode: "required",
+				firm_state_id: "required",
+				firmdistrict_id: "required",
+				amc_id: "required",
+				firmregisteration_no:"required",
+				gstin: {
+					required : true,
+					maxlength: 15,
+					minlength : 15,
+				},
+				firmpanno: {
+					required : true,
+					firm_pan_no_valid: true
+				},
+				firmpan_file: "required",
+				gstin_file: "required",
+				declarationofsolvency: "required",
+				uploadedbankguaranteetype: "required",
+				bankname: "required",
+				account_holder: "required",
+				account_no: "required",
+				c_account_no: "required",
+				ifsc: {
+					required : true,
+					ifsc_valid: true,
+					maxlength: 11,
+					minlength : 11,
+				},
+				c_ifsc:{
+					required : true,
+					equalTo : "#c_ifsc"
+				},
+				account_file: "required",
+			},
 
+			messages : {
+				typeoffirm : "Please select type of firm",
+				name : "Please enter your full name",
+				fathersname : "Father's name is required",
+				gender : "Please choose gender",
+				address : "Please enter your Address",
+				dob : "Please select date of birth",
+				pincode : "Please enter your Pincode",
+				state_id : "Please select your Sate",
+				district_id : "Please select your District",
+				mandal_id : "Please select your Mandal",
+				aadhar_file : "Please upload aadhar card",
+				pan_no :{
+					required : "Please enter your PAN number",
+				},
+				pan_file : "Please upload your Pan card",
+				aadhar_no :{
+					required : "Please enter your aadhaar number",
+					maxlength: "Please enter valid aadhaar number",
+					minlength : "Please enter valid aadhaar number",
+				} ,
+				email :{
+					required : "Please enter your email",
+					email : "Please provide valid email address"
+				},
+				mobile :{
+					required : "Please enter Mobile number",
+					number : "Please provide number only"
+				},
+				firmname : "Please provide firm name",
+				firmaddress : "Please provide firm Address",
+				firmpincode : "Please provide firm pin code",
+				firm_state_id : "Please selec firm state",
+				firmdistrict_id : "Please select firm district",
+				amc_id : "Please provide AMC name",
+				gstin :{
+					required : "Please enter your GST number",
+					maxlength: "Please enter valid GST number",
+					minlength : "Please enter valid GST number",
+				} ,
+				firmpanno : "Please provide firm PAN no",
+				firmpan_file : "Please upload firm pan file",
+				gstin_file : "Please upload gst file",
+				declarationofsolvency : "Please provide declaration solvency",
+				uploadedbankguaranteetype : "Please upload bank guarantee",
+				bankname : "Please provide bank name",
+				uploadedbankguaranteetype : "Please upload bank guarantee",
+				account_holder : "Please provide account holder name",
+				account_no : "Please provide account number",
+				c_account_no : "Please provide confirm account number",
+				ifsc : "Please provide IFSC number",
+				c_ifsc : {
+					required : "Please confirm IFSC number",
+					equalTo: "Please enter valid GST number",
+				},
+				account_file : "Please provide account number",
 
-var formdata = new FormData(form);
+			},
+			submitHandler: function(form) {
 
-$.ajax({
-type: "POST",
-url: "{{url('save-trader-details')}}",
-data: formdata, // serializes the form's elements.
-cache: false,
-contentType: false,
-processData: false,
-success: function(data)
-{
-if(data.success == true)
-{
- window.location.href = "{{url('/')}}/trader-payment/"+data.message;
-}
-else
-{
-$(".errorstatus").show();
-$(".errorstatus").html(data.message);
-}
-}
-});
-    }
-        
-           
-            });
-
-
-        });
-
-
-         
-function nextForm2(d){
-var t1= true;
-    $(".f1").each(function() {
-   if($(this).val()=='')
-   t1 = false;
-});
-
-if(t1 == true)
-{
-    var cur = $(d).parents('.form-section');
-	let	nextStep = $(d).parents('.form-section').next();
-		$("#progressbar li").eq($(".form-section").index(nextStep)).addClass("active current").siblings().removeClass("current");
-		nextStep.show();
-		cur.hide();
-}
-else
-{
-    $("#trader-register-form").valid()
-}
+				$(".errorstatus").hide();
+				$(".errorstatus").html("");
 
 
-   
-}
+				var formdata = new FormData(form);
+
+				$.ajax({
+					type: "POST",
+					url: "{{url('save-trader-details')}}",
+					data: formdata, // serializes the form's elements.
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data) {
+						if (data.success == true) {
+							window.location.href = "{{url('/')}}/trader-payment/"+data.message;
+						} else {
+							$(".errorstatus").show();
+							$(".errorstatus").html(data.message);
+						}
+					}
+				});
+			}
+
+
+		});
+
+	});
+
+
+
+	function nextForm2(d)
+	{
+		var t1= true;
+		$(".f1").each(function() {
+			if ($(this).val()=='')
+				t1 = false;
+		});
+
+		if (t1 == true) {
+			var cur = $(d).parents('.form-section');
+			let	nextStep = $(d).parents('.form-section').next();
+			$("#progressbar li").eq($(".form-section").index(nextStep)).addClass("active current").siblings().removeClass("current");
+			nextStep.show();
+			cur.hide();
+		} else {
+			$("#trader-register-form").valid()
+		}
+	}
 </script>
 @stop
