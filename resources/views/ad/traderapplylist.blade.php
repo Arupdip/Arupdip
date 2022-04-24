@@ -3,8 +3,14 @@
 @section('content')
 
 <div class="container-fluid bdy">
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
     <div class="row">
     <div class="col-sm-12">
+        @include('layouts.alerts')
         <div class="py-5 section">
             <card class="card">
                 <h5 class="card-header">Trader Applications
@@ -38,13 +44,10 @@
                                   <td><span class="badge badge-warning">Comply Pending</span></td>
                                   @endif
                                   <td align="center">
-                                    <a href="javascript:helpModal('#view-trader-details')" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
+                                    <a href="{{url('/')}}/ad/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
+                                    <a href="{{url('/')}}/ad/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
                                    
-                                    @if($row->is_ad_approval != 1)
-                                    <a href="{{url('/')}}/ad/traderapproval/{{$row->application_id}}" title="Approve" class="btn btn-icon btn-info"><i class="priya-check"></i> </a>
-                               
-                                  @endif
-                                  
+                                   
 
                                   </td>
                                 </tr>

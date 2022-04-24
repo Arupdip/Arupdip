@@ -108,8 +108,16 @@ Route::group(['prefix' => 'amc', 'middleware' => 'amc'], function () {
 
 	Route::get('/', [FAMCController::class, 'dashboard']);
 	// For Manage mandal,district,state
+	Route::get('/trader-signature-upload', [FAMCController::class, 'tradersignatureupload']);
+	Route::post('/upload-trader-sign', [FAMCController::class, 'uploadtraderesign']);
+
+	Route::get('/trader-signature-upload-success', [FAMCController::class, 'tradersignatureuploadsuccess']);
+
+
 	Route::get('/traderapplylist', [FAMCController::class, 'traderapplylist']);
 	Route::get('/traderapproval/{id}', [FAMCController::class, 'traderapproval']);
+	Route::get('/traderviedetails/{id}', [FAMCController::class, 'traderViewDetails']);
+	Route::post('/traderapprovesubmit', [FAMCController::class, 'traderApproveSubmit']);
 
 	Route::get('/caapplylist', [FAMCController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [FAMCController::class, 'caapproval']);
@@ -123,6 +131,10 @@ Route::group(['prefix' => 'ad', 'middleware' => 'ad'], function () {
 	Route::get('/traderapplylist', [ADController::class, 'traderapplylist']);
 	Route::get('/traderapproval/{id}', [ADController::class, 'traderapproval']);
 
+	Route::get('/traderviedetails/{id}', [ADController::class, 'traderViewDetails']);
+	Route::post('/traderapprovesubmit', [ADController::class, 'traderApproveSubmit']);
+
+
 	Route::get('/caapplylist', [ADController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [ADController::class, 'caapproval']);
 });
@@ -133,6 +145,11 @@ Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], funct
 	// For Manage mandal,district,state
 	Route::get('/traderapplylist', [CommissionerController::class, 'traderapplylist']);
 	Route::get('/traderapproval/{id}', [CommissionerController::class, 'traderapproval']);
+
+	Route::get('/traderviedetails/{id}', [CommissionerController::class, 'traderViewDetails']);
+	Route::post('/traderapprovesubmit', [CommissionerController::class, 'traderApproveSubmit']);
+
+
 
 	Route::get('/caapplylist', [CommissionerController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [CommissionerController::class, 'caapproval']);

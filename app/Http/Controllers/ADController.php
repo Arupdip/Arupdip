@@ -14,6 +14,7 @@ use App\Models\State;
 use App\Models\District;
 use DB;
 use Auth;
+use App\Models\Traderlog;
 class ADController extends Controller
 {
 
@@ -52,5 +53,31 @@ class ADController extends Controller
 
     }
 
+
+    
+    public function traderViewDetails($id){
+
+        $traderview = TraderApply::where("application_id",'=',$id)->first();
+ 
+        $Traderlog = Traderlog::where("application_id",'=',$traderview->id)->get();
+        return view('ad.traderviewdetails', compact('traderview','Traderlog'));
+ 
+     } 
+ 
+     public function traderApproveSubmit(Request $request){
+ 
+         $input = $request->all();
+         $input['created_at'] = date('Y-m-d H:i:s');
+         unset($input['_token']);
+ 
+         $input['user_id'] = Auth::user()->id;
+         $approvetrader = Traderlog::insertGetId($input);
+         TraderApply::where("id",'=',$request->application_id)->update(['is_ad_approval'=>1]);
+         if($approvetrader){
+            return redirect('/ad/traderapplylist')->with('success','Trader Approved succesfully');
+         }
+   
+  
+        }
     
 }

@@ -101,36 +101,36 @@ class TraderController extends Controller
 
         if ($file = $request->file('aadhar_file')) {
             $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['aadhar_file']);
+            $file->move(public_path('uploads'), $input['aadhar_file']);
         }
 
         if ($file = $request->file('pan_file')) {
             $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['pan_file']);
+            $file->move(public_path('uploads'), $input['pan_file']);
         }
 
         if ($file = $request->file('firmpan_file')) {
             $input['firmpan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['firmpan_file']);
+            $file->move(public_path('uploads'), $input['firmpan_file']);
         }
 
         if ($file = $request->file('gstin_file')) {
             $input['gstin_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['gstin_file']);
+            $file->move(public_path('uploads'), $input['gstin_file']);
         }
 
         if ($file = $request->file('declarationofsolvency')) {
             $input['declarationofsolvency'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['declarationofsolvency']);
+            $file->move(public_path('uploads'), $input['declarationofsolvency']);
         }
 
         if ($file = $request->file('uploadedbankguaranteetype')) {
             $input['uploadedbankguaranteetype'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['uploadedbankguaranteetype']);
+            $file->move(public_path('uploads'), $input['uploadedbankguaranteetype']);
         }
         if ($file = $request->file('account_file')) {
             $input['account_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['account_file']);
+            $file->move(public_path('uploads'), $input['account_file']);
         }
 
 

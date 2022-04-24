@@ -166,13 +166,26 @@
                                 <label><i class="priya-dashboard"></i> <a href="#">Dashboard</a><input type="checkbox" /></label>
                             </li>
                             <li>
-                                <label><i class="priya-truck"></i>Manage Traders/ CA<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
+                                <label><i class="priya-truck"></i>Manage Traders<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
                                 <ul class="collapse">
                                     <!-- <li><a href="./dashboard/add-Trader">Add New</a></li> -->
-                                    <li><a href="{{url('/')}}/amc/traderapplylist">Traders Application List</a></li>
-                                    <li><a href="{{url('/')}}/amc/caapplylist">CA Application List</a></li>
+                                    <li><a href="{{url('/')}}/amc/traderapplylist">Pending Registration</a></li>
+                                    <li><a href="{{url('/')}}/amc/trader-signature-upload">Pending Digital Signature</a></li>
+                                    <li><a href="{{url('/')}}/amc/trader-signature-upload-success">Uploaded Digital Signature</a></li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <label><i class="priya-truck"></i>Manage CA<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
+                                <ul class="collapse">
+                                    <!-- <li><a href="./dashboard/add-Trader">Add New</a></li> -->
+                                 
+                                    <li><a href="{{url('/')}}/amc/caapplylist">CA Application List</a></li>
+                                    
+                                </ul>
+                            </li>
+
+
                             <li>
                                 <label><i class="priya-user"></i>Manage Other Users<input type="checkbox" /> <i class="priya-caret-down float-right mt-1"></i></label>
                                 <ul class="collapse">
