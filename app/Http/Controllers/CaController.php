@@ -123,13 +123,25 @@ class CaController extends Controller
         unset($input['_token']);
         if ($file = $request->file('familymemberholdcafile')) {
             $input['familymemberholdcafile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['familymemberholdcafile']);
+            $file->move(public_path('uploads'), $input['familymemberholdcafile']);
         }
 
         if ($file = $request->file('upladedotherfirmfile')) {
             $input['upladedotherfirmfile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
-            $file->move(public_path('public/Image'), $input['upladedotherfirmfile']);
+            $file->move(public_path('uploads'), $input['upladedotherfirmfile']);
         }
+        if ($file = $request->file('aadhar_file')) {
+            $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['aadhar_file']);
+        }
+
+
+        if ($file = $request->file('pan_file')) {
+            $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['pan_file']);
+        }
+
+
 
 
         DB::table('temp_causer')->insertGetId($input);

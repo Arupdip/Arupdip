@@ -5,6 +5,7 @@
 <div class="container-fluid bdy">
     <div class="row">
     <div class="col-sm-12">
+        @include('layouts.alerts')
         <div class="py-5 section">
             <card class="card">
                 <h5 class="card-header">CA Applications
@@ -37,16 +38,11 @@
                                   @else
                                   <td><span class="badge badge-warning">Comply Pending</span></td>
                                   @endif
-                                  <td align="center">
-                                    <a href="javascript:helpModal('#view-trader-details')" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-                                   
-                                    @if($row->is_amc_approval != 1)
-                                    <a href="{{url('/')}}/amc/caapproval/{{$row->application_id}}" title="Approve" class="btn btn-icon btn-info"><i class="priya-check"></i> </a>
-                               
-                                  @endif
-                                  
-
-                                  </td>
+                                    <td align="center">
+                                        <a href="{{url('/')}}/amc/caviewdetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
+                                        <a href="{{url('/')}}/amc/caviewdetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+                                       
+                                      </td>
                                 </tr>
                                
                                 @endforeach

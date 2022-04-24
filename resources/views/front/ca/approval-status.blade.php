@@ -136,7 +136,7 @@
                                     <div class="col-md-3 col-sm-6">
                                         <div class="dl">
                                             <div class="dt">License Type</div>
-                                            <div class="dd">@if(isset($row->liscencetype)){{$row->liscencetype->name}} @endif</div>
+                                            <div class="dd">CA</div>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-6">
@@ -164,7 +164,7 @@
                                 <li  @if($row->is_amc_approval == 1) class="approved" @endif>AMC Approval <!--<a href="#" class="badge badge-warning">Recheck</a>--></li>
                                 <li  @if($row->is_ad_approval == 1) class="approved" @endif>AD Approval</li>
                                 <li  @if($row->is_commisioner_approval == 1) class="approved" @endif>Commissioner Approval</li>
-                                @if($row->is_commisioner_approval ==1 && $row->is_final_pay == 0)
+                                @if($row->is_final_pay == 0)
                                 <li><a href="#">Final Payment</a> <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a></li>
                                 @endif
                                 @if($row->is_final_pay == 1)

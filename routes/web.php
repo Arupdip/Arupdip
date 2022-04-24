@@ -121,6 +121,13 @@ Route::group(['prefix' => 'amc', 'middleware' => 'amc'], function () {
 
 	Route::get('/caapplylist', [FAMCController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [FAMCController::class, 'caapproval']);
+
+	Route::get('/caviewdetails/{id}', [FAMCController::class, 'caViewDetails']);
+	Route::post('/caapprovesubmit', [FAMCController::class, 'caApproveSubmit']);
+
+	Route::get('/ca-signature-upload', [FAMCController::class, 'casignatureupload']);
+	Route::post('/upload-ca-sign', [FAMCController::class, 'uploadcasign']);
+	Route::get('/ca-signature-upload-success', [FAMCController::class, 'casignatureuploadsuccess']);
 });
 
 Route::group(['prefix' => 'ad', 'middleware' => 'ad'], function () {
@@ -137,6 +144,9 @@ Route::group(['prefix' => 'ad', 'middleware' => 'ad'], function () {
 
 	Route::get('/caapplylist', [ADController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [ADController::class, 'caapproval']);
+
+	Route::get('/caviewdetails/{id}', [ADController::class, 'caViewDetails']);
+	Route::post('/caapprovesubmit', [ADController::class, 'caApproveSubmit']);
 });
 
 Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], function () {
@@ -153,6 +163,9 @@ Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], funct
 
 	Route::get('/caapplylist', [CommissionerController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [CommissionerController::class, 'caapproval']);
+
+	Route::get('/caviewdetails/{id}', [CommissionerController::class, 'caViewDetails']);
+	Route::post('/caapprovesubmit', [CommissionerController::class, 'caApproveSubmit']);
 });
 
 

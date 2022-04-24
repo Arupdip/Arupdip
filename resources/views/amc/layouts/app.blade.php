@@ -180,7 +180,9 @@
                                 <ul class="collapse">
                                     <!-- <li><a href="./dashboard/add-Trader">Add New</a></li> -->
                                  
-                                    <li><a href="{{url('/')}}/amc/caapplylist">CA Application List</a></li>
+                                    <li><a href="{{url('/')}}/amc/caapplylist">Pending Registration</a></li>
+                                    <li><a href="{{url('/')}}/amc/ca-signature-upload">Pending Digital Signature</a></li>
+                                    <li><a href="{{url('/')}}/amc/ca-signature-upload-success">Uploaded Digital Signature</a></li>
                                     
                                 </ul>
                             </li>

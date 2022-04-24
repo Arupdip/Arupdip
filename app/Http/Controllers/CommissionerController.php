@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CAApply;
 use App\Models\TraderApply;
+use App\Models\Calog;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\Hash;
@@ -76,6 +77,30 @@ class CommissionerController extends Controller
    
   
         }
+
+        public function caViewDetails($id){
+
+            $cadata = CAApply::where("application_id",'=',$id)->first();
+            $calog = Calog::where("application_id",'=',$cadata->id)->get();
+            return view('commissioner.caviewdetails', compact('cadata','calog'));
+     
+         } 
+     
+         public function caApproveSubmit(Request $request){
+     
+             $input = $request->all();
+             $input['created_at'] = date('Y-m-d H:i:s');
+             unset($input['_token']);
+     
+             $input['user_id'] = Auth::user()->id;
+             $approveca = Calog::insertGetId($input);
+             CAApply::where("id",'=',$request->application_id)->update(['is_commisioner_approval'=>1]);
+             if($approveca){
+                return redirect('/commissioner/caapplylist')->with('success','CA Approved succesfully');
+             }
+       
+      
+          } 
 
 
     
