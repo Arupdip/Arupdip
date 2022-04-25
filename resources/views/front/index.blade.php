@@ -48,13 +48,11 @@
         <div class="illustrations">
             <div class="text-center pb-5"><logo><img src="{{asset('images/logo.png')}}" alt="" /> OLMS</logo></div>
             <h1>Online License Management System</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            <ul>
-                <li>It is a long established fact that a reader will be distracted</li>
-                <li>Cras auctor est vitae efficitur semper.</li>
-                <li>Sed et porttitor massa, eu placerat diam. Quisque efficitur pretium eleifend.</li>
-                <li>Sed sit amet mattis ligula. Etiam vitae turpis vel nunc venenatis convallis at in lorem.</li>
-            </ul>
+			<p>Online License management system (OLMS) acts as an information gateway to citizens & governs Farmer Welfare. Sales and Purchase framers commodities only happen thru license Traders and Commission Agents. Department aims to develop a web based system to maintain and automated the issue of license and renewal process. Traders and Commission Agents directly access to the web application for the license. This application mainly caters following key features:</p>
+			<ul>
+				<li>Issuing licenses for commission agents and trades</li>
+				<li>Renewal  of licenses for commission agents and trades</li>
+			</ul>
             <div class="text-center">
                 <a href="{{ url('trader-register') }}" class="btn btn-lg"><i class="priya-sign-in rl-1"></i> Sign Up as Trader</a>
                 <a href="{{ url('ca-register') }}" class="btn btn-lg"><i class="priya-sign-in rl-1"></i> Sign Up as CA</a>
@@ -98,8 +96,8 @@
                                     </div>
                                     <div class="flex-auto text-right">
                                         <div class="captcha d-flex">
-                                            <span><img src="./images/captcha.png"></span>
-                                            <button type="button" class="btn btn-r-curved" class="reload" id="reload">
+											<span id="captchar">{{asset('images/captcha_bg.jpg')}}</span>
+											<button type="button" onclick="createCaptcha()" class="btn btn-r-curved" class="reload" id="reload">
                                                 &#x21bb;
                                             </button>
                                         </div>
@@ -107,7 +105,7 @@
 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-login btn-sm mt-2">Login</button>
+							<button type="button" class="btn btn-login btn-sm mt-2" onclick="validateCaptcha()">Login</button>
                         </form>
                         <div class="text-center small mt-3 bold">
                             <a href="#forgotpassword" class="link">Forgot Password</a>
@@ -143,109 +141,71 @@
     <footer class="main-footer text-center py-3">
         &copy;<script>document.write(new Date().getFullYear())</script> Department
     </footer>
-<!--
-    <script type="text/javascript">
-
-        $(document).on('keyup', '.mobile', function (event) {
-            var regex = /^[6-9]/;
-            if (!regex.test(this.value)) {
-                this.value = '';
-                return false;
-            }
-
-        });
-        function loginSubmitFunc() {
-            var mobileno = $("#mobileno").val();
-            var loginpwd = $("#loginpwd").val();
-            var captcha = $("#captcha").val();
-            var blankTest = /\S/;
-            if (!blankTest.test(mobileno)) {
-                $("#mobileno").focus();
-                $("#mobileno").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#mobileno").parents('.input-group').removeClass('form_validate_error');
-            }
-            if (!blankTest.test(loginpwd)) {
-                $("#loginpwd").focus();
-                $("#loginpwd").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#loginpwd").parents('.input-group').removeClass('form_validate_error');
-                //$("#loginsubmitfrm").submit();
-
-            }
-            if (!blankTest.test(captcha)) {
-                $("#captcha").focus();
-                $("#captcha").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#captcha").parents('.input-group').removeClass('form_validate_error');
-                //$("#loginsubmitfrm").submit();
-
-            }
-        }
-        function forgotfrmFunc() {
-            var forgot_login_id = $("#forgot_login_id").val();
-            var blankTest = /\S/;
-            if (!blankTest.test(forgot_login_id)) {
-                $("#forgot_login_id").focus();
-                $("#forgot_login_id").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#forgot_login_id").parents('.input-group').removeClass('form_validate_error');
-            }
-        }
-        function forgotOtpSubmitFunc() {
-            var forgot_verify_otp = $("#forgot_verify_otp").val();
-            var blankTest = /\S/;
-            if (!blankTest.test(forgot_verify_otp)) {
-                $("#forgot_verify_otp").focus();
-                $("#forgot_verify_otp").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#forgot_verify_otp").parents('.input-group').removeClass('form_validate_error');
-            }
-        }
-        function setNewPwdSubmitFunc() {
-            var new_pwd = $("#new_pwd").val();
-            var confirm_pwd = $("#confirm_pwd").val();
-            var blankTest = /\S/;
-            if (!blankTest.test(new_pwd)) {
-                $("#new_pwd").focus();
-                $("#new_pwd").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#new_pwd").parents('.input-group').removeClass('form_validate_error');
-            }
-            if (!blankTest.test(confirm_pwd)) {
-                $("#confirm_pwd").focus();
-                $("#confirm_pwd").parents('.input-group').addClass('form_validate_error');
-                return false;
-            } else {
-                $("#confirm_pwd").parents('.input-group').removeClass('form_validate_error');
-            }
-            if (confirm_pwd != new_pwd) {
-                $("#confirm_pwd").focus();
-                $("#confirm_pwd").parents('.input-group').addClass('form_validate_error');
-                $("#errorconfirmpwdmsg").html('<font style="color:#f00">Password Mismatch!!</font>');
-                return false;
-            } else {
-                $("#confirm_pwd").parents('.input-group').removeClass('form_validate_error');
-                $("#errorconfirmpwdmsg").html('');
-            }
-        }
-        // $('#reload').click(function () {
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: './reload-captcha',
-        //         success: function (data) {
-        //             $(".captcha span").html(data.captcha);
-        //         }
-        //     });
-        // });
-
-    </script>  -->
+    
 </body>
+<script>
+	$('#captchar').height(38)
+	createCaptcha();
+	var code;
+	function createCaptcha()
+	{
+		//clear the contents of captcha div first
+		document.getElementById('captchar').innerHTML = "";
+		var charsArray ="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%&";
+		var lengthOtp = 6;
+		var captcha = [];
+
+		for (var i = 0; i < lengthOtp; i++) {
+			//below code will not allow Repetition of Characters
+			var index = Math.floor(Math.random() * charsArray.length + 1); //get the next character from the array
+			if (captcha.indexOf(charsArray[index]) == -1)
+				captcha.push(charsArray[index]);
+			else
+				i--;
+		}
+
+		var canv = document.createElement("canvas");
+		canv.id = "captcha";
+		canv.width = 100;
+		canv.height = 38;
+
+		var ctx = canv.getContext("2d");
+		var background = new Image();
+		background.src = "{{asset('images/captcha_bg.jpg')}}";
+
+		background.onload = function() {
+			ctx.drawImage(background,0,0,100,100);
+			ctx.font = "20px cursive";
+			ctx.strokeText(captcha.join(""), 8, 25, background.width*2, background.height * 2);
+		}
+
+
+		//ctx.strokeText(captcha.join(""), 8, 25);
+
+		//storing captcha so that can validate you can save it somewhere else according to your specific requirements
+		code = captcha.join("");
+		document.getElementById("captchar").appendChild(canv); // adds the canvas to the body element
+	}
+
+	function validateCaptcha()
+	{
+		event.preventDefault();
+		debugger
+		var val = $('#captcha').val();
+		if (val == '') {
+			$('#captcha').focus();
+			return
+		}
+		if (val == code) {
+			$('#loginfrm').submit();
+		} else {
+			alert("Invalid Captcha. try Again");
+			createCaptcha();
+		}
+	}
+
+
+
+</script>  
 
 </html>

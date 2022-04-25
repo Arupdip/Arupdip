@@ -46,15 +46,14 @@
     </header> -->
     <div class="login-container">
         <div class="illustrations">
-            <div class="text-center pb-5"><logo><img src="../images/logo.png" alt="" /> OLMS</logo></div>
+            <div class="text-center pb-5"><logo><img src="{{asset('images/logo.png')}}" alt="" /> OLMS</logo></div>
             <h1>Online License Management System</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            <ul>
-                <li>It is a long established fact that a reader will be distracted</li>
-                <li>Cras auctor est vitae efficitur semper.</li>
-                <li>Sed et porttitor massa, eu placerat diam. Quisque efficitur pretium eleifend.</li>
-                <li>Sed sit amet mattis ligula. Etiam vitae turpis vel nunc venenatis convallis at in lorem.</li>
-            </ul>
+			<
+			<p>Online License management system (OLMS) acts as an information gateway to citizens & governs Farmer Welfare. Sales and Purchase framers commodities only happen thru license Traders and Commission Agents. Department aims to develop a web based system to maintain and automated the issue of license and renewal process. Traders and Commission Agents directly access to the web application for the license. This application mainly caters following key features:</p>
+			<ul>
+				<li>Issuing licenses for commission agents and trades</li>
+				<li>Renewal  of licenses for commission agents and trades</li>
+			</ul>
             <!--<div class="text-center">
                 <a href="register.html" class="btn btn-lg"><i class="priya-sign-in rl-1"></i> Sign Up as New User</a>
             </div>-->
@@ -97,8 +96,8 @@
                                     </div>
                                     <div class="flex-auto text-right">
                                         <div class="captcha d-flex">
-                                            <span><img src="../images/captcha.png"></span>
-                                            <button type="button" class="btn btn-r-curved" class="reload" id="reload">
+											<span id="captchar"><img src="{{asset('images/captcha_bg.jpg')}}"></span>
+											<button type="button" onclick="createCaptcha()" class="btn btn-r-curved" class="reload" id="reload">
                                                 &#x21bb;
                                             </button>
                                         </div>
@@ -106,7 +105,7 @@
 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-login btn-sm mt-2">Login</button>
+							<button type="button"  onclick="validateCaptcha()" class="btn btn-login btn-sm mt-2">Login</button>
                         </form>
                         <div class="text-center small mt-3 bold">
                             <a href="#forgotpassword" class="link">Forgot Password</a>
@@ -143,7 +142,67 @@
         &copy;<script>document.write(new Date().getFullYear())</script> Department
     </footer>
 
-    <script type="text/javascript">
+ <script type="text/javascript">
+	$('#captchar').height(38)
+	createCaptcha();
+	var code;
+	function createCaptcha()
+	{
+    	document.getElementById('captchar').innerHTML = "";
+		var charsArray ="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%&";
+		var lengthOtp = 6;
+		var captcha = [];
+
+		for (var i = 0; i < lengthOtp; i++) {
+			//below code will not allow Repetition of Characters
+			var index = Math.floor(Math.random() * charsArray.length + 1); //get the next character from the array
+			if (captcha.indexOf(charsArray[index]) == -1)
+				captcha.push(charsArray[index]);
+			else
+				i--;
+		}
+
+		var canv = document.createElement("canvas");
+		canv.id = "captcha";
+		canv.width = 100;
+		canv.height = 38;
+
+		var ctx = canv.getContext("2d");
+		var background = new Image();
+		background.src = "{{asset('images/captcha_bg.jpg')}}";
+
+		background.onload = function() {
+			ctx.drawImage(background,0,0,100,100);
+			ctx.font = "20px cursive";
+			ctx.strokeText(captcha.join(""), 8, 25, background.width*2, background.height * 2);
+		}
+
+
+		//ctx.strokeText(captcha.join(""), 8, 25);
+
+		//storing captcha so that can validate you can save it somewhere else according to your specific requirements
+		code = captcha.join("");
+		document.getElementById("captchar").appendChild(canv); // adds the canvas to the body element
+	}
+
+	function validateCaptcha()
+	{
+		event.preventDefault();
+		debugger
+		var val = $('#captcha').val();
+		if (val == '') {
+			$('#captcha').focus();
+			return
+		}
+		if (val == code) {
+			$('#loginfrm').submit();
+		} else {
+			alert("Invalid Captcha. try Again");
+			createCaptcha();
+		}
+	}
+    
+    
 
         // $(document).on('keyup', '.mobile', function (event) {
         //     var regex = /^[6-9]/;
