@@ -32,6 +32,21 @@ Route::get('/', function () {
 	return view('front/index');
 });
 
+Route::any('logout', function () {
+	
+	if (Auth::user()->user_type == 0) {
+		$redirect = 'admin/login';
+	}elseif(Auth::user()->user_type == 3 || Auth::user()->user_type == 4 || Auth::user()->user_type == 5){
+		$redirect = 'login';
+	}else{
+		$redirect = '/';
+	}
+	
+	Auth::logout();
+	return redirect($redirect);
+	
+})->name("logout");
+
 
 /*
 / Web Routes for CA(commision agent) with CaController 
@@ -65,9 +80,12 @@ Route::get('trader-final-payment-success/{id}', [TraderController::class, 'trade
 / Web Routes for ADMIN(super admin) with CaController 
 /
 */
+
+
 Route::get('admin/login', function () {
 	return view('admin/login');
 })->name("adminlogin");
+
 Route::post('admin/post-login', [AuthController::class, 'loginsubmit']);
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 	Route::get('/', [HomeController::class, 'dashboard']);

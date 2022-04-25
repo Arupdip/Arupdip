@@ -55,9 +55,9 @@
                 <li>Sed et porttitor massa, eu placerat diam. Quisque efficitur pretium eleifend.</li>
                 <li>Sed sit amet mattis ligula. Etiam vitae turpis vel nunc venenatis convallis at in lorem.</li>
             </ul>
-            <div class="text-center">
+            <!--<div class="text-center">
                 <a href="register.html" class="btn btn-lg"><i class="priya-sign-in rl-1"></i> Sign Up as New User</a>
-            </div>
+            </div>-->
         </div>
         <div class="flip-card" id="forgotpassword">
 

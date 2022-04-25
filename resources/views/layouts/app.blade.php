@@ -58,15 +58,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+									<a onclick="return prAlert('Do you want to logout?',{confirm:true,'callback':'link',ele:this})" data-href="{{ route('logout') }}">{{ __('Logout') }}</a>
                                 </div>
                             </li>
                         @endguest
