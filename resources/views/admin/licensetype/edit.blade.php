@@ -24,7 +24,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>License Type<span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->name}}" />
+                                    <input type="text" name="name" disabled="" class="form-control pri-form" autocomplete="off" required value="{{$licensetype->name}}" />
                                 </div>
                             </div>                  
                             <div class="col-md-6">

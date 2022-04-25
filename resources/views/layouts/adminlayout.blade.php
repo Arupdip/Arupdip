@@ -13,9 +13,15 @@
     <title>OLMS</title>
 	<link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo.png')}}" />
     <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"> </script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('slick/slick.min.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <style>
+		label.error{
+			color: #ff0000;
+		}
+    </style>
 </head>
 <body>
 <color-palate>
