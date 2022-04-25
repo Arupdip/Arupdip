@@ -35,19 +35,10 @@
                                     <ul>
                                         <li><a href="#" ><i class="priya-user"></i> My Profile</a></li>
                                         <li><a href="#" ><i class="priya-key"></i> Change Password</a></li>
-                                        <li class="logout">
-
-                                            <a class="dropdown-item" href="{{ route('logout') }}">
-                                   {{ __('Logout') }}
-                               </a>
-
-                           <!--    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                   @csrf
-                               </form>
--->
-                               <!-- <a href="../" onclick="return prAlert('Do you want to logout?',{confirm:true,'callback':'link',ele:this})">Logout</a>
-                               --> </li>
-                              </ul>
+										<li class="logout">
+											<a onclick="return prAlert('Do you want to logout?',{confirm:true,'callback':'link',ele:this})" data-href="{{ route('logout') }}">{{ __('Logout') }}</a>
+										</li>
+                              		</ul>
                                 </div>
                             </div>
                         </div>
