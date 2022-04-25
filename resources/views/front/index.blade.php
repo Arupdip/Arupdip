@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('slick/slick.css')}}" />
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
-    <title>OLMS</title>
+    
+    <title>OLMS</title>    
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo.png')}}" />
+	
     <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('slick/slick.min.js')}}"></script>

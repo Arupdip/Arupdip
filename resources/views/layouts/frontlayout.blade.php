@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
     <title>OLMS - Registration</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo.png')}}" />
+    
     <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
 </head>
 <body>
