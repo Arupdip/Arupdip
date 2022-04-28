@@ -34,16 +34,23 @@
 	                                  <td>{{$row->name}}</td>
 	                                  <td>{{$row->aadhar_no}}</td>
 	                                  <td>{{$row->gstin}}</td>
-	                                  @if($row->is_amc_approval == 1)
-	                                  <td><span class="badge badge-success">Comply Solved</span></td>
-	                                  @else
+	                                  @if($row->is_amc_approval == 1 && $row->is_ad_comply == 0)
+	                                  <td><span class="badge badge-success">Approved</span></td>
+	                                  @endif
+									  @if($row->is_ad_comply == 1 )
 	                                  <td><span class="badge badge-warning">Comply Pending</span></td>
 	                                  @endif
+
+									  @if($row->is_amc_approval == 0 && $row->is_ad_comply == 0)
+	                                  <td><span class="badge badge-danger">Approval Pending</span></td>
+	                                  @endif
+
+
 	                                  <td align="center">
 	                                    <a href="{{url('/')}}/amc/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-	                                    <a href="{{url('/')}}/amc/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
-	                                   
-	                                 
+										@if($row->is_amc_approval == 0 || ( $row->is_ad_comply == 1 && $row->is_amc_comply == 0)   )
+										<a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+									  @endif
 	                                  
 	                                  </td>
 	                                </tr>
@@ -61,4 +68,27 @@
 </div>
 
 
+<div id="view-trader-details" class="help-modal"  style="display: none;">
+    
+</div>
+
+
+<script>
+
+function editcomply(id)
+{
+    
+    $.ajax({
+        type: "get",
+        url: "{{url('/')}}/edittradercomply/"+id,
+        success: function(data)
+        {
+            $("#view-trader-details").html(data);
+            helpModal('#view-trader-details')
+          // show response from the php script.
+        }
+    });
+}
+
+</script>
 @endsection

@@ -41,7 +41,7 @@ class CommissionerController extends Controller
 
     public function traderapplylist(){
 
-        $data = TraderApply::where("is_ad_approval","=",1)->get();
+        $data = TraderApply::where("is_ad_approval","=",1)->orwhere("is_commissioner_comply","=",1)->get();
         return view('commissioner.traderapplylist', compact('data'));
 
     }
@@ -61,6 +61,66 @@ class CommissionerController extends Controller
         return view('commissioner.traderviewdetails', compact('traderview','Traderlog'));
  
      } 
+
+
+     
+     public function viewtradercomply($id){
+
+        $traderold = Traderlog::where("id",'=',$id)->first();
+        $trader =  json_decode($traderold->old_data);
+
+        return view('commissioner.tradermodalcomment', compact('traderold','trader'));
+ 
+     } 
+
+
+
+     public function edittradercomply($id){
+
+        $trader = TraderApply::where("id",'=',$id)->first();
+        $traderold ='';
+        if($trader->is_commissioner_comply==1 && Auth::user()->user_type == 4)
+        $traderold = Traderlog::where("application_id",'=',$id)->where("type",'=',1)->orderBy('id', 'desc')->first();
+        if($trader->is_ad_comply==1 && Auth::user()->user_type == 3)
+        $traderold = Traderlog::where("application_id",'=',$id)->where("type",'=',2)->orderBy('id', 'desc')->first();
+        
+
+
+        return view('commissioner.tradermodal', compact('trader','traderold'));
+ 
+     } 
+
+     public function submitcomply(Request $request){
+
+        $data =$request->all();
+        unset($data['_token']);
+        unset($data['id']);
+
+        $input['created_at'] = date('Y-m-d H:i:s');
+        $input['application_id'] = $request->id;
+        $input['old_data'] = json_encode(TraderApply::where("id",'=',$request->id)->first());
+        $input['comment'] = 'Comply';
+        $input['logs'] = json_encode($data);;
+        if(Auth::user()->user_type == 5)
+        $input['type'] = '1';
+        if(Auth::user()->user_type == 4)
+        $input['type'] = '2';
+        if(Auth::user()->user_type == 3)
+        $input['type'] = '3';
+        $input['user_id'] = Auth::user()->id;
+        $approvetrader = Traderlog::insertGetId($input);
+        if(Auth::user()->user_type == 5)
+        TraderApply::where("id",'=',$request->id)->update(['is_commissioner_comply'=>1]);
+
+        if(Auth::user()->user_type == 4)
+        TraderApply::where("id",'=',$request->id)->update(['is_ad_comply'=>1]);
+
+        if(Auth::user()->user_type == 3)
+        TraderApply::where("id",'=',$request->id)->update(['is_amc_comply'=>1]);
+        return redirect()->back()->with('success','Commply succesfully sent !!');
+     }
+
+
  
      public function traderApproveSubmit(Request $request){
  

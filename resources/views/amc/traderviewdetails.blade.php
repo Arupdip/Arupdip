@@ -32,6 +32,7 @@
                                     <th>Approved By</th>
                                     <th>Date Time</th>
                                     <th>Comment</th>
+                                    <th>Type</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,7 +41,12 @@
                                 <tr>
                                     <td>@isset($tl->user) {{$tl->user->name}} ({{$tl->user->usertype->name}}) @endisset </td>
                                     <td>{{date('d F Y h:i A')}}</td>
-                                    <td>{{$tl->comment}}</td>
+                                    <td>@if($tl->type ==0)  {{$tl->comment}}
+                                        
+                                        @else <a href="#" onClick="editcomply({{$tl->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+                                        @endif</td>
+
+                                    <td>@if($tl->type ==0) Approval @else Comply @endif </td>
                                 </tr>
 
                                 @endforeach
@@ -81,7 +87,7 @@
                         <div class="col-md-4">
                             <dl>
                                 <dt>Age</dt>
-                                <dd>32</dd>
+                                <dd>{{$traderview->age}}</dd>
                                 <!-- <label class="give-comply">
                                     <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                                     <input type="radio" />
@@ -89,7 +95,7 @@
                                 </label> -->
                             </dl>
                         </div>
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <dl>
                                 <dt>Is Minor</dt>
                                 <dd>No</dd>
@@ -99,7 +105,7 @@
                                     <textarea name=""></textarea>
                                 </label> -->
                             </dl>
-                        </div>
+                        </div> --}}
                         <div class="col-md-4">
                             <dl>
                                 <dt>Address</dt>
@@ -280,7 +286,7 @@
                 </div>
             </card>
             <div class="mt-3 text-center">
-                @if($traderview->is_amc_approval == 0)   <button class="btn btn-warning" type="button" onclick="helpModal('#comply-pop')"><i class="priya-mail-reply"></i> Comply</button>
+                @if($traderview->is_amc_approval == 0)  
               <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button> @endif
             </div>
         </div>
@@ -368,6 +374,29 @@
 
 
 
+<div id="view-trader-details" class="help-modal"  style="display: none;">
+    
+</div>
+
+
+<script>
+
+function editcomply(id)
+{
+    
+    $.ajax({
+        type: "get",
+        url: "{{url('/')}}/viewtradercomply/"+id,
+        success: function(data)
+        {
+            $("#view-trader-details").html(data);
+            helpModal('#view-trader-details')
+          // show response from the php script.
+        }
+    });
+}
+
+</script>
 
 
 

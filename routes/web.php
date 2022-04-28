@@ -32,6 +32,9 @@ Route::get('/', function () {
 	return view('front/index');
 });
 
+Route::get('/home', function () {
+	return redirect('/');
+});
 Route::any('logout', function () {
 	
 	if (Auth::user()->user_type == 0) {
@@ -121,6 +124,9 @@ Route::group(['prefix' => 'trader', 'middleware' => 'trader'], function () {
 	// For Manage mandal,district,state
 	Route::get('/approval-status/{app_id}', [TraderController::class, 'approvalstatus']);
 	Route::get('/my-application-list', [TraderController::class, 'applicationlist']);
+
+	Route::get('/recheck/{app_id}', [TraderController::class, 'recheck']);
+	Route::post('reset-trader-details', [TraderController::class, 'resetTraderDetails']);
 });
 
 
@@ -182,17 +188,17 @@ Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], funct
 	Route::post('/traderapprovesubmit', [CommissionerController::class, 'traderApproveSubmit']);
 
 
-
 	Route::get('/caapplylist', [CommissionerController::class, 'caapplylist']);
 	Route::get('/caapproval/{id}', [CommissionerController::class, 'caapproval']);
 
 	Route::get('/caviewdetails/{id}', [CommissionerController::class, 'caViewDetails']);
 	Route::post('/caapprovesubmit', [CommissionerController::class, 'caApproveSubmit']);
 });
+Route::get('/edittradercomply/{id}', [CommissionerController::class, 'edittradercomply']);
 
+Route::post('/submitcomply', [CommissionerController::class, 'submitcomply']);
 
+Route::get('/viewtradercomply/{id}', [CommissionerController::class, 'viewtradercomply']);
 
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

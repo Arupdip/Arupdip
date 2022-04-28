@@ -297,7 +297,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Confirm IFSC Code<span class="text-danger">*</span></label>
-									<input type="text" name="c_ifsc" class="form-control pri-form" id="c_ifsc" maxlength="10" />
+									<input type="text" name="c_ifsc" class="form-control pri-form" id="c_ifsc" maxlength="11" />
                                 </div>
                             </div>
                             <div class="col-md-4">

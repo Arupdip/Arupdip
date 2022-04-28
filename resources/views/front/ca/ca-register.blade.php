@@ -143,16 +143,6 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Upload PAN<span class="text-danger">*</span></label>
-                                    <input type="file" id="pan_file" name="pan_file"
-                                        class="form-control  pri-form pan_file"  />
-                                       
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label>Email ID<span class="text-danger">*</span></label>
                                     <input type="text"  name="email" class="form-control pri-form" />
                                 </div>

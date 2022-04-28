@@ -43,13 +43,13 @@ class ADController extends Controller
 
     public function traderapplylist(){
 
-        $data = TraderApply::where("is_amc_approval","=",1)->get();
+        $data = TraderApply::where("is_amc_approval","=",1)->orwhere("is_ad_comply","=",1)->get();
         return view('ad.traderapplylist', compact('data'));
 
     }
     public function traderapproval($id){
 
-        TraderApply::where("application_id",'=',$id)->update(['is_ad_approval'=>1]);
+        TraderApply::where("application_id",'=',$id)->update(['is_ad_approval'=>1 , 'is_commissioner_comply'=>0]);
         return redirect('/ad/traderapplylist');
 
     }

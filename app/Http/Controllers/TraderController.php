@@ -11,8 +11,12 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\TraderApply;
+use App\Models\Traderlog;
 use Auth;
 use App\Models\CAApply;
+use Carbon\Carbon; 
+
+
 
 class TraderController extends Controller
 {
@@ -49,6 +53,117 @@ class TraderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function resetTraderDetails(Request $request)
+    {
+        // dd($request->all());
+
+        $returnArr = array("success" => false, "message" => "");
+
+        $returnArr = array("success" => false, "message" => "");
+
+
+        $checkaddhar = TraderApply::where("aadhar_no", "=", $request->aadhar_no)->where('application_id','!=',$request->id)->count();
+        if ($checkaddhar != 0) {
+            $returnArr['message'] = "Aadhar card is already existed !!";
+            return $returnArr;
+        }
+
+   
+        $checkpan = TraderApply::where("pan_no", "=", $request->pan_no)->where('application_id','!=',$request->id)->count();
+        if ($checkpan != 0) {
+            $returnArr['message'] = "Pan No is already existed !!";
+            return $returnArr;
+        }
+
+        $checkpan = TraderApply::where("firmpanno", "=", $request->firmpanno)->where('application_id','!=',$request->id)->count();
+        if ($checkpan != 0) {
+            $returnArr['message'] = "Firm Pan No is already existed !!";
+            return $returnArr;
+        }
+
+        $checkgistin = TraderApply::where("gstin", "=", $request->gstin)->where('application_id','!=',$request->id)->count();
+        if ($checkgistin != 0) {
+            $returnArr['message'] = "GSTIN No is already existed !!";
+            return $returnArr;
+        }
+        $input = $request->all();
+       
+       
+        // $input['updated_at'] = date('Y-m-d H:i:s');
+        unset($input['_token']);
+        unset($input['id']);
+        if ($file = $request->file('aadhar_file')) {
+            $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['aadhar_file']);
+        }else{
+            unset($input['aadhar_file']);
+        }
+
+        if ($file = $request->file('pan_file')) {
+            $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['pan_file']);
+        }else{
+            unset($input['pan_file']);
+        }
+
+        if ($file = $request->file('firmpan_file')) {
+            $input['firmpan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['firmpan_file']);
+        }else{
+            unset($input['firmpan_file']);
+        }
+
+        if ($file = $request->file('gstin_file')) {
+            $input['gstin_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['gstin_file']);
+        }else{
+            unset($input['gstin_file']);
+        }
+
+        if ($file = $request->file('declarationofsolvency')) {
+            $input['declarationofsolvency'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['declarationofsolvency']);
+        }else{
+            unset($input['declarationofsolvency']);
+        }
+
+        if ($file = $request->file('uploadedbankguaranteetype')) {
+            $input['uploadedbankguaranteetype'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['uploadedbankguaranteetype']);
+        }else{
+            unset($input['uploadedbankguaranteetype']);
+        }
+        if ($file = $request->file('account_file')) {
+            $input['account_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['account_file']);
+        }else{
+            unset($input['account_file']);
+        }
+
+
+        $input['is_amc_approval'] = 0;
+        $input['is_amc_comply'] = 0;
+        $input['is_ad_approval'] = 0;
+        $input['is_commisioner_approval'] = 0;
+
+        TraderApply::where('application_id','=',$request->id)->update($input);
+      $tt =   TraderApply::where('application_id','=',$request->id)->first();
+        $input1['created_at'] = date('Y-m-d H:i:s');
+        $input1['application_id'] = $tt->id;
+      
+        $input1['comment'] = 'Recheck Submit';
+        $input1['user_id'] = Auth::user()->id;
+        $approvetrader = Traderlog::insertGetId($input1);
+        $returnArr['success'] = true;
+        $returnArr['message'] ='';
+        return $returnArr;
+    }
+
+
+
+    
     public function saveTraderDetails(Request $request)
     {
         // dd($request->all());
@@ -94,6 +209,14 @@ class TraderController extends Controller
             return $returnArr;
         }
         $input = $request->all();
+        $currentYear = date('Y'); // Current Year
+        $birthYear = date('Y', strtotime(str_replace("/","-",$request->dob))); 
+        $age = $currentYear - $birthYear;
+      
+        $input['age'] = $age;
+        // dd($input['age']);
+        $input['dob'] = strtotime(str_replace("-","/",$request->dob));
+        $input['dob'] = date("Y-m-d", strtotime($input['dob']));   
         $randomid = Str::random(211);
         $input['user_temp_id'] = $randomid;
         // $input['updated_at'] = date('Y-m-d H:i:s');
@@ -205,6 +328,24 @@ class TraderController extends Controller
         return view("front.trader.approval-status", compact('data'));
     }
 
+    public function recheck($id)
+    {
+
+        $data = TraderApply::where("application_id", '=', $id)->get();
+if($data[0]->is_amc_comply ==1)
+     $traderold = Traderlog::where("application_id",'=',$data[0]->id)->where("type",'=',3)->orderBy('id', 'desc')->first();
+else
+return redirect()->back();
+
+$states = State::all();
+$mandal = Mandal::all();
+$amc = AMC::all();
+return view('front/trader/recheck', compact('states' , 'mandal', 'amc' , 'data', 'traderold','id'));
+
+
+
+        return view("front.trader.recheck", compact('data'));
+    }
 
 
     //trader final payment 

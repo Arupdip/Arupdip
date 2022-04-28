@@ -137,7 +137,7 @@ class AMCController extends Controller
 
         $input['user_id'] = Auth::user()->id;
         $approveca = Calog::insertGetId($input);
-        CAApply::where("id", '=', $request->application_id)->update(['is_amc_approval' => 1]);
+        CAApply::where("id", '=', $request->application_id)->update(['is_amc_approval' => 1, 'is_ad_comply' => 0]);
         if ($approveca) {
             return redirect('/amc/caapplylist')->with('success', 'CA Approved succesfully');
         }

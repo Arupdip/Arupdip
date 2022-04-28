@@ -11,6 +11,8 @@
                 </div>
             </h4>
             <hr />
+
+            
         </div>
         <div class="card-body pt-0">
             <div class="p-2">
@@ -52,18 +54,8 @@
                                             <div class="dd">{{$row->dob}}</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="dl">
-                                            <div class="dt">Age</div>
-                                            <div class="dd">{{$row->age}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="dl">
-                                            <div class="dt">Is Minor</div>
-                                            <div class="dd">No</div>
-                                        </div>
-                                    </div>
+                                   
+                                   
                                     <div class="col-md-6 col-sm-6">
                                         <div class="dl">
                                             <div class="dt">Address</div>
@@ -124,6 +116,127 @@
                                             <div class="dd">{{$row->email}}</div>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm Name</div>
+                                            <div class="dd">{{$row->firmname}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm Address</div>
+                                            <div class="dd">{{$row->firmaddress}}</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm Pincode</div>
+                                            <div class="dd">{{$row->firmpincode}}</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm Pincode</div>
+                                            <div class="dd">{{$row->firmpincode}}</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm State</div>
+                                            <div class="dd">@if(isset($row->firmstate->state_title)) {{$row->firmstate->state_title}} @endif</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm District</div>
+                                            <div class="dd">@if(isset($row->firmdistrict->name)) {{$row->firmdistrict->name}} @endif</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">AMC Name</div>
+                                            <div class="dd">@if(isset($row->amc->name)) {{$row->amc->name}} @endif</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm Registration</div>
+                                            <div class="dd">{{$row->firmregisteration_no}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm PAN</div>
+                                            <div class="dd">{{$row->firmpanno}}</div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Firm GSTIN</div>
+                                            <div class="dd">{{$row->gstin}}</div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Bank Name</div>
+                                            <div class="dd">{{$row->bankname}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Holder  Name</div>
+                                            <div class="dd">{{$row->account_holder}}</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Account  No</div>
+                                            <div class="dd">{{$row->account_no}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Bank IFSC</div>
+                                            <div class="dd">{{$row->ifsc}}</div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </fieldset>
                         </form>
@@ -134,16 +247,16 @@
                             <ul>
                                 <li @if($row->is_submit == 1) class="approved" @endif>Details Submitted</li>
                                 <li @if($row->is_reg_pay == 1) class="approved" @endif>Registration Fee Paid</li>
-                                <li @if($row->is_amc_approval == 1) class="approved" @endif >AMC Approval <a href="compliance-recheck.php" class="badge badge-warning">Recheck</a></li>
-                                <li  @if($row->is_ad_approval == 1) class="approved" @endif >Head Office AD Approval</li>
-                                <li @if($row->is_commisioner_approval == 1) class="approved" @endif>Commissioner Approval</li>
+                                <li @if($row->is_amc_approval == 1 && $row->is_amc_comply == 0) class="approved" @endif >AMC Approval @if($row->is_amc_comply == 1) <a href="{{url('/')}}/trader/recheck/{{$row->application_id}}" class="badge badge-warning">Recheck</a> @endif</li>
+                                <li  @if($row->is_ad_approval == 1 && $row->is_ad_comply == 0) class="approved" @endif >Head Office AD Approval</li>
+                                <li @if($row->is_commisioner_approval == 1 && $row->is_commisioner_comply == 0) class="approved" @endif>Commissioner Approval</li>
                                 @if($row->is_final_pay == 0)
-                                <li><a href="#">Final Payment</a> <a href="{{url('trader-final-payment/'.$row->application_id)}}" class="badge badge-warning">Pay now</a></li>
+                                <li>Final Payment @if($row->is_commisioner_approval == 1) <a href="{{url('trader-final-payment/'.$row->application_id)}}" class="badge badge-warning">Pay now</a> @endif </li>
                                 @endif
                                 @if($row->is_final_pay == 1)
                                 <li  class="approved">Final Payment <a href="" class="badge badge-success">Success</a></li>
                                 @endif
-                                <li @if($row->is_commisioner_approval == 1) class="approved" @endif >AMC Capture Digital Signature</li>
+                                <li @if($row->is_sign_upload == 1) class="approved" @endif >AMC Capture Digital Signature</li>
                                 <li>Trader License Generated</li>
                             </ul>
                         </div>

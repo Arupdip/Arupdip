@@ -33,15 +33,17 @@
                                   <td>{{$row->name}}</td>
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
-                                  @if($row->is_commisioner_approval == 1)
+                                  @if($row->is_commisioner_approval == 1 && $row->is_commisioner_comply == 0)
                                   <td><span class="badge badge-success">Comply Solved</span></td>
                                   @else
                                   <td><span class="badge badge-warning">Comply Pending</span></td>
                                   @endif
                                   <td align="center">
                                     <a href="{{url('/')}}/commissioner/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-                                    <a href="{{url('/')}}/commissioner/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
                                    
+                                    @if($row->is_commisioner_approval == 0 && $row->is_commissioner_comply ==0 )
+                                     <a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+                                   @endif
                                   
 
                                   </td>
@@ -57,4 +59,29 @@
       </div>
     </div>
 </div>
+
+
+<div id="view-trader-details" class="help-modal"  style="display: none;">
+    
+</div>
+
+
+<script>
+
+function editcomply(id)
+{
+    
+    $.ajax({
+        type: "get",
+        url: "{{url('/')}}/edittradercomply/"+id,
+        success: function(data)
+        {
+            $("#view-trader-details").html(data);
+            helpModal('#view-trader-details')
+          // show response from the php script.
+        }
+    });
+}
+
+</script>
 @endsection

@@ -165,13 +165,13 @@
                                 <li  @if($row->is_ad_approval == 1) class="approved" @endif>AD Approval</li>
                                 <li  @if($row->is_commisioner_approval == 1) class="approved" @endif>Commissioner Approval</li>
                                 @if($row->is_final_pay == 0)
-                                <li><a href="#">Final Payment</a> <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a></li>
+                                <li><a href="#">Final Payment</a>@if($row->is_commisioner_approval == 1) <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a> @endif</li>
                                 @endif
                                 @if($row->is_final_pay == 1)
                                 <li  class="approved">Final Payment <a href="" class="badge badge-success">Success</a></li>
                                 @endif
-                                <li>AMC Capture Digital Signature</li>
-                                <li>Trader License Generated</li>
+                                <li @if($row->is_sign_upload == 1) class="approved" @endif >AMC Capture Digital Signature</li>
+                                <li>CA License Generated</li>
                             </ul>
                         </div>
                     </div>
