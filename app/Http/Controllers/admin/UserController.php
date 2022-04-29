@@ -19,7 +19,9 @@ class UserController extends Controller
 */
 	public function index()
 	{
-		echo 'if';
+		$user = User::where('user_type',[3,4,5])->orWhere('user_type',null)->orderBy('name','ASC')->get();
+		
+		return view('admin.user.index',compact('user'));
 	}
 
 /**
@@ -39,22 +41,32 @@ class UserController extends Controller
 * @return \Illuminate\Http\Response
 */
 
-	public function emailValidation(Request $request){
+	public function emailValidation(Request $request,$id=''){
 		
 		$user = User::where('email',$request->email)->first();
+		if (!empty($id)) {
+			$user = User::where('email',$request->email)->where('id','!=',$id)->first();
+		}
 				
 		echo (empty($user))?'true':'false';
 	}
 	
-	public function phoneValidation(Request $request)
+	public function phoneValidation(Request $request, $id='')
 	{
 		$user = User::where('phone',$request->phone)->first();
-				
+		if (!empty($id)) {
+			$user = User::where('phone',$request->phone)->where('id','!=',$id)->first();
+		}
+						
 		echo (empty($user))?'true':'false';
 	}
-	public function employeeIdValidation(Request $request)
+	
+	public function employeeIdValidation(Request $request, $id='')
 	{
 		$user = User::where('employee_id',$request->employee_id)->first();
+		if (!empty($id)) {
+			$user = User::where('employee_id',$request->employee_id)->where('id','!=',$id)->first();
+		}
 				
 		echo (empty($user))?'true':'false';
 	}
@@ -96,8 +108,8 @@ class UserController extends Controller
 */
 	public function edit($id)
 	{
-		$userType = UserType::find($id);
-		return view('admin.usertype.edit', compact('userType'));
+		$user = User::find($id);
+		return view('admin.user.edit', compact('user'));
 	}
 
 /**
@@ -110,13 +122,21 @@ class UserController extends Controller
 	public function update(Request $request, $id)
 	{
 		$input =  $request->all();
+		
+		$pass = $input['password'];
 
 		unset($input['_token']);
 		unset($input['_method']);
+		unset($input['password']);
+		
+		if (!empty($pass)) {
+			$input['password'] = Hash::make($pass);
+		}	
+		
 		$input['updated_at'] = date('Y-m-d H:i:s');
-		UserType::where('id','=',$id)->update($input);
+		User::where('id','=',$id)->update($input);
 
-		return redirect('/admin/usertype')->with("success","User role type is successfully updated !!");
+		return redirect('/admin/user')->with("success","User data successfully updated !!");
 	}
 
 /**
@@ -127,12 +147,13 @@ class UserController extends Controller
 */
 	public function destroy($id)
 	{
-		$type = UserType::where('id',$id)->first();
-		$type->status = 2;
-		$type->update();
+		$user = User::where('id',$id)->first();
+		
+		$user->status = ($user->status == 1)?2:1;
+		$user->update();
 
-
-
-		return redirect('/admin/usertype')->with("success","User role type is successfully updated !!");
+		return true; //redirect('/admin/user')->with("success","User ststus successfully updated !!");
 	}
+	
+	
 }
