@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
 
-                                @foreach($calog as $tl)
+                                @foreach($TraderLog as $tl)
                                 <tr>
                                     <td>@isset($tl->user) {{$tl->user->name}} ({{$tl->user->usertype->name}}) @endisset </td>
                                     <td>{{date('d F Y h:i A')}}</td>
