@@ -33,7 +33,6 @@
 										<th class="text-center">Name</th>
 										<th class="text-center">Email</th>
 										<th class="text-center">Phone</th>
-										<th class="text-center">Roll</th>
 										<th class="text-center">Designation</th>
 										<th class="text-center">Status</th>
 										<th class="text-center">Action</th>
@@ -45,22 +44,41 @@
 										$i=1;
 									@endphp
 									
-									@foreach ($users as $val)
+									@foreach ($user as $val)
 									<tr>
-										<td>{{$i++}}</td>
+										<td class="text-center">{{$i++}}</td>
 										<td>{{$val->name}}</td>
 										<td>{{$val->email}}</td>
-										<td>{{$val->phone}}</td>
-										<td>{{$val->phone}}</td>
-										<td>{{user_roll($val->user_type)}}</td>
-										<td>{{$val->phone}}</td>
-										<td>{{$val->phone}}</td>
-										<!--<td align="center">
-											<a href="{{url('/')}}/admin/usertype/{{$val->id}}/edit" class="btn btn-icon btn-info" title="Edit">
+										<td class="text-center">{{$val->phone}}</td>
+										<td >
+											@if($val->user_type == 3)
+											AMC Officer
+											@elseif($val->user_type == 4)
+											AD Officer
+											@elseif($val->user_type == 5)
+											Commissioner
+											@else
+											<span class="text-center text-warning">NO</span>
+											@endif
+										</td>
+										<td class="text-center">
+											@if($val->status == 1)
+											<span class="text-success">Active</span>
+											@elseif($val->status == 2)
+											<span class="text-danger">Deactive</span>
+											@endif
+										</td>
+										<td align="center">
+												<a href="{{url('/')}}/admin/user/{{$val->id}}/edit" class="btn btn-icon btn-info" title="Edit">
 												<i class="priya-edit"></i></a>
-												<a href="javascript:void(0)" title="Delete" class="btn btn-icon btn-danger" onclick="deleteid({{$val->id}})">
-												<i class="priya-trash"></i> </a>
-										</td>-->
+											@if($val->status == 1)
+												<a href="javascript:void(0)" title="Deactive" class="btn btn-icon btn-danger" onclick="deleteid({{$val->id}})">
+												<i class="priya-ban"></i> </a>
+											@else
+												<a href="javascript:void(0)" title="Active" class="btn btn-icon btn-success" onclick="actived({{$val->id}})">
+												<i class="priya-check-circle-o"></i> </a>
+											@endif
+										</td>
 									</tr>
 									@endforeach
 								</tbody>
@@ -72,20 +90,34 @@
 		</div>
 	</div>
 </div>
-<!-- <a href="{{url('/')}}/admin/usertype/create" class="float-btn" title="Add New">+</a>-->
+<a href="{{url('/')}}/admin/user/create" class="float-btn" title="Add New">+</a>
 
 <script type="text/javascript">
 
 	function deleteid(id)
 	{
-		if (confirm('Are you sure to delete?')) {
+		if (confirm('Are you sure, You want to deactive this ?')) {
 
 			$.ajax({
 				type: "DELETE",
 				url: "{{url('/')}}/admin/user/"+id,
 				data: {_token: "{{csrf_token()}}", id: id}, // serializes the form's elements.
 				success: function(data) {
-					window.location.reload();
+					location.reload();
+				}
+			});
+		}
+	}
+	function actived(id)
+	{
+		if (confirm('Are you sure, You want to active this ?')) {
+
+			$.ajax({
+				type: "DELETE",
+				url: "{{url('/')}}/admin/user/"+id,
+				data: {_token: "{{csrf_token()}}", id: id}, // serializes the form's elements.
+				success: function(data) {
+					location.reload();
 				}
 			});
 		}

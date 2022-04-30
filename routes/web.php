@@ -89,9 +89,9 @@ Route::get('admin/login', function () {
 	return view('admin/login');
 })->name("adminlogin");
 
-Route::get('email-validation', [UserController::class, 'emailValidation']);
-Route::get('phone-validation', [UserController::class, 'phoneValidation']);
-Route::get('employee-id-validation', [UserController::class, 'employeeIdValidation']);
+Route::get('email-validation/{id?}', [UserController::class, 'emailValidation']);
+Route::get('phone-validation/{id?}', [UserController::class, 'phoneValidation']);
+Route::get('employee-id-validation/{id?}', [UserController::class, 'employeeIdValidation']);
 
 Route::post('admin/post-login', [AuthController::class, 'loginsubmit']);
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
