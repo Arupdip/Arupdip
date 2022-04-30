@@ -1,7 +1,7 @@
 @extends('ad.layouts.app')
 
 @section('content')
-
+@include('status')
 <div class="container-fluid bdy">
 
     <div class="row">
@@ -34,25 +34,13 @@
                                   <td>{{$row->name}}</td>
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
-                                  @if($row->is_ad_approval == 1 && $row->is_commissioner_comply == 0)
-                                  <td><span class="badge badge-success">Approved</span></td>
-                                 
-                                  @elseif($row->is_commissioner_comply == 1 && $row->is_ad_comply == 0)
-                                  <td><span class="badge badge-warning">Comply Pending</span></td>
-                                  
-                                  @elseif($row->is_ad_comply == 1 )
-                                  <td><span class="badge badge-warning">Comply</span></td>
-                                 
-                                  @else
-                                  <td><span class="badge badge-danger">Approval Pending</span></td>
-                                  @endif
+                                  <td>{{getStatus($row->status)}}</td>
                                   <td align="center">
                                     <a href="{{url('/')}}/ad/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-                                    @if(($row->is_ad_approval != 1 &&  $row->is_ad_comply != 1 ) || ( $row->is_ad_comply ==0 &&  $row->is_commissioner_comply ==1)  )
+                                    @if($row->status == 1 ||  $row->status == 5)
                                     <a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
                                   @endif
-                                   
-
+                                  
                                   </td>
                                 </tr>
                                

@@ -143,10 +143,8 @@ class TraderController extends Controller
         }
 
 
-        $input['is_amc_approval'] = 0;
-        $input['is_amc_comply'] = 0;
-        $input['is_ad_approval'] = 0;
-        $input['is_commisioner_approval'] = 0;
+        $input['status'] = 3;
+       
 
         TraderApply::where('application_id','=',$request->id)->update($input);
       $tt =   TraderApply::where('application_id','=',$request->id)->first();
@@ -332,7 +330,7 @@ class TraderController extends Controller
     {
 
         $data = TraderApply::where("application_id", '=', $id)->get();
-if($data[0]->is_amc_comply ==1)
+if($data[0]->status ==2)
      $traderold = Traderlog::where("application_id",'=',$data[0]->id)->where("type",'=',3)->orderBy('id', 'desc')->first();
 else
 return redirect()->back();

@@ -1,7 +1,7 @@
 @extends('commissioner.layouts.app')
 
 @section('content')
-
+@include('status')
 <div class="container-fluid bdy">
     <div class="row">
     <div class="col-sm-12">
@@ -33,21 +33,13 @@
                                   <td>{{$row->name}}</td>
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
-                                  @if($row->is_commisioner_approval == 1 && $row->is_commisioner_comply == 0)
-                                  <td><span class="badge badge-success">Approved</span></td>
-                                  @elseif($row->is_commisioner_comply == 1)
-                                  <td><span class="badge badge-warning">Comply</span></td>
-                                  @else
-                                  <td><span class="badge badge-danger">Approval Pending</span></td>
-                                  @endif
+                                  <td>{{getStatus($row->status)}}</td>
                                   <td align="center">
-                                    <a href="{{url('/')}}/commissioner/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-                                   
-                                    @if($row->is_commisioner_approval == 0 && $row->is_commissioner_comply ==0 )
-                                     <a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
-                                   @endif
+                                    <a href="{{url('/')}}/commissioner/traderviewdetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
+                                    @if($row->status == 6 ||  $row->status == 8)
+                                    <a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+                                  @endif
                                   
-
                                   </td>
                                 </tr>
                                

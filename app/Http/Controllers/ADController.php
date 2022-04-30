@@ -73,7 +73,12 @@ class ADController extends Controller
  
          $input['user_id'] = Auth::user()->id;
          $approvetrader = Traderlog::insertGetId($input);
-         TraderApply::where("id",'=',$request->application_id)->update(['is_ad_approval'=>1]);
+         $cn = Traderlog::where('type','=',1)->count();
+        if($cn == 0)
+        TraderApply::where("id", '=', $request->application_id)->update(['status' => 6 , 'is_ad_approval'=>1]);
+        else
+        TraderApply::where("id", '=', $request->application_id)->update(['status' => 8 , 'is_ad_approval'=>1]);
+       
          if($approvetrader){
             return redirect('/ad/traderapplylist')->with('success','Trader Approved succesfully');
          }
@@ -98,7 +103,12 @@ class ADController extends Controller
      
              $input['user_id'] = Auth::user()->id;
              $approveca = Calog::insertGetId($input);
-             CAApply::where("id",'=',$request->application_id)->update(['is_ad_approval'=>1]);
+             $cn = Calog::where('type','=',1)->count();
+             if($cn == 0)
+             CAApply::where("id", '=', $request->application_id)->update(['status' => 6 , 'is_ad_approval'=>1]);
+             else
+             CAApply::where("id", '=', $request->application_id)->update(['status' => 8 , 'is_ad_approval'=>1]);
+           
              if($approveca){
                 return redirect('/ad/caapplylist')->with('success','CA Approved succesfully');
              }

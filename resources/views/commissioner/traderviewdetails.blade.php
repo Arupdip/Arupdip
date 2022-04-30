@@ -40,8 +40,8 @@
                                 @foreach($Traderlog as $tl)
                                 <tr>
                                     <td>@isset($tl->user) {{$tl->user->name}} ({{$tl->user->usertype->name}}) @endisset </td>
-                                    <td>{{date('d F Y h:i A',  strtotime($tl->creatted_at))}}</td>
-                                    <td>@if($tl->type ==0)  {{$tl->comment}}
+                                    <td>{{date('d F Y h:i A',  strtotime($tl->created_at))}}</td>
+                                    <td>@if($tl->type ==0 || $tl->type == 4)  {{$tl->comment}}
                                         
                                         @else <a href="#" onClick="editcomply({{$tl->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
                                         @endif</td>
@@ -286,7 +286,7 @@
                 </div>
             </card>
             <div class="mt-3 text-center">
-                @if($traderview->is_commisioner_approval == 0) 
+                @if($traderview->status == 6 || $traderview->status == 8) 
               <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button>
               
               @endif

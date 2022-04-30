@@ -149,7 +149,7 @@ Route::group(['prefix' => 'amc', 'middleware' => 'amc'], function () {
 
 	Route::get('/traderapplylist', [FAMCController::class, 'traderapplylist']);
 	Route::get('/traderapproval/{id}', [FAMCController::class, 'traderapproval']);
-	Route::get('/traderviedetails/{id}', [FAMCController::class, 'traderViewDetails']);
+	Route::get('/traderviewdetails/{id}', [FAMCController::class, 'traderViewDetails']);
 	Route::post('/traderapprovesubmit', [FAMCController::class, 'traderApproveSubmit']);
 
 	Route::get('/caapplylist', [FAMCController::class, 'caapplylist']);
@@ -171,7 +171,7 @@ Route::group(['prefix' => 'ad', 'middleware' => 'ad'], function () {
 	Route::get('/traderapplylist', [ADController::class, 'traderapplylist']);
 	Route::get('/traderapproval/{id}', [ADController::class, 'traderapproval']);
 
-	Route::get('/traderviedetails/{id}', [ADController::class, 'traderViewDetails']);
+	Route::get('/traderviewdetails/{id}', [ADController::class, 'traderViewDetails']);
 	Route::post('/traderapprovesubmit', [ADController::class, 'traderApproveSubmit']);
 
 
@@ -189,7 +189,7 @@ Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], funct
 	Route::get('/traderapplylist', [CommissionerController::class, 'traderapplylist']);
 	Route::get('/traderapproval/{id}', [CommissionerController::class, 'traderapproval']);
 
-	Route::get('/traderviedetails/{id}', [CommissionerController::class, 'traderViewDetails']);
+	Route::get('/traderviewdetails/{id}', [CommissionerController::class, 'traderViewDetails']);
 	Route::post('/traderapprovesubmit', [CommissionerController::class, 'traderApproveSubmit']);
 
 

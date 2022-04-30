@@ -135,13 +135,13 @@ class CommissionerController extends Controller
         $input['user_id'] = Auth::user()->id;
         $approvetrader = Calog::insertGetId($input);
         if(Auth::user()->user_type == 5)
-        CAApply::where("id",'=',$request->id)->update(['is_commissioner_comply'=>1]);
+        CAApply::where("id",'=',$request->id)->update(['status'=>7]);
 
         if(Auth::user()->user_type == 4)
-        CAApply::where("id",'=',$request->id)->update(['is_ad_comply'=>1]);
+        CAApply::where("id",'=',$request->id)->update(['status'=>4]);
 
         if(Auth::user()->user_type == 3)
-        CAApply::where("id",'=',$request->id)->update(['is_amc_comply'=>1]);
+        CAApply::where("id",'=',$request->id)->update(['status'=>2]);
         return redirect()->back()->with('success','Commply succesfully sent !!');
      }
 
@@ -167,13 +167,13 @@ class CommissionerController extends Controller
         $input['user_id'] = Auth::user()->id;
         $approvetrader = Traderlog::insertGetId($input);
         if(Auth::user()->user_type == 5)
-        TraderApply::where("id",'=',$request->id)->update(['is_commissioner_comply'=>1]);
+        TraderApply::where("id",'=',$request->id)->update(['status'=>7]);
 
         if(Auth::user()->user_type == 4)
-        TraderApply::where("id",'=',$request->id)->update(['is_ad_comply'=>1]);
+        TraderApply::where("id",'=',$request->id)->update(['status'=>4]);
 
         if(Auth::user()->user_type == 3)
-        TraderApply::where("id",'=',$request->id)->update(['is_amc_comply'=>1]);
+        TraderApply::where("id",'=',$request->id)->update(['status'=>2]);
         return redirect()->back()->with('success','Commply succesfully sent !!');
      }
 
@@ -187,7 +187,7 @@ class CommissionerController extends Controller
  
          $input['user_id'] = Auth::user()->id;
          $approvetrader = Traderlog::insertGetId($input);
-         TraderApply::where("id",'=',$request->application_id)->update(['is_commisioner_approval'=>1]);
+         TraderApply::where("id",'=',$request->application_id)->update(['is_commisioner_approval'=>1, 'status' => 9]);
          if($approvetrader){
             return redirect('/commissioner/traderapplylist')->with('success','Trader Approved succesfully');
          }
@@ -211,7 +211,7 @@ class CommissionerController extends Controller
      
              $input['user_id'] = Auth::user()->id;
              $approveca = Calog::insertGetId($input);
-             CAApply::where("id",'=',$request->application_id)->update(['is_commisioner_approval'=>1]);
+             CAApply::where("id",'=',$request->application_id)->update(['is_commisioner_approval'=>1 , 'status' => 9]);
              if($approveca){
                 return redirect('/commissioner/caapplylist')->with('success','CA Approved succesfully');
              }

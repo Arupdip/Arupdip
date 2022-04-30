@@ -284,10 +284,8 @@ class CaController extends Controller
 
       
 
-        $input['is_amc_approval'] = 0;
-        $input['is_amc_comply'] = 0;
-        $input['is_ad_approval'] = 0;
-        $input['is_commisioner_approval'] = 0;
+        $input['status'] = 3;
+       
 
         CAApply::where('application_id','=',$request->id)->update($input);
       $tt =   CAApply::where('application_id','=',$request->id)->first();
