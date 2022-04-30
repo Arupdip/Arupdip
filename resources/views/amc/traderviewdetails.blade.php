@@ -285,7 +285,7 @@
                     </div>
                 </div>
             </card>
-            <div class="mt-3 text-center">
+            <div class="mt-3 text-center j">
                 @if($traderview->is_amc_approval == 0 && $traderview->is_amc_comply == 0)
               <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button> @endif
             </div>
