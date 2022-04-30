@@ -34,9 +34,11 @@
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
                                   @if($row->is_commisioner_approval == 1 && $row->is_commisioner_comply == 0)
-                                  <td><span class="badge badge-success">Comply Solved</span></td>
+                                  <td><span class="badge badge-success">Approved</span></td>
+                                  @elseif($row->is_commisioner_comply == 1)
+                                  <td><span class="badge badge-warning">Comply</span></td>
                                   @else
-                                  <td><span class="badge badge-warning">Comply Pending</span></td>
+                                  <td><span class="badge badge-danger">Approval Pending</span></td>
                                   @endif
                                   <td align="center">
                                     <a href="{{url('/')}}/commissioner/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 

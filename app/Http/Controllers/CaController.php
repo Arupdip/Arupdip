@@ -13,6 +13,7 @@ use App\Models\State;
 use App\Models\District;
 use App\Models\Licensetype;
 use App\Models\AMC;
+use App\Models\Calog;
 use DB;
 use Auth;
 
@@ -228,4 +229,99 @@ class CaController extends Controller
             return redirect()->to('ca/approval-status/'.$id);
         }
     }
+
+
+
+    
+    public function resetCaDetails(Request $request)
+    {
+        // dd($request->all());
+
+        $returnArr = array("success" => false, "message" => "");
+
+        $returnArr = array("success" => false, "message" => "");
+
+
+        $checkaddhar = CAApply::where("aadhar_no", "=", $request->aadhar_no)->where('application_id','!=',$request->id)->count();
+        if ($checkaddhar != 0) {
+            $returnArr['message'] = "Aadhar card is already existed !!";
+            return $returnArr;
+        }
+
+   
+        $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->where('application_id','!=',$request->id)->count();
+        if ($checkpan != 0) {
+            $returnArr['message'] = "Pan No is already existed !!";
+            return $returnArr;
+        }
+
+    
+
+        $checkgistin = CAApply::where("gstin", "=", $request->gstin)->where('application_id','!=',$request->id)->count();
+        if ($checkgistin != 0) {
+            $returnArr['message'] = "GSTIN No is already existed !!";
+            return $returnArr;
+        }
+        $input = $request->all();
+       
+       
+        // $input['updated_at'] = date('Y-m-d H:i:s');
+        unset($input['_token']);
+        unset($input['id']);
+        if ($file = $request->file('aadhar_file')) {
+            $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['aadhar_file']);
+        }else{
+            unset($input['aadhar_file']);
+        }
+
+        if ($file = $request->file('pan_file')) {
+            $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['pan_file']);
+        }else{
+            unset($input['pan_file']);
+        }
+
+      
+
+        $input['is_amc_approval'] = 0;
+        $input['is_amc_comply'] = 0;
+        $input['is_ad_approval'] = 0;
+        $input['is_commisioner_approval'] = 0;
+
+        CAApply::where('application_id','=',$request->id)->update($input);
+      $tt =   CAApply::where('application_id','=',$request->id)->first();
+        $input1['created_at'] = date('Y-m-d H:i:s');
+        $input1['application_id'] = $tt->id;
+        $input1['type'] = 4;
+        $input1['comment'] = 'Recheck Submit';
+        $input1['user_id'] = Auth::user()->id;
+        $approvetrader = Calog::insertGetId($input1);
+        $returnArr['success'] = true;
+        $returnArr['message'] ='';
+        return $returnArr;
+    }
+
+
+
+    public function recheck($id)
+    {
+
+        $data = CAApply::where("application_id", '=', $id)->get();
+if($data[0]->is_amc_comply ==1)
+     $traderold = Calog::where("application_id",'=',$data[0]->id)->where("type",'=',3)->orderBy('id', 'desc')->first();
+else
+return redirect()->back();
+
+$states = State::all();
+
+$amc = AMC::all();
+return view('front/ca/recheck', compact('states' ,  'amc' , 'data', 'traderold','id'));
+
+
+
+        return view("front.ca.recheck", compact('data'));
+    }
+
+
 }

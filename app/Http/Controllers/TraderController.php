@@ -152,7 +152,7 @@ class TraderController extends Controller
       $tt =   TraderApply::where('application_id','=',$request->id)->first();
         $input1['created_at'] = date('Y-m-d H:i:s');
         $input1['application_id'] = $tt->id;
-      
+        $input1['type'] = 4;
         $input1['comment'] = 'Recheck Submit';
         $input1['user_id'] = Auth::user()->id;
         $approvetrader = Traderlog::insertGetId($input1);

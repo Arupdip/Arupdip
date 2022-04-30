@@ -130,7 +130,7 @@ if(isset($array[$name])){
             <div class="col-md-3">
                 <dl>
                     <dt>Aadhar File Upload</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->aadhar_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         
                         <input type="radio" />
@@ -155,7 +155,7 @@ if(isset($array[$name])){
             <div class="col-md-3">
                 <dl>
                     <dt>PAN File Upload</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->pan_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         
                         <input type="radio" />
@@ -274,7 +274,7 @@ if(isset($array[$name])){
             <div class="col-md-3">
                 <dl>
                     <dt>Upload Firm PAN File </dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->firmpan_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         
                         <input type="radio" />
@@ -287,7 +287,7 @@ if(isset($array[$name])){
             <div class="col-md-3">
                 <dl>
                     <dt>Upload GSTIN</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->gstin_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         
                         <input type="radio" />
@@ -300,7 +300,7 @@ if(isset($array[$name])){
             <div class="col-md-3">
                 <dl>
                     <dt>Declaration of Solvency</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->declarationofsolvency}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         
                         <input type="radio" />
@@ -313,7 +313,7 @@ if(isset($array[$name])){
             <div class="col-md-3">
                 <dl>
                     <dt>Bank Guarantee Copy</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->uploadedbankguaranteetype}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         
                         <input type="radio" />
@@ -386,6 +386,18 @@ if(isset($array[$name])){
                         
                         <input type="radio" />
                         <?php echo getfield('ifsc', $log); ?>
+                    </label>
+                </dl>
+            </div>
+
+            <div class="col-md-3">
+                <dl>
+                    <dt>Bank Passbook</dt>
+                    <a href="{{url('/')}}/public/uploads/{{$trader->account_file}}" class="priya-download" download="download"></a>
+                    <label class="give-comply">
+                      
+                        <input type="radio" />
+                        <?php echo getfield('account_file', $log); ?>
                     </label>
                 </dl>
             </div>

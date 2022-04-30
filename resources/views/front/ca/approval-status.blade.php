@@ -32,7 +32,7 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="dl">
                                             <div class="dt">Do you have a trader license</div>
-                                            <div class="dd">Yes <a href="#"><i class="priya-download"></i></a></div>
+                                            <div class="dd"> @if($row->traderlicense == 1) Yes @else No @endif</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
@@ -61,12 +61,7 @@
                                             <div class="dd">{{$row->name}}</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="dl">
-                                            <div class="dt">Age</div>
-                                            <div class="dd">{{$row->age}}</div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-md-3 col-sm-6">
                                         <div class="dl">
                                             <div class="dt">Father's Name</div>
@@ -159,10 +154,11 @@
                         <div class="status-sec">
                             <h5>Approval Status</h5>
                             <ul>
-                                <li @if($row->is_submit == 1) class="approved" @endif >Details Submitted</li>
+                                <li @if($row->is_submit == 1) class="approved" @endif>Details Submitted</li>
                                 <li @if($row->is_reg_pay == 1) class="approved" @endif>Registration Fee Paid</li>
-                                <li  @if($row->is_amc_approval == 1) class="approved" @endif>AMC Approval <!--<a href="#" class="badge badge-warning">Recheck</a>--></li>
-                                <li  @if($row->is_ad_approval == 1) class="approved" @endif>AD Approval</li>
+                                <li @if($row->is_amc_approval == 1 && $row->is_amc_comply == 0) class="approved" @endif >AMC Approval @if($row->is_amc_comply == 1) <a href="{{url('/')}}/ca/recheck/{{$row->application_id}}" class="badge badge-warning">Recheck</a> @endif</li>
+                                <li  @if($row->is_ad_approval == 1 && $row->is_ad_comply == 0) class="approved" @endif >Head Office AD Approval</li>
+                                <li @if($row->is_commisioner_approval == 1 && $row->is_commisioner_comply == 0) class="approved" @endif>Commissioner Approval</li>
                                 <li  @if($row->is_commisioner_approval == 1) class="approved" @endif>Commissioner Approval</li>
                                 @if($row->is_final_pay == 0)
                                 <li><a href="#">Final Payment</a>@if($row->is_commisioner_approval == 1) <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a> @endif</li>

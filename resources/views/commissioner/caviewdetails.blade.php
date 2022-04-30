@@ -32,6 +32,7 @@
                                     <th>Approved By</th>
                                     <th>Date Time</th>
                                     <th>Comment</th>
+                                    <th>Type</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,7 +41,12 @@
                                 <tr>
                                     <td>@isset($tl->user) {{$tl->user->name}} ({{$tl->user->usertype->name}}) @endisset </td>
                                     <td>{{date('d F Y h:i A')}}</td>
-                                    <td>{{$tl->comment}}</td>
+                                    <td>@if($tl->type ==0)  {{$tl->comment}}
+                                        
+                                        @else <a href="#" onClick="editcomply({{$tl->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+                                        @endif</td>
+
+                                    <td>@if($tl->type ==0) Approval @elseif($tl->type == 4) Recheck Submit @else Comply @endif </td>
                                 </tr>
 
                                 @endforeach
@@ -278,6 +284,29 @@
 
 
 
+<div id="view-trader-details" class="help-modal"  style="display: none;">
+    
+</div>
+
+
+<script>
+
+function editcomply(id)
+{
+    
+    $.ajax({
+        type: "get",
+        url: "{{url('/')}}/editcacomply/"+id,
+        success: function(data)
+        {
+            $("#view-trader-details").html(data);
+            helpModal('#view-trader-details')
+          // show response from the php script.
+        }
+    });
+}
+
+</script>
 
 
 

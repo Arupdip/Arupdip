@@ -122,7 +122,7 @@ else{
 
             <div class="col-md-3">
                 <dl>
-                    <dt>District</dt>
+                    <dt>Mandal</dt>
                     <dd> @if(isset($trader->mandal->name)) {{$trader->mandal->name}} @endif</dd>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
@@ -146,7 +146,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Aadhar File Upload</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->aadhar_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -171,7 +171,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>PAN File Upload</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->pan_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -289,7 +289,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Upload Firm PAN File </dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->firmpan_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -302,7 +302,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Upload GSTIN</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->gstin_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -315,7 +315,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Declaration of Solvency</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->declarationofsolvency}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -328,7 +328,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Bank Guarantee Copy</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->uploadedbankguaranteetype}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -407,7 +407,7 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Upload Copy of Bank Passbook</dt>
-                  
+                    <a href="{{url('/')}}/public/uploads/{{$trader->account_file}}" class="priya-download" download="download"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />

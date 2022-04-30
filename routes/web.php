@@ -116,6 +116,11 @@ Route::group(['prefix' => 'ca', 'middleware' => 'ca'], function () {
 
 	Route::get('/final-payment/{id}', [CaController::class, 'caFinalPay']);
 	Route::get('/final-payment-success/{id}', [CaController::class, 'caFinalPaySuccess']);
+
+	Route::get('/recheck/{app_id}', [CaController::class, 'recheck']);
+	Route::post('reset-ca-details', [CaController::class, 'resetCaDetails']);
+
+
 });
 
 Route::group(['prefix' => 'trader', 'middleware' => 'trader'], function () {
@@ -199,6 +204,17 @@ Route::get('/edittradercomply/{id}', [CommissionerController::class, 'edittrader
 Route::post('/submitcomply', [CommissionerController::class, 'submitcomply']);
 
 Route::get('/viewtradercomply/{id}', [CommissionerController::class, 'viewtradercomply']);
+
+
+
+Route::get('/editcacomply/{id}', [CommissionerController::class, 'editcacomply']);
+
+Route::post('/submitcomplyca', [CommissionerController::class, 'submitcomplyca']);
+
+Route::get('/viewcacomply/{id}', [CommissionerController::class, 'viewcacomply']);
+
+
+
 
 
 Auth::routes();

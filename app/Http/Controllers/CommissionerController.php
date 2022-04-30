@@ -74,6 +74,31 @@ class CommissionerController extends Controller
      } 
 
 
+     public function viewcacomply($id){
+
+        $traderold = Calog::where("id",'=',$id)->first();
+        $trader =  json_decode($traderold->old_data);
+
+        return view('commissioner.camodalcomment', compact('traderold','trader'));
+ 
+     } 
+
+
+     public function editcacomply($id){
+
+        $trader = CAApply::where("id",'=',$id)->first();
+        $traderold ='';
+        if($trader->is_commissioner_comply==1 && Auth::user()->user_type == 4)
+        $traderold = Calog::where("application_id",'=',$id)->where("type",'=',1)->orderBy('id', 'desc')->first();
+        if($trader->is_ad_comply==1 && Auth::user()->user_type == 3)
+        $traderold = Calog::where("application_id",'=',$id)->where("type",'=',2)->orderBy('id', 'desc')->first();
+        
+
+
+        return view('commissioner.camodal', compact('trader','traderold'));
+ 
+     } 
+
 
      public function edittradercomply($id){
 
@@ -90,6 +115,38 @@ class CommissionerController extends Controller
  
      } 
 
+     public function submitcomplyca(Request $request){
+
+        $data =$request->all();
+        unset($data['_token']);
+        unset($data['id']);
+
+        $input['created_at'] = date('Y-m-d H:i:s');
+        $input['application_id'] = $request->id;
+        $input['old_data'] = json_encode(CAApply::with('state','district','amc','liscencetype','user')->where("id",'=',$request->id)->first());
+        $input['comment'] = 'Comply';
+        $input['logs'] = json_encode($data);;
+        if(Auth::user()->user_type == 5)
+        $input['type'] = '1';
+        if(Auth::user()->user_type == 4)
+        $input['type'] = '2';
+        if(Auth::user()->user_type == 3)
+        $input['type'] = '3';
+        $input['user_id'] = Auth::user()->id;
+        $approvetrader = Calog::insertGetId($input);
+        if(Auth::user()->user_type == 5)
+        CAApply::where("id",'=',$request->id)->update(['is_commissioner_comply'=>1]);
+
+        if(Auth::user()->user_type == 4)
+        CAApply::where("id",'=',$request->id)->update(['is_ad_comply'=>1]);
+
+        if(Auth::user()->user_type == 3)
+        CAApply::where("id",'=',$request->id)->update(['is_amc_comply'=>1]);
+        return redirect()->back()->with('success','Commply succesfully sent !!');
+     }
+
+
+
      public function submitcomply(Request $request){
 
         $data =$request->all();
@@ -98,7 +155,7 @@ class CommissionerController extends Controller
 
         $input['created_at'] = date('Y-m-d H:i:s');
         $input['application_id'] = $request->id;
-        $input['old_data'] = json_encode(TraderApply::where("id",'=',$request->id)->first());
+        $input['old_data'] = json_encode(TraderApply::with('state','firmstate','district','firmdistrict','mandal','amc','liscencetype','user')->where("id",'=',$request->id)->first());
         $input['comment'] = 'Comply';
         $input['logs'] = json_encode($data);;
         if(Auth::user()->user_type == 5)

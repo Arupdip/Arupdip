@@ -36,19 +36,21 @@
 	                                  <td>{{$row->gstin}}</td>
 	                                  @if($row->is_amc_approval == 1 && $row->is_ad_comply == 0)
 	                                  <td><span class="badge badge-success">Approved</span></td>
-	                                  @endif
-									  @if($row->is_ad_comply == 1 )
+	                                 
+									  @elseif($row->is_ad_comply == 1 && $row->is_amc_comply == 0)
 	                                  <td><span class="badge badge-warning">Comply Pending</span></td>
-	                                  @endif
-
-									  @if($row->is_amc_approval == 0 && $row->is_ad_comply == 0)
+	                                  
+									  @elseif($row->is_amc_comply == 1 )
+	                                  <td><span class="badge badge-warning">Comply</span></td>
+	                                 
+									  @else
 	                                  <td><span class="badge badge-danger">Approval Pending</span></td>
 	                                  @endif
 
 
 	                                  <td align="center">
 	                                    <a href="{{url('/')}}/amc/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-										@if($row->is_amc_approval == 0 || ( $row->is_ad_comply == 1 && $row->is_amc_comply == 0)   )
+										@if(($row->is_amc_approval != 1 &&  $row->is_amc_comply != 1 ) || ( $row->is_amc_comply ==0 &&  $row->is_ad_comply ==1)  )
 										<a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
 									  @endif
 	                                  

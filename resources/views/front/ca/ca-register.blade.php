@@ -67,6 +67,23 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Do you have a trader license<span class="text-danger">*</span></label>
+                                    <div>
+                                        <label class="pri-radio">
+                                            <input type="radio" name="traderlicense" class="" value="1" ><i></i> Yes
+                                        </label>
+                                        <label class="pri-radio ml-4">
+                                            <input type="radio"  name="traderlicense" class="" checked value="0" ><i></i> No
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
@@ -94,12 +111,7 @@
                                     <span class="text-danger" id="err_dup_error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Age<span class="text-danger">*</span></label>
-                                    <input type="text"  name="age" maxlength="2" class="form-control pri-form" autocomplete="off">
-                                </div>
-                            </div>
+                           
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Father's Name<span class="text-danger">*</span></label>

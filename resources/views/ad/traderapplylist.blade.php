@@ -35,15 +35,22 @@
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
                                   @if($row->is_ad_approval == 1 && $row->is_commissioner_comply == 0)
-                                  <td><span class="badge badge-success">Comply Solved</span></td>
-                                  @else
+                                  <td><span class="badge badge-success">Approved</span></td>
+                                 
+                                  @elseif($row->is_commissioner_comply == 1 && $row->is_ad_comply == 0)
                                   <td><span class="badge badge-warning">Comply Pending</span></td>
+                                  
+                                  @elseif($row->is_ad_comply == 1 )
+                                  <td><span class="badge badge-warning">Comply</span></td>
+                                 
+                                  @else
+                                  <td><span class="badge badge-danger">Approval Pending</span></td>
                                   @endif
                                   <td align="center">
                                     <a href="{{url('/')}}/ad/traderviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-                                    @if($row->is_ad_approval == 0 || ( $row->is_commissioner_comply == 1 && $row->is_ad_comply == 0)   )
-                                     <a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
-                                   @endif
+                                    @if(($row->is_ad_approval != 1 &&  $row->is_ad_comply != 1 ) || ( $row->is_ad_comply ==0 &&  $row->is_commissioner_comply ==1)  )
+                                    <a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
+                                  @endif
                                    
 
                                   </td>

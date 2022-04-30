@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
 
-                                @foreach($Traderlog as $tl)
+                                @foreach($calog as $tl)
                                 <tr>
                                     <td>@isset($tl->user) {{$tl->user->name}} ({{$tl->user->usertype->name}}) @endisset </td>
                                     <td>{{date('d F Y h:i A')}}</td>
@@ -46,7 +46,7 @@
                                         @else <a href="#" onClick="editcomply({{$tl->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
                                         @endif</td>
 
-                                    <td>@if($tl->type ==0) Approval @else Comply @endif </td>
+                                    <td>@if($tl->type ==0) Approval @elseif($tl->type == 4) Recheck Submit @else Comply @endif </td>
                                 </tr>
 
                                 @endforeach
@@ -287,7 +287,7 @@
                 </div>
             </card>
             <div class="mt-3 text-center">
-                @if($traderview->is_ad_approval == 0)  
+                @if($traderview->is_ad_approval == 0 && $traderview->is_ad_comply == 0)
               <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button> @endif
             </div>
         </div>
