@@ -40,7 +40,7 @@
                                 @foreach($calog as $tl)
                                 <tr>
                                     <td>@isset($tl->user) {{$tl->user->name}} ({{$tl->user->usertype->name}}) @endisset </td>
-                                    <td>{{date('d F Y h:i A')}}</td>
+                                    <td>{{date('d F Y h:i A',  strtotime($tl->creatted_at))}}</td>
                                     <td>@if($tl->type ==0)  {{$tl->comment}}
                                         
                                         @else <a href="#" onClick="editcomply({{$tl->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
