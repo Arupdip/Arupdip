@@ -197,7 +197,7 @@
             </card>
           
             <div class="mt-3 text-center">
-                @if($traderview->status == 0 ||  $traderview->status == 3  ||  $traderview->status ==4   )
+                @if($cadata->status == 0 ||  $cadata->status == 3   )
                 <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button> @endif
               </div>
         </div>

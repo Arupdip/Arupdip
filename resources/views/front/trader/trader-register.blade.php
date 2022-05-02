@@ -184,7 +184,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PIN Code<span class="text-danger">*</span></label>
-                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" max="6" name="firmpincode" class="form-control pri-form" />
+                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" max="6" name="firmpincode" maxlength="6" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">

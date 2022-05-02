@@ -153,11 +153,15 @@
                     <div class="col-md-3">
                         <div class="status-sec">
                             <h5>Approval Status</h5>
+
+                            {{-- @php
+dd($row->status);
+                            @endphp --}}
                             <ul>
                                 <ul>
                                     <li @if($row->is_submit == 1) class="approved" @endif>Details Submitted</li>
                                     <li @if($row->is_reg_pay == 1) class="approved" @endif>Registration Fee Paid</li>
-                                    <li @if($row->status == 1 || $row->status == 5 || $row->status == 6 && $row->status == 8 || $row->status  == 9) class="approved" @endif >AMC Approval @if($row->status == 2) <a href="{{url('/')}}/trader/recheck/{{$row->application_id}}" class="badge badge-warning">Recheck</a> @endif</li>
+                                    <li @if($row->status == 1 || $row->status == 5 || $row->status == 6 && $row->status == 8 || $row->status  == 9) class="approved" @endif >AMC Approval @if($row->status == 2) <a href="{{url('/')}}/ca/recheck/{{$row->application_id}}" class="badge badge-warning">Recheck</a> @endif</li>
                                     <li  @if($row->status == 6 && $row->status == 8 || $row->status  == 9) class="approved" @endif >Head Office AD Approval</li>
                                     <li @if($row->status  == 9) class="approved" @endif>Commissioner Approval</li>
                              

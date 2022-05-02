@@ -193,7 +193,6 @@
 	function validateCaptcha()
 	{
 		event.preventDefault();
-		debugger
 		var val = $('#captcha').val();
 		if (val == '') {
 			$('#captcha').focus();

@@ -73,11 +73,15 @@
                                     <label>Do you have a trader license<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
-                                            <input type="radio" name="traderlicense" class="" value="1" ><i></i> Yes
+                                            <input type="radio" name="traderlicense" class="" onchange="priGroup(this)" value="1" ><i></i> Yes
                                         </label>
                                         <label class="pri-radio ml-4">
-                                            <input type="radio"  name="traderlicense" class="" checked value="0" ><i></i> No
+                                            <input type="radio"  name="traderlicense" class="" onchange="priGroup(this)" checked value="0" ><i></i> No
                                         </label>
+                                    </div>
+                                    <div class="pri-collapsed">
+                                        <label>Attach File<span class="text-danger">*</span></label>
+                                        <input type="file" name="traderlicensefile" class="form-control pri-form" />
                                     </div>
                                     
                                 </div>

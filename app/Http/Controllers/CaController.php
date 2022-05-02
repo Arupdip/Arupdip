@@ -127,6 +127,11 @@ class CaController extends Controller
             $file->move(public_path('uploads'), $input['familymemberholdcafile']);
         }
 
+        if ($file = $request->file('traderlicensefile')) {
+            $input['traderlicensefile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['traderlicensefile']);
+        }
+
         if ($file = $request->file('upladedotherfirmfile')) {
             $input['upladedotherfirmfile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['upladedotherfirmfile']);
@@ -306,7 +311,7 @@ class CaController extends Controller
     {
 
         $data = CAApply::where("application_id", '=', $id)->get();
-if($data[0]->is_amc_comply ==1)
+if($data[0]->status ==2)
      $traderold = Calog::where("application_id",'=',$data[0]->id)->where("type",'=',3)->orderBy('id', 'desc')->first();
 else
 return redirect()->back();

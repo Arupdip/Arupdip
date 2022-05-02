@@ -203,7 +203,7 @@ $.ajax({
 					processData: false,
 					success: function(data) {
 						if (data.success == true) {
-							window.location.href = "{{url('/')}}/trader/approval-status/{{$id}}";
+							window.location.href = "{{url('/')}}/ca/approval-status/{{$id}}";
 						} else {
 							$(".errorstatus").show();
 							$(".errorstatus").html(data.message);

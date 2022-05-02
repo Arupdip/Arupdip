@@ -88,9 +88,9 @@ class CommissionerController extends Controller
 
         $trader = CAApply::where("id",'=',$id)->first();
         $traderold ='';
-        if($trader->is_commissioner_comply==1 && Auth::user()->user_type == 4)
+        if($trader->status==7 && Auth::user()->user_type == 4)
         $traderold = Calog::where("application_id",'=',$id)->where("type",'=',1)->orderBy('id', 'desc')->first();
-        if($trader->is_ad_comply==1 && Auth::user()->user_type == 3)
+        if($trader->status==4 && Auth::user()->user_type == 3)
         $traderold = Calog::where("application_id",'=',$id)->where("type",'=',2)->orderBy('id', 'desc')->first();
         
 
@@ -104,9 +104,9 @@ class CommissionerController extends Controller
 
         $trader = TraderApply::where("id",'=',$id)->first();
         $traderold ='';
-        if($trader->is_commissioner_comply==1 && Auth::user()->user_type == 4)
+        if($trader->status==7 && Auth::user()->user_type == 4)
         $traderold = Traderlog::where("application_id",'=',$id)->where("type",'=',1)->orderBy('id', 'desc')->first();
-        if($trader->is_ad_comply==1 && Auth::user()->user_type == 3)
+        if($trader->status==4 && Auth::user()->user_type == 3)
         $traderold = Traderlog::where("application_id",'=',$id)->where("type",'=',2)->orderBy('id', 'desc')->first();
         
 
@@ -149,13 +149,14 @@ class CommissionerController extends Controller
 
      public function submitcomply(Request $request){
 
+
         $data =$request->all();
         unset($data['_token']);
         unset($data['id']);
 
         $input['created_at'] = date('Y-m-d H:i:s');
         $input['application_id'] = $request->id;
-        $input['old_data'] = json_encode(TraderApply::with('state','firmstate','district','firmdistrict','mandal','amc','liscencetype','user')->where("id",'=',$request->id)->first());
+        $input['old_data'] = json_encode(TraderApply::with('state','firmstate','district','firmdistrict','mandal','amc','user')->where("id",'=',$request->id)->first());
         $input['comment'] = 'Comply';
         $input['logs'] = json_encode($data);;
         if(Auth::user()->user_type == 5)

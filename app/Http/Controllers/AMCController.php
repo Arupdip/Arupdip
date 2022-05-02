@@ -60,6 +60,9 @@ class AMCController extends Controller
     {
         $input = array();
 
+        $expiryyear = date('Y-m-d', strtotime(' + 2 years'));
+        $input['expiry_date'] = $expiryyear;
+
         $input['is_sign_upload'] = 1;
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
@@ -165,6 +168,10 @@ class AMCController extends Controller
     {
         $input = array();
 
+        $expiryyear = date('Y-m-d', strtotime(' + 2 years'));
+        $input['expiry_date'] = $expiryyear;
+
+        
         $input['is_sign_upload'] = 1;
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();

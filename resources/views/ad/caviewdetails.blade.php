@@ -196,7 +196,7 @@
           
           
             <div class="mt-3 text-center">
-                @if($traderview->status == 1 ||  $traderview->status == 5 )
+                @if($cadata->status == 1 ||  $cadata->status == 5 )
                 <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button> @endif
              </div>
         </div>

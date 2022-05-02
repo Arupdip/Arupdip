@@ -36,8 +36,8 @@
 	                                  <td>{{$row->gstin}}</td>
 									  <td>{{getStatus($row->status)}}</td>
 	                                  <td align="center">
-	                                    <a href="{{url('/')}}/amc/caviedetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-										@if($row->status == 0 ||  $row->status == 3)
+	                                    <a href="{{url('/')}}/amc/caviewdetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
+										@if($row->status == 0 ||  $row->status == 4 || $row->status == 3)
 										<a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
 									  @endif
 	                                  

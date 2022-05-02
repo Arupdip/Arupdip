@@ -36,7 +36,6 @@ Route::get('/home', function () {
 	return redirect('/');
 });
 Route::any('logout', function () {
-	
 	if (Auth::user()->user_type == 0) {
 		$redirect = 'admin/login';
 	}elseif(Auth::user()->user_type == 3 || Auth::user()->user_type == 4 || Auth::user()->user_type == 5){

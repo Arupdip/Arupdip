@@ -37,7 +37,7 @@ class LicensetypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   dd($request->all);
         $input =  $request->all();
         unset($input['_token']);
         $input['created_at'] = date('Y-m-d H:i:s');
