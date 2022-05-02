@@ -17,6 +17,7 @@ use App\Models\Mandal;
 use App\Models\Calog;
 use DB;
 use Auth;
+use Mail;
 
 class CaController extends Controller
 {
@@ -285,8 +286,16 @@ class CaController extends Controller
                     'password' => Hash::make($password),
                     'created_at' => date('Y-m-d H:i:s')
                 );
+                $data=array('password'=>$password , 'username' =>$tempData->email );
+                Mail::send('email.index', $data, function($message) use ($data) {
+                $message->to($data['username'])
+                ->subject('CA Registration Successfully');
+                });
 
                 $user_id = User::insertGetId($userArr);
+
+           
+
             } else {
                 $user = User::where("email", "=", $tempData->email)->first();
                 $user_id = $user->id;
@@ -303,8 +312,13 @@ class CaController extends Controller
             $result['is_reg_pay'] = 1;
             $result['application_id']  = Str::random(211);
             unset($result['id']);
+            unset($result['old_application_id']);
             CAApply::insert($result);
             Auth::loginUsingId($user_id);
+
+         
+
+          
             return redirect("/ca/approval-status/" . $result['application_id']);
         }
     }

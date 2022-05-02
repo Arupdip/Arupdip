@@ -15,7 +15,7 @@ use App\Models\Traderlog;
 use Auth;
 use App\Models\CAApply;
 use Carbon\Carbon; 
-
+use Mail;
 
 
 class TraderController extends Controller
@@ -27,6 +27,8 @@ class TraderController extends Controller
      */
     public function traderRegister()
     {
+
+     
         $states = State::all();
         $mandal = Mandal::all();
         $amc = AMC::all();
@@ -400,7 +402,7 @@ class TraderController extends Controller
 
             if ($count == 0) {
 
-                $password = '12345678';
+                $password = rand(100000, 999999);
                 $userArr =  array(
                     "email" => $tempData->email,
                     "name" => $tempData->name,
@@ -410,7 +412,16 @@ class TraderController extends Controller
                     'created_at' => date('Y-m-d H:i:s')
                 );
 
+                $data=array('password'=>$password , 'username' =>$tempData->email );
+                Mail::send('email.index', $data, function($message) use ($data) {
+                $message->to($data['username'])
+                ->subject('Trader Registration Successfully');
+              });
+
+
                 $user_id = User::insertGetId($userArr);
+
+
             } else {
                 $user = User::where("email", "=", $tempData->email)->first();
                 $user_id = $user->id;
@@ -422,13 +433,18 @@ class TraderController extends Controller
             }
 
             $result['user_id'] = $user_id;
-
+unset($result['old_application_id']);
             $result['is_submit'] = 1;
             $result['is_reg_pay'] = 1;
             $result['application_id']  = Str::random(211);
             unset($result['id']);
             TraderApply::insert($result);
             Auth::loginUsingId($user_id);
+
+         
+
+
+
             return redirect("/trader/approval-status/" . $result['application_id']);
         }
     }
