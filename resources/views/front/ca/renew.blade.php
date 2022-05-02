@@ -1,6 +1,8 @@
 @extends('layouts.frontlayout')
 
 @section('content')
+
+
 <div class="container-fluid bdy">
     <div class="card my-5">
         <div class="card-head">
@@ -32,41 +34,10 @@
                         <h6>CA Details</h6>
                        
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Does any of your family members hold Commission Agent License<span class="text-danger">*</span></label>
-                                    <div>
-                                        <label class="pri-radio">
-                                            <input type="radio" name="isfamilymemberholdca" class="commodity_wether_cls" value="1"  onchange="priGroup(this)"><i></i> Yes
-                                        </label>
-                                        <label class="pri-radio ml-4">
-											<input type="radio" name="isfamilymemberholdca" class="commodity_wether_cls redioGroup" value="0"  onchange="priGroup(this)">
-											<i></i> No
-                                        </label>
-                                    </div>
-                                    <div class="pri-collapsed">
-                                        <label>Attach File<span class="text-danger">*</span></label>
-                                        <input type="file" name="familymemberholdcafile" class="form-control pri-form" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Do you have any other firm/Business or Are you a partner of any firm/business<span class="text-danger">*</span></label>
-                                    <div>
-                                        <label class="pri-radio">
-                                            <input type="radio" name="isotherfirm" class="commodity_wether_cls" value="1" onchange="priGroup(this)"><i></i> Yes
-                                        </label>
-                                        <label class="pri-radio ml-4">
-                                            <input type="radio"  name="isotherfirm" class="commodity_wether_cls" value="0" onchange="priGroup(this)"><i></i> No
-                                        </label>
-                                    </div>
-                                    <div class="pri-collapsed">
-                                        <label>Attach File<span class="text-danger">*</span></label>
-                                        <input type="file" name="upladedotherfirmfile" class="form-control pri-form" />
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" name="old_application_id" id="" 
+                            class="form-control pri-form f1" value="{{$Caapply->application_id}}" aria-required="true" />
+
+
 
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -91,8 +62,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
-                                    <input type="text" id="aadhar_no" name="aadhar_no"
-                                        class="form-control  pri-form aadhar_no" maxlength="16" value="" />
+                                    <input type="text" id="aadhar_no" name="aadhar_no" value="{{$Caapply->aadhar_no}}"
+                                        class="form-control  pri-form aadhar_no" maxlength="16"  />
                                         <label id="aadharerror" style="display: none"  class="error" >Please enter valid Aadhar Number</label>
                                 </div>
                             </div>
@@ -100,7 +71,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload Aadhaar<span class="text-danger">*</span></label>
-                                    <input type="file" id="aadhar_file" name="aadhar_file"
+                                    <input type="file" id="aadhar_file" name="aadhar_file"  value="{{$Caapply->aadhar_file}}"
                                         class="form-control  pri-form aadhar_file"  />
                                        
                                 </div>
@@ -110,7 +81,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Full Name<span class="text-danger">*</span></label>
-                                    <input type="text" id="name"  name="name"
+                                    <input type="text" id="name"  name="name"  value="{{$Caapply->name}}"
                                         class="form-control pri-form" aria-="true" />
                                     <span class="text-danger" id="err_dup_error"></span>
                                 </div>
@@ -119,13 +90,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Father's Name<span class="text-danger">*</span></label>
-                                    <input type="text"  name="fathersname" class="form-control pri-form" />
+                                    <input type="text"  name="fathersname" class="form-control pri-form"   value="{{$Caapply->fathersname}}"/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="text"  name="dob" class="form-control pri-form" autocomplete="off" />
+                                    <input type="text"  name="dob" class="form-control pri-form"  value="{{$Caapply->dob}}" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -141,32 +112,32 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Address<span class="text-danger">*</span></label>
-                                    <textarea name="address"  class="form-control pri-form"></textarea>
+                                    <textarea name="address"  class="form-control pri-form">{{$Caapply->address}}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="mobile" class="form-control pri-form" maxlength="10" />
+                                    <input type="text" name="mobile"  value="{{$Caapply->mobile}}" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PAN Number<span class="text-danger">*</span></label>
-									<input type="text"  name="pan_no" class="form-control pri-form pan_no" maxlength="10" />
+									<input type="text"   value="{{$Caapply->pan_no}}" name="pan_no" class="form-control pri-form pan_no" maxlength="10" />
                                     <label id="pannoerror" style="display: none"  class="error" >Please enter valid Pan Number</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email ID<span class="text-danger">*</span></label>
-                                    <input type="text"  name="email" class="form-control pri-form" />
+                                    <input type="text"   value="{{$Caapply->email}}" name="email" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Market Name <span class="text-danger">*</span></label>
-                                    <input type="text"  name="marketname" class="form-control pri-form" />
+                                    <input type="text"  name="marketname"  value="{{$Caapply->marketname}}" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -191,7 +162,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>GSTIN<span class="text-danger">*</span></label>
-									<input type="text" name="gstin"  class="form-control pri-form"  maxlength="15"/>
+									<input type="text" name="gstin"   value="{{$Caapply->gstin}}"  class="form-control pri-form"  maxlength="15"/>
                                 </div>
                             </div>
                             <!--<div class="col-md-4">
@@ -199,9 +170,9 @@
                                     <label>License Type<span class="text-danger">*</span></label>
                                     <select name="liscencetype_id"  class="form-control pri-form">
                                         <option value="">-- Select --</option>
-                                         @foreach($liscencetype as $r)
-                                        <option value="{{$r->id}}">{{$r->name}}</option>
-                                        @endforeach
+                                         {{-- @foreach($liscencetype as $r) --}}
+                                        {{-- <option value="{{$r->id}}">{{$r->name}}</option> --}}
+                                        {{-- @endforeach --}}
                                     </select>
                                 </div>
                             </div>-->
@@ -211,7 +182,7 @@
                                     <select name="amc_id"  class="form-control pri-form">
                                         <option value="">-- Select --</option>
                                           @foreach($amc as $r)
-                                        <option value="{{$r->id}}">{{$r->name}}</option>
+                                        <option value="{{$r->id}}" @if($Caapply->amc_id == $r->id) selected @endif> {{$r->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -219,7 +190,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Name in Power Of Attorney<span class="text-danger">*</span></label>
-                                    <input type="text"  name="power_attorney" class="form-control pri-form" />
+                                    <input type="text"  value="{{$Caapply->power_attorney}}"  name="power_attorney" class="form-control pri-form" />
                                 </div>
                             </div>
                             
@@ -246,32 +217,28 @@
 <script>
 	$(document).ready(function () {
 
-        
-		$('#ca-register-form input[type=text]').attr("disabled",true);
-		$('#ca-register-form textarea').attr('disabled', true);
-		$('#ca-register-form select').attr('disabled', true);
-		$('.submit_btn').attr('disabled', true);
+        $("#state-dd").val("{{$Caapply->state_id}}").trigger('change');
+        $.ajax({
+				url: "{{url('fetch-districts')}}",
+				type: "POST",
+				data: {
+					state_id: {{$Caapply->district_id}},
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('#district-dd').html('<option value="">Select City</option>');
+					$.each(res.districts, function (key, value) {
+						$("#district-dd").append('<option value="' + value
+						.id + '">' + value.name + '</option>');
+					});
 
-		redioGroup();
-		$('.commodity_wether_cls').click(function() {
-			redioGroup();
-		})
+                    $('#district-dd').val("{{$Caapply->district_id}}").trigger('change');
+				}
+			});
 
-		function redioGroup()
-		{
-			if ($('input[name="isfamilymemberholdca"]:checked').val() == 1 && $('input[name="isotherfirm"]:checked').val() == 1) {
-				$('#ca-register-form input[type=text]').attr("disabled",false);
-				$('#ca-register-form textarea').attr('disabled', false);
-				$('#ca-register-form select').attr('disabled', false);
-				$('.submit_btn').attr('disabled', false);
-			} else {
-				$('#ca-register-form input[type=text]').attr("disabled",true);
-				$('#ca-register-form textarea').attr('disabled', true);
-				$('#ca-register-form select').attr('disabled', true);
-				$('.submit_btn').attr('disabled', true);
-				$('label.error').remove();
-			}
-		}
+
+		
 
 
 		$('input[name="dob"]').daterangepicker({
@@ -325,14 +292,7 @@
 
 		$("#ca-register-form").validate({
 			rules: {
-				isfamilymemberholdca: "required",
-				familymemberholdcafile: "required",
-				isotherfirm: "required",
-				upladedotherfirmfile: "required",
-
-                aadhar_file: "required",
-
-                pan_file: "required",
+				
 				aadhar_no:  {
 					required : true,
 					number: true,
@@ -397,14 +357,14 @@
 
 				$.ajax({
 					type: "POST",
-					url: "{{url('save-ca-details')}}",
+					url: "{{url('ca/renew-ca-details')}}",
 					data: formdata, // serializes the form's elements.
 					cache: false,
 					contentType: false,
 					processData: false,
 					success: function(data) {
 						if (data.success == true) {
-							window.location.href = "{{url('/')}}/ca-payment/"+data.message;
+							window.location.href = "{{url('/')}}/ca/ca-payment-renew/"+data.message;
 						} else {
 							$(".errorstatus").show();
 							$(".errorstatus").html(data.message);
@@ -414,6 +374,9 @@
 			}
 
 		});
+
+
+// For renewal registartion
 
 
 

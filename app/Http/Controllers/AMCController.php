@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Tempuser;
 use App\Models\State;
+use App\Models\Licensetype;
 use App\Models\District;
 use DB;
 use Auth;
@@ -60,7 +61,8 @@ class AMCController extends Controller
     {
         $input = array();
 
-        $expiryyear = date('Y-m-d', strtotime(' + 2 years'));
+        $Licensetype = Licensetype::find(1);
+        $expiryyear = date('Y-m-d', strtotime(' + '.$Licensetype->validity.' years'));
         $input['expiry_date'] = $expiryyear;
 
         $input['is_sign_upload'] = 1;
@@ -168,7 +170,8 @@ class AMCController extends Controller
     {
         $input = array();
 
-        $expiryyear = date('Y-m-d', strtotime(' + 2 years'));
+        $Licensetype = Licensetype::find(2);
+        $expiryyear = date('Y-m-d', strtotime(' + '.$Licensetype->validity.' years'));
         $input['expiry_date'] = $expiryyear;
 
         

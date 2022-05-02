@@ -120,6 +120,13 @@ Route::group(['prefix' => 'ca', 'middleware' => 'ca'], function () {
 	Route::post('reset-ca-details', [CaController::class, 'resetCaDetails']);
 
 
+
+	Route::get('/renew/{app_id}', [CaController::class, 'renew']);
+	Route::post('renew-ca-details', [CaController::class, 'renewCaDetails']);
+	Route::get('ca-payment-renew/{id}', [CaController::class, 'paymentrenew']);
+	Route::get('ca-regpay-success-renew/{id}', [CaController::class, 'caRegPaySuccessrenew']);
+	
+
 });
 
 Route::group(['prefix' => 'trader', 'middleware' => 'trader'], function () {
@@ -131,6 +138,16 @@ Route::group(['prefix' => 'trader', 'middleware' => 'trader'], function () {
 
 	Route::get('/recheck/{app_id}', [TraderController::class, 'recheck']);
 	Route::post('reset-trader-details', [TraderController::class, 'resetTraderDetails']);
+
+
+	
+	Route::get('/renew/{app_id}', [TraderController::class, 'renew']);
+
+	Route::post('renew-trader-details', [TraderController::class, 'renewTraderDetails']);
+Route::get('trader-payment-renew/{id}', [TraderController::class, 'traderpaymentrenew']);
+Route::get('trader-regpay-success-renew/{id}', [TraderController::class, 'traderRegPaySuccessrenew']);
+
+
 });
 
 

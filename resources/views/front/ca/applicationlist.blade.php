@@ -19,7 +19,7 @@
                                     <th>Full Name</th>
                                     <th>Aadhar No.</th>
                                     <th>GSTIN</th>
-                                   
+                                    <th>Expiry Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -32,11 +32,20 @@
                                   <td>{{$row->name}}</td>
                                   <td>{{$row->aadhar_no}}</td>
                                   <td>{{$row->gstin}}</td>
-                                  
+                                  <td>
+                                    @if($row->is_sign_upload == 1 && $row->expiry_date <= date('Y-m-d'))
+{{$row->expiry_date}}
+@else
+Process
+                                    @endif
+                                  </td>
+                                 
                                      
                                   <td align="center">
                                     <a href="{{url('/')}}/ca/approval-status/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
-                                   
+                                    @if($row->is_sign_upload == 1 && $row->expiry_date <= date('Y-m-d') && $row->is_renew_apply == 0)
+                                   <a href="{{url('/')}}/ca/renew/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details">Renew</a> 
+                                   @endif
 
                                   </td>
                                 </tr>

@@ -13,6 +13,7 @@ use App\Models\State;
 use App\Models\District;
 use App\Models\Licensetype;
 use App\Models\AMC;
+use App\Models\Mandal;
 use App\Models\Calog;
 use DB;
 use Auth;
@@ -158,11 +159,110 @@ class CaController extends Controller
     }
 
 
+
+    public function paymentrenew($id)
+    {
+
+        return view("front.ca.ca-payment-renew", compact("id"));
+    }
+
+    public function renewCaDetails(Request $request)
+    {
+
+        $returnArr = array("success" => false, "message" => "", "id" => "");
+        $oldTrader = CAApply::where('application_id','=', $request->old_application_id)->first();
+        $input = $request->all();
+        $randomid = Str::random(211);
+        $input['user_temp_id'] = $randomid;
+        $input['updated_at'] = date('Y-m-d H:i:s');
+        unset($input['_token']);
+        if ($file = $request->file('familymemberholdcafile')) {
+            $input['familymemberholdcafile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['familymemberholdcafile']);
+        }
+        else{
+            $input['familymemberholdcafile']  = $oldTrader->familymemberholdcafile;
+        }
+
+        if ($file = $request->file('traderlicensefile')) {
+            $input['traderlicensefile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['traderlicensefile']);
+        }
+        else{
+            $input['traderlicensefile']  = $oldTrader->traderlicensefile;
+        }
+
+        if ($file = $request->file('upladedotherfirmfile')) {
+            $input['upladedotherfirmfile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['upladedotherfirmfile']);
+        }
+        else{
+            $input['upladedotherfirmfile']  = $oldTrader->upladedotherfirmfile;
+        }
+        if ($file = $request->file('aadhar_file')) {
+            $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['aadhar_file']);
+        }
+        else{
+            $input['aadhar_file']  = $oldTrader->aadhar_file;
+        }
+
+
+        if ($file = $request->file('pan_file')) {
+            $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['pan_file']);
+        }
+        else{
+            $input['pan_file']  = $oldTrader->pan_file;
+        }
+
+
+
+
+        DB::table('temp_causer')->insertGetId($input);
+
+        $returnArr['success'] = true;
+        $returnArr['message'] = $randomid;
+        return $returnArr;
+    }
+
+
+
+
+
+
     public function capayment($id)
     {
 
         return view("front.ca.ca-payment", compact("id"));
     }
+
+
+    
+
+    public function caRegPaySuccessrenew($id)
+    {
+        $tempData =  DB::table('temp_causer')->where("user_temp_id", "=", $id)->first();
+
+        if (isset($tempData)) {
+
+              $result = [];
+            foreach ($tempData as $key => $value) {
+                $result[$key] =  $value;
+            }
+            CAApply::where('application_id','=',$result['old_application_id'])->update(['is_renew_apply'=>1]);
+         
+            unset($result['old_application_id']);
+            $result['user_id'] = Auth::user()->id;
+            $result['is_submit'] = 1;
+            $result['is_reg_pay'] = 1;
+            $result['application_id']  = Str::random(211);
+            unset($result['id']);
+            CAApply::insert($result);
+            return redirect("/ca/approval-status/" . $result['application_id']);
+        }
+    }
+
 
 
 
@@ -326,5 +426,19 @@ return view('front/ca/recheck', compact('states' ,  'amc' , 'data', 'traderold',
         return view("front.ca.recheck", compact('data'));
     }
 
+
+
+
+    public function renew($id)
+    {
+
+  $Caapply = CAApply::where("application_id", '=', $id)->first();
+$states = State::all();
+$mandal = Mandal::all();
+$amc = AMC::all();
+
+return view('front/ca/renew', compact('states' , 'mandal', 'amc' , 'Caapply','id'));
+
+    }
 
 }

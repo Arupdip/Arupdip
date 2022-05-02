@@ -268,10 +268,124 @@ class TraderController extends Controller
         return view("front.trader.trader-payment", compact("id"));
     }
 
+    public function traderpaymentrenew($id)
+    {
+
+        return view("front.trader.trader-payment-renew", compact("id"));
+    }
+
+
+
+    public function renewTraderDetails(Request $request)
+    {
+        // dd($request->all());
+
+        $returnArr = array("success" => false, "message" => "");
+
+        $returnArr = array("success" => false, "message" => "");
+
+
+        
+       $oldTrader = TraderApply::where('application_id','=', $request->old_application_id)->first();
+        $input = $request->all();
+        $currentYear = date('Y'); // Current Year
+        $birthYear = date('Y', strtotime(str_replace("/","-",$request->dob))); 
+        $age = $currentYear - $birthYear;
+      
+        $input['age'] = $age;
+        // dd($input['age']);
+        $input['dob'] = strtotime(str_replace("-","/",$request->dob));
+        $input['dob'] = date("Y-m-d", strtotime($input['dob']));   
+        $randomid = Str::random(211);
+        $input['user_temp_id'] = $randomid;
+        // $input['updated_at'] = date('Y-m-d H:i:s');
+        unset($input['_token']);
+
+        if ($file = $request->file('aadhar_file')) {
+            $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['aadhar_file']);
+        }
+        else{
+            $input['aadhar_file']  = $oldTrader->aadhar_file;
+        }
+
+        if ($file = $request->file('pan_file')) {
+            $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['pan_file']);
+        }else{
+            $input['pan_file']  = $oldTrader->pan_file;
+        }
+
+        if ($file = $request->file('firmpan_file')) {
+            $input['firmpan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['firmpan_file']);
+        }else{
+            $input['firmpan_file']  = $oldTrader->firmpan_file;
+        }
+
+        if ($file = $request->file('gstin_file')) {
+            $input['gstin_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['gstin_file']);
+        }else{
+            $input['gstin_file']  = $oldTrader->gstin_file;
+        }
+
+        if ($file = $request->file('declarationofsolvency')) {
+            $input['declarationofsolvency'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['declarationofsolvency']);
+        }else{
+            $input['declarationofsolvency']  = $oldTrader->declarationofsolvency;
+        }
+
+        if ($file = $request->file('uploadedbankguaranteetype')) {
+            $input['uploadedbankguaranteetype'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['uploadedbankguaranteetype']);
+        }else{
+            $input['uploadedbankguaranteetype']  = $oldTrader->uploadedbankguaranteetype;
+        }
+        if ($file = $request->file('account_file')) {
+            $input['account_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['account_file']);
+        }else{
+            $input['account_file']  = $oldTrader->account_file;
+        }
+
+
+        DB::table('temp_traderuser')->insertGetId($input);
+
+        $returnArr['success'] = true;
+        $returnArr['message'] = $randomid;
+        return $returnArr;
+    }
 
 
 
 
+    public function traderRegPaySuccessrenew($id)
+    {
+        $tempData =  DB::table('temp_traderuser')->where("user_temp_id", "=", $id)->first();
+
+        if (isset($tempData)) {
+
+           
+            $result = [];
+            foreach ($tempData as $key => $value) {
+                $result[$key] =  $value;
+              
+            }
+
+            TraderApply::where('application_id','=',$result['old_application_id'])->update(['is_renew_apply'=>1]);
+            unset($result['old_application_id']);
+            $result['user_id'] = Auth::user()->id;
+
+            $result['is_submit'] = 1;
+            $result['is_reg_pay'] = 1;
+            $result['application_id']  = Str::random(211);
+            unset($result['id']);
+            TraderApply::insert($result);
+            return redirect("/trader/approval-status/" . $result['application_id']);
+        }
+    }
 
 
 
@@ -325,6 +439,22 @@ class TraderController extends Controller
         $data = TraderApply::where("application_id", '=', $id)->get();
         return view("front.trader.approval-status", compact('data'));
     }
+
+
+    public function renew($id)
+    {
+
+  $TraderApply = TraderApply::where("application_id", '=', $id)->first();
+$states = State::all();
+$mandal = Mandal::all();
+$amc = AMC::all();
+
+return view('front/trader/renew', compact('states' , 'mandal', 'amc' , 'TraderApply','id'));
+
+    }
+
+
+
 
     public function recheck($id)
     {
