@@ -118,31 +118,50 @@ class CommissionerController extends Controller
      public function submitcomplyca(Request $request){
 
         $data =$request->all();
+        
         unset($data['_token']);
         unset($data['id']);
+        
+		$value = false;
+		foreach ($data as $key=>$val) {
+			if (!empty($val)) {
+				$value = true;
+			}
+		}
+		
+		if ($value == false) {
+			return redirect()->back()->with('error','Commply field is empty !!');
+		}else{
 
-        $input['created_at'] = date('Y-m-d H:i:s');
-        $input['application_id'] = $request->id;
-        $input['old_data'] = json_encode(CAApply::with('state','district','amc','liscencetype','user')->where("id",'=',$request->id)->first());
-        $input['comment'] = 'Comply';
-        $input['logs'] = json_encode($data);;
-        if(Auth::user()->user_type == 5)
-        $input['type'] = '1';
-        if(Auth::user()->user_type == 4)
-        $input['type'] = '2';
-        if(Auth::user()->user_type == 3)
-        $input['type'] = '3';
-        $input['user_id'] = Auth::user()->id;
-        $approvetrader = Calog::insertGetId($input);
-        if(Auth::user()->user_type == 5)
-        CAApply::where("id",'=',$request->id)->update(['status'=>7]);
+	        $input['created_at'] = date('Y-m-d H:i:s');
+	        $input['application_id'] = $request->id;
+	        $input['old_data'] = json_encode(CAApply::with('state','district','amc','liscencetype','user')->where("id",'=',$request->id)->first());
+	        $input['comment'] = 'Comply';
+	        $input['logs'] = json_encode($data);
+	        
+	        if(Auth::user()->user_type == 5)
+	        	$input['type'] = '1';
+	        
+	        if(Auth::user()->user_type == 4)
+	       		$input['type'] = '2';
+	        
+	        if(Auth::user()->user_type == 3)
+	        	$input['type'] = '3';
+	        	$input['user_id'] = Auth::user()->id;
+	        	
+	        	$approvetrader = Calog::insertGetId($input);
+	        	
+	        if(Auth::user()->user_type == 5)
+	        	CAApply::where("id",'=',$request->id)->update(['status'=>7]);
 
-        if(Auth::user()->user_type == 4)
-        CAApply::where("id",'=',$request->id)->update(['status'=>4]);
+	        if(Auth::user()->user_type == 4)
+	        	CAApply::where("id",'=',$request->id)->update(['status'=>4]);
 
-        if(Auth::user()->user_type == 3)
-        CAApply::where("id",'=',$request->id)->update(['status'=>2]);
-        return redirect()->back()->with('success','Commply succesfully sent !!');
+	        if(Auth::user()->user_type == 3)
+	        	CAApply::where("id",'=',$request->id)->update(['status'=>2]);
+	        
+	        return redirect()->back()->with('success','Commply succesfully sent !!');
+     	}
      }
 
 

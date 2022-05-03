@@ -7,6 +7,11 @@
     dl dd{margin-bottom: 0; }
     dl a[download] {
         position: absolute;
+        right: 30px;
+        top: 6px;
+    } 
+	dl a.priya-eye {
+        position: absolute;
         right: 10px;
         top: 6px;
     }
@@ -134,6 +139,7 @@
                                 <dt>Aadhaar No.</dt>
                                 <dd>{{$cadata->aadhar_no}}</dd>
                                 <a href="{{url('/')}}/public/uploads/{{$cadata->aadhar_file}}" class="priya-download" download="aadhar"></a>
+                                <a href="{{url('/')}}/public/uploads/{{$cadata->aadhar_file}}" class="priya-eye" target="_blank"></a>
                             </dl>
                         </div>
                         <div class="col-md-4">
@@ -141,6 +147,7 @@
                                 <dt>PAN No.</dt>
                                 <dd>{{$cadata->pan_no}}</dd>
                                 <a href="{{url('/')}}/public/uploads/{{$cadata->pan_file}}" class="priya-download" download="pan"></a>
+                                <a href="{{url('/')}}/public/uploads/{{$cadata->pan_file}}" class="priya-eye" target="_blank"></a>
                             </dl>
                         </div>
                         <div class="col-md-4">
@@ -181,6 +188,7 @@
                                 <dt>Family Hold Ca</dt>
                                 <dd>@if($cadata->isfamilymemberholdca == 1) Yes @else No @endif</dd>
                                 @if($cadata->isfamilymemberholdca == 1) <a href="{{url('/')}}/public/uploads/{{$cadata->familymemberholdcafile}}" class="priya-download" download="pan"></a> @endif
+                                @if($cadata->isfamilymemberholdca == 1) <a href="{{url('/')}}/public/uploads/{{$cadata->familymemberholdcafile}}" class="priya-eye" target="_blank"></a> @endif
                             </dl>
                         </div>
                         <div class="col-md-4">
@@ -188,6 +196,7 @@
                                 <dt>Other Firm</dt>
                                 <dd>@if($cadata->isotherfirm == 1) Yes @else No @endif</dd>
                                 @if($cadata->isotherfirm == 1) <a href="{{url('/')}}/public/uploads/{{$cadata->upladedotherfirmfile}}" class="priya-download" download="pan"></a> @endif
+                                @if($cadata->isotherfirm == 1) <a href="{{url('/')}}/public/uploads/{{$cadata->upladedotherfirmfile}}" class="priya-eye" target="_blank"></a> @endif
                             </dl>
                         </div>
                        

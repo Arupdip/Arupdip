@@ -18,12 +18,13 @@
 	                        <table class="table table-stripped table-bordered theme-tbl">
 	                            <thead>
 	                                <tr>
-	                                    <th>Sl.No.</th>
-	                                    <th>Full Name</th>
-	                                    <th>Aadhar No.</th>
-	                                    <th>GSTIN</th>
-	                                    <th>Status</th>
-	                                    <th>Action</th>
+	                                    <th class="text-center">Sl.No.</th>
+										<th class="text-center">Full Name</th>
+										<th class="text-center">Apply Date</th>
+										<th class="text-center">Aadhar No.</th>
+										<th class="text-center">GSTIN</th>
+										<th class="text-center">Status</th>
+										<th class="text-center">Action</th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
@@ -32,11 +33,12 @@
 	                              <?php $i++;?>
 	                                <tr>
 	                                  <td>{{$i}}</td>
+	                                  <td>-</td>
 	                                  <td>{{$row->name}}</td>
 	                                  <td>{{$row->aadhar_no}}</td>
 	                                  <td>{{$row->gstin}}</td>
 	                                  <td>{{getStatus($row->status)}}</td>
-	                                  <td align="center">
+	                                  <td >
 	                                    <a href="{{url('/')}}/amc/traderviewdetails/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a> 
 										@if($row->status == 0 ||  $row->status == 3  ||  $row->status ==4   )
 										<a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 

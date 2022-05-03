@@ -15,7 +15,7 @@
         <div class="card-body pt-0">
             <div class="p-2">
                 <ul id="progressbar">
-                    <li class="priya-cubes">Collect CA Details</li>
+					<li class="priya-cubes active">Collect CA Details</li>
                     <li class="active priya-hourglass-2">Process Payment</li>
                     <li class="priya-file-text-o">Department Approval</li>
                     <li class="priya-bell-o">Notify CA</li>

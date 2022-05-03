@@ -63,10 +63,11 @@
                                     <label>Gender<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
-                                            <input type="radio" name="gender" class="" value="M" onchange="priGroup(this)"><i></i> Male
+                                            <input type="radio" name="gender" required="" class="form-control" value="M" onchange="priGroup(this)"><i></i> Male
                                         </label>
                                         <label class="pri-radio ml-4">
-                                            <input type="radio" name="gender" class="" value="F" onchange="priGroup(this)"><i></i> Female
+											<input type="radio" name="gender" required="" class="form-control" value="F" onchange="priGroup(this)">
+											<i></i> Female
                                         </label>
                                     </div>
                                 </div>
@@ -80,13 +81,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="text" name="dob" class="form-control pri-form f1" autocomplete="off" />
+                                    <input type="text" name="dob" readonly="" class="form-control pri-form f1" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PIN Code<span class="text-danger">*</span></label>
-                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="6" name="pincode" class="form-control pri-form f1" />
+                                    <input type="tel"  maxlength="6" name="pincode" class="form-control pri-form f1" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -146,19 +147,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="10" name="mobile" class="form-control pri-form f1" maxlength="10" />
+									<input type="tel"  maxlength="10" name="mobile" id="mobile" class="form-control pri-form f1" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Alternate Mobile Number<span class="text-danger">*</span></label>
-                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="10" name="alternate_mobile" class="form-control pri-form f1" maxlength="10" />
+									<input type="tel" maxlength="10" name="alternate_mobile" id="alternate_mobile" class="form-control pri-form f1" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email<span class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control pri-form f1"  />
+                                    <input type="email" autocomplete="off" name="email" class="form-control pri-form f1"  />
                                 </div>
                             </div>
                         </div>
@@ -184,14 +185,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>PIN Code<span class="text-danger">*</span></label>
-                                    <input type="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" max="6" name="firmpincode" maxlength="6" class="form-control pri-form" />
+                                    <input type="tel" name="firmpincode" maxlength="6" class="form-control pri-form" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>State<span class="text-danger">*</span></label>
                                     <select name="firm_state_id" id="firmstate_id" class="form-control pri-form">
-                                        <option  value="">--Select state--</option>
+										<option  selected="" disabled="">--Select state--</option>
                                         @foreach($states as $state)
                                         <option value="{{$state->state_id}}">{{$state->state_title}}</option>
                                         @endforeach
@@ -201,16 +202,16 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>District<span class="text-danger">*</span></label>
-                                    <select name="firmdistrict_id" id="firmdistrict_id" class="form-control pri-form">
-                                        <option>-- Select --</option>
+                                    <select name="firmdistrict_id" id="firmdistrict_id" required="" class="form-control pri-form">
+                                        <option selected="" disabled="">-- Select --</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>AMC Name<span class="text-danger">*</span></label>
-                                    <select name="amc_id" class="form-control pri-form">
-										<option>-- Select --</option>
+                                    <select name="amc_id" required="" class="form-control pri-form">
+										<option selected="" disabled="">-- Select --</option>
                                         @foreach($amc as $row)
                                         <option value="{{$row->id}}" >{{$row->name}}</option>
                                         @endforeach
@@ -263,8 +264,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bank Name<span class="text-danger">*</span></label>
-                                    <select name="bankname" class="form-control pri-form">
-                                        <option>-- Select --</option>
+                                    <select name="bankname" required="" class="form-control pri-form">
+										<option selected="" disabled="">-- Select --</option>
                                         <option value="sbi">State bank of india</option>
                                         <option value="pnb">Punjab Natioanl Bank</option>
                                     </select>
@@ -279,25 +280,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bank Account No<span class="text-danger">*</span></label>
-                                    <input type="tel" name="account_no" class="form-control pri-form" maxlength="10" />
+									<input type="password" autocomplete="off" name="account_no" id="account_no" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Confirm Account No<span class="text-danger">*</span></label>
-                                    <input type="tel" name="c_account_no" class="form-control pri-form" maxlength="10" />
+									<input type="tel" name="c_account_no" id="c_account_no" class="form-control pri-form" maxlength="10" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>IFSC Code<span class="text-danger">*</span></label>
-                                    <input type="text" name="ifsc" class="form-control pri-form" maxlength="11" />
+									<input type="text" name="ifsc" id="ifsc" class="form-control pri-form" maxlength="11" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Confirm IFSC Code<span class="text-danger">*</span></label>
-									<input type="text" name="c_ifsc" class="form-control pri-form" id="c_ifsc" maxlength="11" />
+									<input type="text" name="c_ifsc" id="c_ifsc" class="form-control pri-form" id="c_ifsc" maxlength="11" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -397,13 +398,13 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script>
+
 	$(document).ready(function () {
 		$('input[name="dob"]').daterangepicker({
 			singleDatePicker: true,
 			showDropdowns: true,
-			minYear: 1901,
-			maxDate: new Date(),
-			maxYear: parseInt(moment().format('YYYY'),10),
+			startDate: new Date(moment().subtract(20, 'years')),
+			maxDate: new Date(moment().subtract(20, 'years')),
 			autoUpdateInput: false,
 			locale: {
 				cancelLabel: 'Clear'
@@ -476,13 +477,24 @@
 		$.validator.addMethod("ifsc_valid", function(value, element) {
 			return this.optional( element ) || ifsc_type.test( $('input[name="ifsc"]').val() );
 		}, "Please enter valid 11 digit bank IFSC code");
+		
+		$.validator.addMethod("alt_mobile", function(value, element) {
+			var mobile_val = $('input[name="mobile"]').val()
+			if (value != mobile_val) {
+				return true;
+			}
+            //alert(value)
+		}, "Mobile number and alternate mobile number must be unique");
+
 
 		$("#trader-register-form").validate({
 			rules: {
 				typeoffirm: "required",
 				name: "required",
 				fathersname: "required",
-				gender: "required",
+				gender:  {
+					required: true
+				},
 				address: "required",
 				dob: "required",
 				pincode: "required",
@@ -514,7 +526,8 @@
 					required:true,
 					minlength:10,
 					maxlength:10,
-					number: true
+					number: true,
+					alt_mobile: true
 				},
 				email:  {
 					required : true,
@@ -543,7 +556,10 @@
 				bankname: "required",
 				account_holder: "required",
 				account_no: "required",
-				c_account_no: "required",
+				c_account_no: {
+					required : true,
+					equalTo : "#account_no"
+				},
 				ifsc: {
 					required : true,
 					ifsc_valid: true,
@@ -552,7 +568,7 @@
 				},
 				c_ifsc:{
 					required : true,
-					equalTo : "#c_ifsc"
+					equalTo : "#ifsc"
 				},
 				account_file: "required",
 			},
@@ -606,11 +622,14 @@
 				uploadedbankguaranteetype : "Please upload bank guarantee",
 				account_holder : "Please provide account holder name",
 				account_no : "Please provide account number",
-				c_account_no : "Please provide confirm account number",
+				c_account_no : {
+					required : "Please provide confirm account number",
+					equalTo: "Account number and confirm account number is not match",
+				},
 				ifsc : "Please provide IFSC number",
 				c_ifsc : {
-					required : "Please confirm IFSC number",
-					equalTo: "Please enter valid GST number",
+					required : "Please provide confirm IFSC number",
+					equalTo: "IFSC code and confirm IFSC code is not match",
 				},
 				account_file : "Please provide account number",
 
