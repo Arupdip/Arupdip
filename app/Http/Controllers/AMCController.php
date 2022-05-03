@@ -17,6 +17,8 @@ use App\Models\Licensetype;
 use App\Models\District;
 use DB;
 use Auth;
+use Mail;
+use PDF;
 
 class AMCController extends Controller
 {
@@ -66,11 +68,23 @@ class AMCController extends Controller
         $input['expiry_date'] = $expiryyear;
 
         $input['is_sign_upload'] = 1;
+        $input['is_pdf_generate'] = 1;
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
 
             $data = TraderApply::where("id", "=", $request->id)->update($input);
+
+            $body =  TraderApply::where("id", "=", $request->id)->first();
+            Mail::send('email.license', ['body' => $body], function($m) use ($body) {
+
+                $m->to($body->email,$body->name)->subject('License Generate');
+                 $pdf = PDF::loadview('email.pdf', compact('body'));
+                 $m->attachData($pdf->output(), 'license,pdf');
+
+            } );
+
+
             $log = array(
 
                 'user_id' => Auth::user()->id,
@@ -176,11 +190,20 @@ class AMCController extends Controller
 
         
         $input['is_sign_upload'] = 1;
+        $input['is_pdf_generate'] = 1;
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
 
             $data = CAApply::where("id", "=", $request->id)->update($input);
+           $body =  CAApply::where("id", "=", $request->id)->first();
+            Mail::send('email.license', ['body' => $body], function($m) use ($body) {
+
+                $m->to($body->email,$body->name)->subject('License Generate');
+                 $pdf = PDF::loadview('email.pdf', compact('body'));
+                 $m->attachData($pdf->output(), 'license,pdf');
+
+            } );
             $log = array(
 
                 'user_id' => Auth::user()->id,
@@ -188,8 +211,12 @@ class AMCController extends Controller
                 'created_at' => date('Y-m-d H:i:s'),
                 'comment' => 'Signature Upload'
             );
+            
             Calog::insertGetId($log);
         }
+
+
+
 
         return redirect()->back()->with('success', 'Signature Uploaded succesfully');
     }

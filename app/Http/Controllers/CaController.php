@@ -313,7 +313,10 @@ class CaController extends Controller
             $result['application_id']  = Str::random(211);
             unset($result['id']);
             unset($result['old_application_id']);
+            $result['created_at'] = date('Y-m-d H:i:s');
+            $result['updated_at'] = date('Y-m-d H:i:s');
             CAApply::insert($result);
+            DB::table('temp_causer')->where("user_temp_id", "=", $id)->delete();
             Auth::loginUsingId($user_id);
 
          

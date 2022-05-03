@@ -438,9 +438,12 @@ unset($result['old_application_id']);
             $result['is_reg_pay'] = 1;
             $result['application_id']  = Str::random(211);
             unset($result['id']);
+
+            $result['created_at'] = date('Y-m-d H:i:s');
+            $result['updated_at'] = date('Y-m-d H:i:s');
             TraderApply::insert($result);
             Auth::loginUsingId($user_id);
-
+            DB::table('temp_traderuser')->where("user_temp_id", "=", $id)->delete();
          
 
 

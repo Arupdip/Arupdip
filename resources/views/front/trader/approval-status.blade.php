@@ -257,7 +257,7 @@
                                 <li  class="approved">Final Payment <a href="" class="badge badge-success">Success</a></li>
                                 @endif
                                 <li @if($row->is_sign_upload == 1) class="approved" @endif >AMC Capture Digital Signature</li>
-                                <li>Trader License Generated</li>
+                                <li @if($row->is_pdf_generate == 1) class="approved" @endif >Trader License Generated</li>
                             </ul>
                         </div>
                     </div>

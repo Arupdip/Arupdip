@@ -46,7 +46,10 @@ Process
                                     @if($row->is_sign_upload == 1 && $row->expiry_date <= date('Y-m-d') && $row->is_renew_apply == 0)
                                    <a href="{{url('/')}}/ca/renew/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details">Renew</a> 
                                    @endif
-
+                                   @if($row->is_pdf_generate == 1) 
+                                   <a href="{{url('/')}}/pdfdownload/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-download"></i></a> 
+                                   
+                                   @endif
                                   </td>
                                 </tr>
                                

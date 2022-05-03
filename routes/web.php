@@ -68,6 +68,7 @@ Route::get('ca-regpay-success/{id}', [CaController::class, 'caRegPaySuccess']);
 /
 */
 
+Route::get('pdfdownload/{id}', [HomeController::class, 'pdfdownload']);
 
 Route::get('trader-register', [TraderController::class, 'traderregister']);
 Route::post('save-trader-details', [TraderController::class, 'saveTraderDetails']);
