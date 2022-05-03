@@ -154,9 +154,7 @@
                         <div class="status-sec">
                             <h5>Approval Status</h5>
 
-                            {{-- @php
-dd($row->status);
-                            @endphp --}}
+                           
                             <ul>
                                 <ul>
                                     <li @if($row->is_submit == 1) class="approved" @endif>Details Submitted</li>
