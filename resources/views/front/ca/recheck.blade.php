@@ -37,7 +37,7 @@ else {
         </div>
         <div class="card-body pt-0">
             <div class="p-2">
-                <form name="" class="clearfix" id="trader-register-form" enctype="multipart/form-data" method="post" action="{{url('trader/reset-trader-details')}}" novalidate="novalidate">
+				<form name="" class="clearfix" id="ca-register-form" enctype="multipart/form-data" method="post" action="{{url('trader/reset-trader-details')}}" novalidate="novalidate">
                     @csrf
                     <div class="form-section">
                         <h6>CA Details</h6>
@@ -179,22 +179,144 @@ else {
     </div>
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"> </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"> </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"> </script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <script>
 $( document ).ready(function() {
     $('.pdivrm').each(function(i, obj) {
-    $(this).parent("div").remove();
-});
+	    $(this).parent("div").remove();
+	});
+	
+	$('input[name="dob"]').daterangepicker({
+		singleDatePicker: true,
+		showDropdowns: true,
+		startDate: new Date(moment().subtract(20, 'years')),
+		maxDate: new Date(moment().subtract(20, 'years')),
+		autoUpdateInput: false,
+		locale: {
+			cancelLabel: 'Clear'
+		}
+	});
+
+	$('input[name="dob"]').on('apply.daterangepicker', function(ev, picker) {
+		$(this).val(picker.startDate.format('DD/MM/YYYY'));
+	});
+
+	$('input[name="dob"]').on('cancel.daterangepicker', function(ev, picker) {
+		$(this).val('');
+	});
+	
+	var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+	$.validator.addMethod("pan_no", function(value, element) {
+		return this.optional( element ) || regpan.test( $('input[name="pan_no"]').val() );
+	}, "Please enter valid 10 digit PAN number");
 });
 
 
+	$("#ca-register-form").validate({
+		rules: {
+			isfamilymemberholdca: "required",
+			familymemberholdcafile: "required",
+			isotherfirm: "required",
+			upladedotherfirmfile: "required",
+
+			aadhar_file: "required",
+
+			pan_file: "required",
+			aadhar_no:  {
+				required : true,
+				number: true,
+				maxlength: 12,
+				minlength : 12,
+			},
+			name: "required",
+			age: {
+				required : true,
+				number: true
+			},
+			fathersname: "required",
+			dob: "required",
+			is_minor: "required",
+			address: "required",
+			mobile: "required",
+			pan_no:{
+				required : true,
+			},
+			email: {
+				required : true,
+				email : true
+			},
+			marketname: "required",
+			state_id: "required",
+			district_id: "required",
+			gstin:  {
+				required : true,
+				maxlength: 15,
+				minlength : 15,
+			},
+			liscencetype_id: "required",
+			amc_id: "required",
+			power_attorney: "required",
+
+		},
+		messages : {
+			gstin :{
+				required : "Please enter your GST number",
+				maxlength: "Please enter valid GST number",
+				minlength : "Please enter valid GST number",
+			} ,
+			aadhar_no :{
+				required : "Please enter your aadhaar number",
+				maxlength: "Please enter valid aadhaar number",
+				minlength : "Please enter valid aadhaar number",
+			} ,
+			email :{
+				required : "Please enter your email",
+				email : "Please provide valid email address"
+			},
+			pan_no:{
+				required : "Please enter your PAN number",
+			}
+
+		},
+		submitHandler : function(form) {
+			$(".errorstatus").hide();
+			$(".errorstatus").html("");
+
+			var formdata = new FormData(form);
+			$.ajax({
+				type: "POST",
+				url: "{{url('ca/reset-ca-details')}}",
+				data: formdata, // serializes the form's elements.
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data) {
+					if (data.success == true) {
+						window.location.href = "{{url('/')}}/ca/approval-status/{{$id}}";
+					} else {
+						$(".errorstatus").show();
+						$(".errorstatus").html(data.message);
+					}
+				}
+			});			
+		}
+
+	});
+
+/*
 $("#trader-register-form").submit(function(e) {
 
 e.preventDefault(); // avoid to execute the actual submit of the form.
 
 
 
-var formdata = new FormData(this);
-$.ajax({
+				var formdata = new FormData(this);
+				$.ajax({
 					type: "POST",
 					url: "{{url('ca/reset-ca-details')}}",
 					data: formdata, // serializes the form's elements.
@@ -211,6 +333,6 @@ $.ajax({
 					}
 				});
 
-});
+});*/
 </script>
 @endsection

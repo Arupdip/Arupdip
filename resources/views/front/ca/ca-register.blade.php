@@ -73,10 +73,11 @@
                                     <label>Do you have a trader license<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
-                                            <input type="radio" name="traderlicense" class="" onchange="priGroup(this)" value="1" ><i></i> Yes
+											<input type="radio" name="traderlicense" class="commodity_wether_cls" onchange="priGroup(this)" value="1" >
+											<i></i> Yes
                                         </label>
                                         <label class="pri-radio ml-4">
-                                            <input type="radio"  name="traderlicense" class="" onchange="priGroup(this)" checked value="0" ><i></i> No
+                                            <input type="radio"  name="traderlicense" class="commodity_wether_cls" onchange="priGroup(this)"  value="0" ><i></i> No
                                         </label>
                                     </div>
                                     <div class="pri-collapsed">
@@ -259,7 +260,7 @@
 
 		function redioGroup()
 		{
-			if ($('input[name="isfamilymemberholdca"]:checked').val() == 1 && $('input[name="isotherfirm"]:checked').val() == 1) {
+			if ($('input[name="isfamilymemberholdca"]:checked').val() == 1 && $('input[name="isotherfirm"]:checked').val() == 1 && $('input[name="traderlicense"]:checked').val() == 1) {
 				$('#ca-register-form input[type=text]').attr("disabled",false);
 				$('#ca-register-form textarea').attr('disabled', false);
 				$('#ca-register-form select').attr('disabled', false);
@@ -277,9 +278,8 @@
 		$('input[name="dob"]').daterangepicker({
 			singleDatePicker: true,
 			showDropdowns: true,
-			minYear: 1901,
-			maxDate: new Date(),
-			maxYear: parseInt(moment().format('YYYY'),10),
+			startDate: new Date(moment().subtract(20, 'years')),
+			maxDate: new Date(moment().subtract(20, 'years')),
 			autoUpdateInput: false,
 			locale: {
 				cancelLabel: 'Clear'
@@ -293,6 +293,7 @@
 		$('input[name="dob"]').on('cancel.daterangepicker', function(ev, picker) {
 			$(this).val('');
 		});
+		
 
 		$('#state-dd').on('change', function () {
 			var idState = this.value;

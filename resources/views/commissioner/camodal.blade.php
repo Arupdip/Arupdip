@@ -124,7 +124,8 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>Aadhar File Upload</dt>
-                    <a href="{{url('/')}}/public/uploads/{{$trader->aadhar_file}}" class="priya-download" download="download"></a>
+					<a href="{{url('/')}}/public/uploads/{{$trader->aadhar_file}}" class="priya-download" download="aadhaar"></a>
+					<a href="{{url('/')}}/public/uploads/{{$trader->aadhar_file}}" class="priya-eye" target="_blank"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />
@@ -149,7 +150,8 @@ else{
             <div class="col-md-3">
                 <dl>
                     <dt>PAN File Upload</dt>
-                    <a href="{{url('/')}}/public/uploads/{{$trader->pan_file}}" class="priya-download" download="download"></a>
+                    <a href="{{url('/')}}/public/uploads/{{$trader->pan_file}}" class="priya-download" download="Pan"></a>
+                    <a href="{{url('/')}}/public/uploads/{{$trader->pan_file}}" class="priya-eye" target="_blank"></a>
                     <label class="give-comply">
                         <i class="priya-mail-reply btn btn-warning btn-sm"></i>
                         <input type="radio" />

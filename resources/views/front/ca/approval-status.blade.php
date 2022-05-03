@@ -15,8 +15,8 @@
         <div class="card-body pt-0">
             <div class="p-2">
                 <ul id="progressbar">
-                    <li class="priya-cubes">Collect Trader Details</li>
-                    <li class="priya-hourglass-2">Process Payment</li>
+					<li class="active priya-cubes">Collect Trader Details</li>
+					<li class="active priya-hourglass-2">Process Payment</li>
                     <li class="active priya-file-text-o">Department Approval</li>
                     <li class="priya-bell-o">Notify Trader</li>
                     <li class="priya-check">Resolve</li>
@@ -166,7 +166,7 @@ dd($row->status);
                                     <li @if($row->status  == 9) class="approved" @endif>Commissioner Approval</li>
                              
                                 @if($row->is_final_pay == 0)
-                                <li><a href="#">Final Payment</a>@if($row->is_commisioner_approval == 1) <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a> @endif</li>
+                                <li>Final Payment @if($row->is_commisioner_approval == 1) <a href="{{url('/')}}/ca/final-payment/{{$row->application_id}}" class="badge badge-warning">Pay Now</a> @endif</li>
                                 @endif
                                 @if($row->is_final_pay == 1)
                                 <li  class="approved">Final Payment <a href="" class="badge badge-success">Success</a></li>
