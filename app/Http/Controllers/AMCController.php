@@ -72,10 +72,15 @@ class AMCController extends Controller
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
-
+            $input['liscence_no'] = rand(10000000000,99999999999);
+            $input['issue_date'] = date('Y-m-d');
             $data = TraderApply::where("id", "=", $request->id)->update($input);
 
             $body =  TraderApply::where("id", "=", $request->id)->first();
+
+            $pdf = PDF::loadview('email.pdf', compact('body'));
+
+            //   $body->email = "ydvipin99@gmail"
             Mail::send('email.license', ['body' => $body], function($m) use ($body) {
 
                 $m->to($body->email,$body->name)->subject('License Generate');
@@ -194,7 +199,8 @@ class AMCController extends Controller
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
-
+            $input['liscence_no'] = rand(10000000000,99999999999);
+            $input['issue_date'] = date('Y-m-d');
             $data = CAApply::where("id", "=", $request->id)->update($input);
            $body =  CAApply::where("id", "=", $request->id)->first();
             Mail::send('email.license', ['body' => $body], function($m) use ($body) {
