@@ -47,7 +47,7 @@ Process
                                    <a href="{{url('/')}}/ca/renew/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details">Renew</a> 
                                    @endif
                                    @if($row->is_pdf_generate == 1) 
-                                   <a href="{{url('/')}}/pdfdownload/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-download"></i></a> 
+                                   <a href="{{url('/')}}/capdfdownload/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-download"></i></a> 
                                    
                                    @endif
                                   </td>

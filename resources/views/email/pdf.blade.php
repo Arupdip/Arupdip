@@ -6,7 +6,7 @@
 <body style="padding: 0; margin: 0;">
 	<div style="padding: 15px; font-family: 'Arial'; font-size: 14px; line-height: 22px;">
 		<div style="text-align: center;">
-			<img src="logo.jpg" alt="">
+			<img src="{{asset('images/trader-logo.jpg')}}" alt="">
 			<h3 style="color: #27ae60; margin-top: 0;">Agricultural Marketing Department<br/>Government of Andhra Pradesh</h3>
 			<h4>FORM 8-A</h4>
 			<h4>(See Rule 48)</h4>
@@ -16,7 +16,7 @@
 		<table width="100%">
 			<tr>
 				<td width="25%">
-					<img src="Shaik-Rafi.jpg" alt="" height="150px">
+					<img src="{{asset('public/uploads/'.$body->image)}}" alt="" height="150px">
 				</td>
 				<td>
 					<table width="100%" cellpadding="0" cellspacing="0" border="1">
@@ -43,11 +43,14 @@
 					</table>
 				</td>
 				<td width="25%" align="right">
-					<img src="qr-code.jpg" alt="" height="150px">
+                    
+
+					<img src="data:image/png;base64,{!! base64_encode(QrCode::size(100)->generate("Trader Name:-".$body->name .",Liscence No:-". $body->liscence_no .", Expirydate :-" .$body->expiry_date))!!}" alt="" height="150px">
+					{{-- <img src="qr-code.jpg" alt="" height="150px"> --}}
 				</td>
 			</tr>
 		</table>
-		<p>Single State wide Trader License is hereby granted to <strong> {{$body->firmaddress}} {{$body->firmpincode}} {{$body->district->name}}R.N. ENTERPRISES, WARD NO:41, ROHITH COTTON GINNING MILL, GANGAMMA ESTATE, ETUKUR ROAD, Guntur-522003 , 8919038568</strong> herein after referred to as the license on payment of fee of Rs 5000/- for operating as trader for purchase/sale of notified agricultural produce, livestock and products of livestock in the entire state of the Andhra Pradesh. This License is valid upto <strong>{{$body->expiry_date}}</strong>, subject to provisions of the Andhra Pradesh (Agricultural Produce & Live Stock) Markets Act, 1966 and Rules 1969, on the following conditions namely:-</p>
+		<p>Single State wide Trader License is hereby granted to <strong>{{$body->name}} S/o {{$body->fathersname}} ,{{$body->address}}, {{$body->district->name}} ,{{$body->state->name}}-{{$body->pincode}} , {{$body->mobile}}</strong> herein after referred to as the license on payment of fee of Rs 5000/- for operating as trader for purchase/sale of notified agricultural produce, livestock and products of livestock in the entire state of the Andhra Pradesh. This License is valid upto <strong>{{$body->expiry_date}}</strong>, subject to provisions of the Andhra Pradesh (Agricultural Produce & Live Stock) Markets Act, 1966 and Rules 1969, on the following conditions namely:-</p>
 		<p>1. This license shall abide by the provisions of the Andhra Pradesh Markets Act, 1966 and the Rules 1966 made thereunder.</p>
 		<p>2. This license shall not be transferrable, in case of any change in the composition of the partners or directors of the firm, the same shall be notified/updated to the Director of Marketing within 15 days of such change coming into effect.</p>
 		<p>3. This license may be suspended or cancelled for violation of provisions of the Andhra Pradesh (Agricultural Products & Live Stock) Markets Act, 1996 and the rules made thereunder and conditions of this license.</p>
@@ -78,7 +81,3 @@
 	</div>
 </body>
 </html>
-{{-- @php
-
-die();
-@endphp --}}
