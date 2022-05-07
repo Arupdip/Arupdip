@@ -202,11 +202,11 @@ class AMCController extends Controller
             $input['liscence_no'] = rand(10000000000,99999999999);
             $input['issue_date'] = date('Y-m-d');
             $data = CAApply::where("id", "=", $request->id)->update($input);
-           $body =  CAApply::where("id", "=", $request->id)->first();
+            $body =  CAApply::where("id", "=", $request->id)->first();
             Mail::send('email.license', ['body' => $body], function($m) use ($body) {
 
-                $m->to($body->email,$body->name)->subject('License Generate');
-                 $pdf = PDF::loadview('email.pdf', compact('body'));
+                 $m->to($body->email,$body->name)->subject('License Generate');
+                 $pdf = PDF::loadview('email.capdf', compact('body'));
                  $m->attachData($pdf->output(), 'license,pdf');
 
             } );
@@ -220,8 +220,6 @@ class AMCController extends Controller
             
             Calog::insertGetId($log);
         }
-
-
 
 
         return redirect()->back()->with('success', 'Signature Uploaded succesfully');
