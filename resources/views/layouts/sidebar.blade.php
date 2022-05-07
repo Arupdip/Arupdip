@@ -11,13 +11,15 @@
                          <li><a href="{{url('/')}}/admin/licensetype"> List</a> </li>
                     </ul>
                 </li>-->
-                <li class="drop-menu">
+              <!--  <li class="drop-menu">
                     <span class="drop-menu-head" onclick="toggleSubmenu(this)"><i class="priya-plus"></i> Department User <i class="priya-angle-right drop-icon"></i></span>
                     <ul class="submenu collapse">
                         <li><a href="{{url('/')}}/admin/designation/create"> Create</a> </li>
                          <li><a href="{{url('/')}}/admin/designation"> List</a> </li>
                     </ul>
-                </li>
+                </li>-->
+				<li><a href="{{url('/')}}/admin/rolls"><i class="priya-arrow-right"></i> Manage Employee Role</a></li>
+                
                 <li class="drop-menu">
                     <span class="drop-menu-head" onclick="toggleSubmenu(this)"><i class="priya-plus"></i> AMC Management <i class="priya-angle-right drop-icon"></i></span>
                     <ul class="submenu collapse">
