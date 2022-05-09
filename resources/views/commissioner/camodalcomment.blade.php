@@ -53,6 +53,143 @@ if(isset($array[$name])){
                 </dl>
             </div>
 
+            {{-- comment --}}
+
+            <div class="col-md-6">
+                <dl>
+                    <dt>Taluk</dt>
+                    <dd>{{$trader->taluk}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('taluk', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Town</dt>
+                    <dd>{{$trader->town}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('town', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Ward Block no</dt>
+                    <dd>{{$trader->wardblockno}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('wardblockno', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Revenue or Town suvey no</dt>
+                    <dd>{{$trader->toensurveyno}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('toensurveyno', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Name of Block</dt>
+                    <dd>{{$trader->nameofblock}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('nameofblock', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Plot No</dt>
+                    <dd>{{$trader->plotno}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('plotno', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Description of premises</dt>
+                    <dd>{{$trader->descriptionofpremises}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('descriptionofpremises', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Boundary North</dt>
+                    <dd>{{$trader->boundarynorth}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('boundarynorth', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Boundary East</dt>
+                    <dd>{{$trader->boundaryeast}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('boundaryeast', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Boundary South</dt>
+                    <dd>{{$trader->boundarysouth}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('boundarysouth', $log); ?>
+                        </label>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dt>Boundary West</dt>
+                    <dd>{{$trader->boundarywest}}</dd>
+                        <label class="give-comply">
+                            
+                            <input type="radio" />
+                           
+                      <?php echo getfield('boundarywest', $log); ?>
+                        </label>
+                </dl>
+            </div>
+
+
+            {{-- comment --}}
             <div class="col-md-3">
                 <dl>
                     <dt>Date of Birth</dt>

@@ -232,4 +232,49 @@ class AMCController extends Controller
         $data = CAApply::where("is_final_pay", "=", 1)->where("is_sign_upload", "=", 1)->orderBy('id', 'DESC')->get();
         return view('amc.casignatureuploadsuccess', compact('data'));
     }
+
+
+     public function liscenceexpirynotification(){
+      
+        $liscenceexpiry5days =  date('Y-m-d', strtotime('+ 5 days'));
+        $ca5days = CAApply::where('expiry_date','=',$liscenceexpiry5days)->get();
+        $trader5days = TraderApply::where('expiry_date','=',$liscenceexpiry5days)->get();
+        $notification5days  = $trader5days->merge($ca5days);
+
+        foreach($notification5days as $row){
+
+
+
+        }
+
+
+        $liscenceexpiry10days =  date('Y-m-d', strtotime('+ 10 days'));
+        $ca10days = CAApply::where('expiry_date','=',$liscenceexpiry10days)->get();
+        $trader10days = TraderApply::where('expiry_date','=',$liscenceexpiry10days)->get();
+        $notification10days  = $trader10days->merge($ca10days);
+
+        foreach($notification10days as $row){
+
+
+
+        }
+
+
+
+        $liscenceexpiry30days =  date('Y-m-d', strtotime('+ 30 days'));
+        $ca30days = CAApply::where('expiry_date','=',$liscenceexpiry30days)->get();
+        $trader30days = TraderApply::where('expiry_date','=',$liscenceexpiry30days)->get();
+        $notification30days  = $trader30days->merge($ca30days);
+
+        foreach($notification30days as $row){
+
+
+
+        }
+
+
+
+     }
+
+
 }

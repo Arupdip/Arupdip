@@ -61,6 +61,97 @@ else {
                                 </div>
                                 <?php echo getfield('address', $log); ?>
                             </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Taluk<span class="text-danger">*</span></label>
+                                    <input type="text" name="taluk" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('taluk', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Town<span class="text-danger">*</span></label>
+                                    <input type="text" name="town" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('town', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Ward Block no<span class="text-danger">*</span></label>
+                                    <input type="text" name="wardblockno" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('wardblockno', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Revenue or Town suvey no<span class="text-danger">*</span></label>
+                                    <input type="text" name="toensurveyno" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('toensurveyno', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name of Block<span class="text-danger">*</span></label>
+                                    <input type="text" name="nameofblock" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('nameofblock', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Plot No<span class="text-danger">*</span></label>
+                                    <input type="text" name="plotno" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('plotno', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Description of premises<span class="text-danger">*</span></label>
+                                    <input type="text" name="descriptionofpremises" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('descriptionofpremises', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary North<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundarynorth" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('boundarynorth', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary East<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundaryeast" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('boundaryeast', $log); ?>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary South<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundarysouth" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('boundarysouth', $log); ?>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary West<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundarywest" class="form-control pri-form f1" />
+                                 
+                                </div>
+                                <?php echo getfield('boundarywest', $log); ?>
+                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
@@ -242,6 +333,17 @@ $( document ).ready(function() {
 			dob: "required",
 			is_minor: "required",
 			address: "required",
+            taluk: "required",
+            town: "required",
+            wardblockno: "required",
+            toensurveyno: "required",
+            nameofblock: "required",
+            plotno: "required",
+            descriptionofpremises: "required",
+            boundarynorth: "required",
+            boundaryeast: "required",
+            boundarysouth: "required",
+            boundarywest: "required",
 			mobile: "required",
 			pan_no:{
 				required : true,

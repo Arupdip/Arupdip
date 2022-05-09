@@ -109,6 +109,72 @@
                         </div>
                         <div class="col-md-4">
                             <dl>
+                                <dt>Name of Taluk</dt>
+                                <dd>{{$cadata->taluk}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Name of Town</dt>
+                                <dd>{{$cadata->town}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Ward Block no</dt>
+                                <dd>{{$cadata->wardblockno}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Revenue or town survey no</dt>
+                                <dd>{{$cadata->toensurveyno}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Name of the Block</dt>
+                                <dd>{{$cadata->nameofblock}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Plot No</dt>
+                                <dd>{{$cadata->plotno}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Description of Primises</dt>
+                                <dd>{{$cadata->descriptionofpremises}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Boundary North</dt>
+                                <dd>{{$cadata->boundarynorth}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Boundary East</dt>
+                                <dd>{{$cadata->boundaryeast}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Boundary South</dt>
+                                <dd>{{$cadata->boundarysouth}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
+                                <dt>Boundary West</dt>
+                                <dd>{{$cadata->boundarywest}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl>
                                 <dt>AMC Name</dt>
                                 <dd>{{$cadata->amc->name}}</dd>
                             </dl>
@@ -296,7 +362,7 @@ function editcomply(id)
     
     $.ajax({
         type: "get",
-        url: "{{url('/')}}/editcacomply/"+id,
+        url: "{{url('/')}}/viewcacomply/"+id,
         success: function(data)
         {
             $("#view-trader-details").html(data);

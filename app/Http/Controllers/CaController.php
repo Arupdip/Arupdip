@@ -171,7 +171,7 @@ class CaController extends Controller
     {
 
         $returnArr = array("success" => false, "message" => "", "id" => "");
-        $oldTrader = CAApply::where('application_id','=', $request->old_application_id)->first();
+        $oldTrader = CAApply::where('application_id', '=', $request->old_application_id)->first();
         $input = $request->all();
         $randomid = Str::random(211);
         $input['user_temp_id'] = $randomid;
@@ -180,56 +180,45 @@ class CaController extends Controller
         if ($file = $request->file('familymemberholdcafile')) {
             $input['familymemberholdcafile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['familymemberholdcafile']);
-        }
-        else{
+        } else {
             $input['familymemberholdcafile']  = $oldTrader->familymemberholdcafile;
         }
 
         if ($file = $request->file('traderlicensefile')) {
             $input['traderlicensefile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['traderlicensefile']);
-        }
-        else{
+        } else {
             $input['traderlicensefile']  = $oldTrader->traderlicensefile;
         }
 
         if ($file = $request->file('upladedotherfirmfile')) {
             $input['upladedotherfirmfile'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['upladedotherfirmfile']);
-        }
-        else{
+        } else {
             $input['upladedotherfirmfile']  = $oldTrader->upladedotherfirmfile;
         }
         if ($file = $request->file('aadhar_file')) {
             $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['aadhar_file']);
-        }
-        else{
+        } else {
             $input['aadhar_file']  = $oldTrader->aadhar_file;
         }
 
 
         if ($file = $request->file('pan_file')) {
+
             $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['pan_file']);
-        }
-        else{
+        } else {
             $input['pan_file']  = $oldTrader->pan_file;
         }
 
 
-
-
         DB::table('temp_causer')->insertGetId($input);
-
         $returnArr['success'] = true;
         $returnArr['message'] = $randomid;
         return $returnArr;
     }
-
-
-
-
 
 
     public function capayment($id)
@@ -239,20 +228,22 @@ class CaController extends Controller
     }
 
 
-    
+
 
     public function caRegPaySuccessrenew($id)
     {
+
         $tempData =  DB::table('temp_causer')->where("user_temp_id", "=", $id)->first();
 
         if (isset($tempData)) {
 
-              $result = [];
+            $result = [];
             foreach ($tempData as $key => $value) {
                 $result[$key] =  $value;
             }
-            CAApply::where('application_id','=',$result['old_application_id'])->update(['is_renew_apply'=>1]);
-         
+
+            CAApply::where('application_id', '=', $result['old_application_id'])->update(['is_renew_apply' => 1]);
+
             unset($result['old_application_id']);
             $result['user_id'] = Auth::user()->id;
             $result['is_submit'] = 1;
@@ -286,16 +277,13 @@ class CaController extends Controller
                     'password' => Hash::make($password),
                     'created_at' => date('Y-m-d H:i:s')
                 );
-                $data=array('password'=>$password , 'username' =>$tempData->email );
-                Mail::send('email.index', $data, function($message) use ($data) {
-                $message->to($data['username'])
-                ->subject('CA Registration Successfully');
+                $data = array('password' => $password, 'username' => $tempData->email);
+                Mail::send('email.index', $data, function ($message) use ($data) {
+                    $message->to($data['username'])
+                        ->subject('CA Registration Successfully');
                 });
 
                 $user_id = User::insertGetId($userArr);
-
-           
-
             } else {
                 $user = User::where("email", "=", $tempData->email)->first();
                 $user_id = $user->id;
@@ -319,9 +307,6 @@ class CaController extends Controller
             DB::table('temp_causer')->where("user_temp_id", "=", $id)->delete();
             Auth::loginUsingId($user_id);
 
-         
-
-          
             return redirect("/ca/approval-status/" . $result['application_id']);
         }
     }
@@ -348,13 +333,13 @@ class CaController extends Controller
         if ($data->count() > 0) {
             CAApply::where("application_id", '=', $id)->update(['is_final_pay' => 1]);
 
-            return redirect()->to('ca/approval-status/'.$id);
+            return redirect()->to('ca/approval-status/' . $id);
         }
     }
 
 
 
-    
+
     public function resetCaDetails(Request $request)
     {
         // dd($request->all());
@@ -364,53 +349,53 @@ class CaController extends Controller
         $returnArr = array("success" => false, "message" => "");
 
 
-        $checkaddhar = CAApply::where("aadhar_no", "=", $request->aadhar_no)->where('application_id','!=',$request->id)->count();
+        $checkaddhar = CAApply::where("aadhar_no", "=", $request->aadhar_no)->where('application_id', '!=', $request->id)->count();
         if ($checkaddhar != 0) {
             $returnArr['message'] = "Aadhar card is already existed !!";
             return $returnArr;
         }
 
-   
-        $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->where('application_id','!=',$request->id)->count();
+
+        $checkpan = CAApply::where("pan_no", "=", $request->pan_no)->where('application_id', '!=', $request->id)->count();
         if ($checkpan != 0) {
             $returnArr['message'] = "Pan No is already existed !!";
             return $returnArr;
         }
 
-    
 
-        $checkgistin = CAApply::where("gstin", "=", $request->gstin)->where('application_id','!=',$request->id)->count();
+
+        $checkgistin = CAApply::where("gstin", "=", $request->gstin)->where('application_id', '!=', $request->id)->count();
         if ($checkgistin != 0) {
             $returnArr['message'] = "GSTIN No is already existed !!";
             return $returnArr;
         }
         $input = $request->all();
-       
-       
+
+
         // $input['updated_at'] = date('Y-m-d H:i:s');
         unset($input['_token']);
         unset($input['id']);
         if ($file = $request->file('aadhar_file')) {
             $input['aadhar_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['aadhar_file']);
-        }else{
+        } else {
             unset($input['aadhar_file']);
         }
 
         if ($file = $request->file('pan_file')) {
             $input['pan_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['pan_file']);
-        }else{
+        } else {
             unset($input['pan_file']);
         }
 
-      
+
 
         $input['status'] = 3;
-       
 
-        CAApply::where('application_id','=',$request->id)->update($input);
-      $tt =   CAApply::where('application_id','=',$request->id)->first();
+
+        CAApply::where('application_id', '=', $request->id)->update($input);
+        $tt =   CAApply::where('application_id', '=', $request->id)->first();
         $input1['created_at'] = date('Y-m-d H:i:s');
         $input1['application_id'] = $tt->id;
         $input1['type'] = 4;
@@ -418,7 +403,7 @@ class CaController extends Controller
         $input1['user_id'] = Auth::user()->id;
         $approvetrader = Calog::insertGetId($input1);
         $returnArr['success'] = true;
-        $returnArr['message'] ='';
+        $returnArr['message'] = '';
         return $returnArr;
     }
 
@@ -428,15 +413,15 @@ class CaController extends Controller
     {
 
         $data = CAApply::where("application_id", '=', $id)->get();
-if($data[0]->status ==2)
-     $traderold = Calog::where("application_id",'=',$data[0]->id)->where("type",'=',3)->orderBy('id', 'desc')->first();
-else
-return redirect()->back();
+        if ($data[0]->status == 2)
+            $traderold = Calog::where("application_id", '=', $data[0]->id)->where("type", '=', 3)->orderBy('id', 'desc')->first();
+        else
+            return redirect()->back();
 
-$states = State::all();
+        $states = State::all();
 
-$amc = AMC::all();
-return view('front/ca/recheck', compact('states' ,  'amc' , 'data', 'traderold','id'));
+        $amc = AMC::all();
+        return view('front/ca/recheck', compact('states',  'amc', 'data', 'traderold', 'id'));
 
 
 
@@ -449,13 +434,11 @@ return view('front/ca/recheck', compact('states' ,  'amc' , 'data', 'traderold',
     public function renew($id)
     {
 
-  $Caapply = CAApply::where("application_id", '=', $id)->first();
-$states = State::all();
-$mandal = Mandal::all();
-$amc = AMC::all();
+        $Caapply = CAApply::where("application_id", '=', $id)->first();
+        $states = State::all();
+        $mandal = Mandal::all();
+        $amc = AMC::all();
 
-return view('front/ca/renew', compact('states' , 'mandal', 'amc' , 'Caapply','id'));
-
+        return view('front/ca/renew', compact('states', 'mandal', 'amc', 'Caapply', 'id'));
     }
-
 }

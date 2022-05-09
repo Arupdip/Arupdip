@@ -77,11 +77,11 @@
 		  </tr>
 		  <tr>
 		    <td align="center">1</td>
-		    <td align="center">Guntur</td>
-		    <td align="center">Guntur</td>
-		    <td align="center">--</td>
-		    <td align="center">--</td>
-		    <td align="center">A2</td>
+		    <td align="center">{{$body->taluk}}</td>
+		    <td align="center">{{$body->town}}</td>
+		    <td align="center">{{$body->wardblockno}}</td>
+		    <td align="center">{{$body->toensurveyno}}</td>
+		    <td align="center">{{$body->nameofblock}}</td>
 		  </tr>
 		  <tr>
 		    <td rowspan="2" align="center"><strong>Plot No</strong> </td>
@@ -103,12 +103,12 @@
 		    <td align="center"><strong>12</strong></td>
 		  </tr>
 		  <tr>
-		    <td align="center">A2/40</td>
-		    <td align="center">market Yard, Guntur </td>
-		    <td align="center">Panduranga Agencies </td>
-		    <td align="center">Road</td>
-		    <td align="center">Karpurapu Hanumaiah &amp; Co., </td>
-		    <td align="center">Road</td>
+		    <td align="center">{{$body->plotno}}</td>
+		    <td align="center">{{$body->descriptionofpremises}} </td>
+		    <td align="center">{{$body->boundarynorth}}</td>
+		    <td align="center">{{$body->boundaryeast}}</td>
+		    <td align="center">{{$body->boundarysouth}}</td>
+		    <td align="center">{{$body->boundarywest}}</td>
 		  </tr>
 		</table>
 		<table width="100%" cellpadding="5" cellspacing="0" border="1" style="margin-top: 20px;">

@@ -34,6 +34,30 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Do you have a trader license<span class="text-danger">*</span></label>
+                                    <div>
+                                        <label class="pri-radio">
+											<input type="radio" name="traderlicense" class="commodity_wether_cls" onchange="priGroup(this)" value="1" >
+											<i></i> Yes
+                                        </label>
+                                        <label class="pri-radio ml-4">
+                                            <input type="radio"  name="traderlicense" class="commodity_wether_cls" onchange="priGroup(this)"  value="0" ><i></i> No
+                                        </label>
+                                    </div>
+                                    <div class="pri-collapsed">
+                                        <label>Attach File<span class="text-danger">*</span></label>
+                                        <input type="file" name="traderlicensefile" class="form-control pri-form" />
+                                    </div>
+                                    {{-- <div class="pri-collapsed">
+                                        <label>Partener Details<span class="text-danger">*</span></label>
+                                        <input type="text" name="traderlicensefile" placeholder="Partener name" class="form-control pri-form" />
+                                        <input type="text" name="traderlicensefile" placeholder="Share" class="form-control pri-form"/>
+                                    </div> --}}
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Does any of your family members hold Commission Agent License<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
@@ -67,27 +91,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Do you have a trader license<span class="text-danger">*</span></label>
-                                    <div>
-                                        <label class="pri-radio">
-											<input type="radio" name="traderlicense" class="commodity_wether_cls" onchange="priGroup(this)" value="1" >
-											<i></i> Yes
-                                        </label>
-                                        <label class="pri-radio ml-4">
-                                            <input type="radio"  name="traderlicense" class="commodity_wether_cls" onchange="priGroup(this)"  value="0" ><i></i> No
-                                        </label>
-                                    </div>
-                                    <div class="pri-collapsed">
-                                        <label>Attach File<span class="text-danger">*</span></label>
-                                        <input type="file" name="traderlicensefile" class="form-control pri-form" />
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
 
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -145,6 +148,78 @@
                                     <textarea name="address"  class="form-control pri-form"></textarea>
                                 </div>
                             </div>
+                            {{-- new start --}}
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Taluk<span class="text-danger">*</span></label>
+                                    <input type="text"  name="taluk" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Town<span class="text-danger">*</span></label>
+                                    <input type="text"  name="town" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Ward Block no<span class="text-danger">*</span></label>
+                                    <input type="text"  name="wardblockno" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Revenue or Town suvey no<span class="text-danger">*</span></label>
+                                    <input type="text"  name="toensurveyno" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name of Block<span class="text-danger">*</span></label>
+                                    <input type="text"  name="nameofblock" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Plot No<span class="text-danger">*</span></label>
+                                    <input type="text"  name="plotno" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Description of premises<span class="text-danger">*</span></label>
+                                    <input type="text"  name="descriptionofpremises" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary North<span class="text-danger">*</span></label>
+                                    <input type="text"  name="boundarynorth" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary East<span class="text-danger">*</span></label>
+                                    <input type="text"  name="boundaryeast" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary South<span class="text-danger">*</span></label>
+                                    <input type="text"  name="boundarysouth" class="form-control pri-form" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary West<span class="text-danger">*</span></label>
+                                    <input type="text"  name="boundarywest" class="form-control pri-form" />
+                                </div>
+                            </div>
+
+                            {{-- new End --}}
+
+
+                            
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
@@ -349,6 +424,17 @@
 				dob: "required",
 				is_minor: "required",
 				address: "required",
+				taluk: "required",
+				town: "required",
+				wardblockno: "required",
+				toensurveyno: "required",
+				nameofblock: "required",
+				plotno: "required",
+				descriptionofpremises: "required",
+				boundarynorth: "required",
+				boundaryeast: "required",
+				boundarysouth: "required",
+				boundarywest: "required",
 				mobile: "required",
 				pan_no:{
 					required : true,

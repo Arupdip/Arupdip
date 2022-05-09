@@ -146,6 +146,72 @@
                                             <div class="dd">{{$row->power_attorney}}</div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Name of Taluk</div>
+                                            <div class="dd">{{$row->taluk}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Name of Town</div>
+                                            <div class="dd">{{$row->town}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Ward Block no</div>
+                                            <div class="dd">{{$row->wardblockno}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Revenue or town survey no</div>
+                                            <div class="dd">{{$row->toensurveyno}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Name of the Block</div>
+                                            <div class="dd">{{$row->nameofblock}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Plot No</div>
+                                            <div class="dd">{{$row->plotno}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Description of Primises</div>
+                                            <div class="dd">{{$row->descriptionofpremises}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Boundary North</div>
+                                            <div class="dd">{{$row->boundarynorth}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Boundary East</div>
+                                            <div class="dd">{{$row->boundaryeast}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Boundary South</div>
+                                            <div class="dd">{{$row->boundarysouth}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="dl">
+                                            <div class="dt">Boundary West</div>
+                                            <div class="dd">{{$row->boundarywest}}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
                         </form>

@@ -179,6 +179,11 @@ Route::group(['prefix' => 'amc', 'middleware' => 'amc'], function () {
 	Route::get('/ca-signature-upload', [FAMCController::class, 'casignatureupload']);
 	Route::post('/upload-ca-sign', [FAMCController::class, 'uploadcasign']);
 	Route::get('/ca-signature-upload-success', [FAMCController::class, 'casignatureuploadsuccess']);
+
+	//for eamil notification for liscence expire
+	Route::get('/liscenceexpirynotification', [FAMCController::class, 'liscenceexpirynotification']);
+
+
 });
 
 Route::group(['prefix' => 'ad', 'middleware' => 'ad'], function () {

@@ -117,6 +117,76 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Name of Taluk<span class="text-danger">*</span></label>
+                                    <input type="text" name="taluk"  value="{{$Caapply->taluk}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name of Town<span class="text-danger">*</span></label>
+                                    <input type="text" name="town"  value="{{$Caapply->town}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Ward Block no<span class="text-danger">*</span></label>
+                                    <input type="text" name="wardblockno"  value="{{$Caapply->wardblockno}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Revenue or town survey no<span class="text-danger">*</span></label>
+                                    <input type="text" name="toensurveyno"  value="{{$Caapply->toensurveyno}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name of the Block<span class="text-danger">*</span></label>
+                                    <input type="text" name="nameofblock"  value="{{$Caapply->nameofblock}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Plot No<span class="text-danger">*</span></label>
+                                    <input type="text" name="plotno"  value="{{$Caapply->plotno}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Description of Primises<span class="text-danger">*</span></label>
+                                    <input type="text" name="descriptionofpremises"  value="{{$Caapply->descriptionofpremises}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary North<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundarynorth"  value="{{$Caapply->boundarynorth}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary East<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundaryeast"  value="{{$Caapply->boundaryeast}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary South<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundarysouth"  value="{{$Caapply->boundarysouth}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Boundary West<span class="text-danger">*</span></label>
+                                    <input type="text" name="boundarywest"  value="{{$Caapply->boundarywest}}" class="form-control pri-form" maxlength="10" />
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Mobile Number<span class="text-danger">*</span></label>
                                     <input type="text" name="mobile"  value="{{$Caapply->mobile}}" class="form-control pri-form" maxlength="10" />
                                 </div>
@@ -308,6 +378,17 @@
 				dob: "required",
 				is_minor: "required",
 				address: "required",
+                taluk: "required",
+				town: "required",
+				wardblockno: "required",
+				toensurveyno: "required",
+				nameofblock: "required",
+				plotno: "required",
+				descriptionofpremises: "required",
+				boundarynorth: "required",
+				boundaryeast: "required",
+				boundarysouth: "required",
+				boundarywest: "required",
 				mobile: "required",
 				pan_no:{
 					required : true,
