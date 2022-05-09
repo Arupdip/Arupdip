@@ -66,7 +66,7 @@ Route::get('ca-regpay-success/{id}', [CaController::class, 'caRegPaySuccess']);
 / Web Routes for Trader with TraderController 
 /
 */
-
+Route::get('trader-payment/{id}', [TraderController::class, 'traderpayment']);
 Route::get('pdfdownload/{id}', [HomeController::class, 'pdfdownload']);
 Route::get('trader-register', [TraderController::class, 'traderregister']);
 Route::post('save-trader-details', [TraderController::class, 'saveTraderDetails']);
