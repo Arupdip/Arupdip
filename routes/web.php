@@ -16,6 +16,7 @@ use App\Http\Controllers\ADController;
 use App\Http\Controllers\CommissionerController;
 
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\RollsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,9 +59,7 @@ Route::any('logout', function () {
 Route::get('ca-register', [CaController::class, 'caRegister']);
 Route::post('save-ca-details', [CaController::class, 'saveCaDetails']);
 Route::post('fetch-districts', [CaController::class, 'fetchDistricts']);
-
 Route::get('ca-payment/{id}', [CaController::class, 'capayment']);
-
 Route::get('ca-regpay-success/{id}', [CaController::class, 'caRegPaySuccess']);
 
 /*
@@ -69,11 +68,8 @@ Route::get('ca-regpay-success/{id}', [CaController::class, 'caRegPaySuccess']);
 */
 
 Route::get('pdfdownload/{id}', [HomeController::class, 'pdfdownload']);
-Route::get('capdfdownload/{id}', [HomeController::class, 'capdfdownload']);
-
 Route::get('trader-register', [TraderController::class, 'traderregister']);
 Route::post('save-trader-details', [TraderController::class, 'saveTraderDetails']);
-Route::get('trader-payment/{id}', [TraderController::class, 'traderpayment']);
 Route::get('trader-regpay-success/{id}', [TraderController::class, 'traderRegPaySuccess']);
 //for final payment for trader
 
@@ -93,8 +89,8 @@ Route::get('admin/login', function () {
 Route::get('email-validation/{id?}', [UserController::class, 'emailValidation']);
 Route::get('phone-validation/{id?}', [UserController::class, 'phoneValidation']);
 Route::get('employee-id-validation/{id?}', [UserController::class, 'employeeIdValidation']);
-
 Route::post('admin/post-login', [AuthController::class, 'loginsubmit']);
+
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 	Route::get('/', [HomeController::class, 'dashboard']);
 	Route::resource('district', DistrictController::class);
@@ -104,6 +100,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 	Route::resource('licensetype', LicensetypeController::class);
 	Route::resource('usertype', UserTypeController::class);
 	Route::resource('user', UserController::class);
+	Route::resource('rolls', RollsController::class);
 });
 
 
@@ -120,8 +117,6 @@ Route::group(['prefix' => 'ca', 'middleware' => 'ca'], function () {
 
 	Route::get('/recheck/{app_id}', [CaController::class, 'recheck']);
 	Route::post('reset-ca-details', [CaController::class, 'resetCaDetails']);
-
-
 
 	Route::get('/renew/{app_id}', [CaController::class, 'renew']);
 	Route::post('renew-ca-details', [CaController::class, 'renewCaDetails']);
@@ -140,14 +135,12 @@ Route::group(['prefix' => 'trader', 'middleware' => 'trader'], function () {
 
 	Route::get('/recheck/{app_id}', [TraderController::class, 'recheck']);
 	Route::post('reset-trader-details', [TraderController::class, 'resetTraderDetails']);
-
-
 	
 	Route::get('/renew/{app_id}', [TraderController::class, 'renew']);
 
 	Route::post('renew-trader-details', [TraderController::class, 'renewTraderDetails']);
-Route::get('trader-payment-renew/{id}', [TraderController::class, 'traderpaymentrenew']);
-Route::get('trader-regpay-success-renew/{id}', [TraderController::class, 'traderRegPaySuccessrenew']);
+	Route::get('trader-payment-renew/{id}', [TraderController::class, 'traderpaymentrenew']);
+	Route::get('trader-regpay-success-renew/{id}', [TraderController::class, 'traderRegPaySuccessrenew']);
 
 
 });
@@ -222,6 +215,8 @@ Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], funct
 	Route::get('/caviewdetails/{id}', [CommissionerController::class, 'caViewDetails']);
 	Route::post('/caapprovesubmit', [CommissionerController::class, 'caApproveSubmit']);
 });
+
+
 Route::get('/edittradercomply/{id}', [CommissionerController::class, 'edittradercomply']);
 
 Route::post('/submitcomply', [CommissionerController::class, 'submitcomply']);

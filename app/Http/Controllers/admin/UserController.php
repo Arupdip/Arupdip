@@ -19,7 +19,7 @@ class UserController extends Controller
 */
 	public function index()
 	{
-		$user = User::where('user_type',[3,4,5])->orWhere('user_type',null)->orderBy('name','ASC')->get();
+		$user = User::where('user_type',3)->orWhere('user_type',4)->orWhere('user_type',5)->orWhere('user_type',null)->orderBy('name','ASC')->get();
 		
 		return view('admin.user.index',compact('user'));
 	}

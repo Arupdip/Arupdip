@@ -16,7 +16,7 @@ class AMCController extends Controller
      */
     public function index()
     {
-    	$amc = AMC::get();
+    	$amc = AMC::where('status',1)->get();
         return view('admin.amc.index', compact('amc'));
     }
 
@@ -43,7 +43,9 @@ class AMCController extends Controller
         unset($input['_token']);
         $input['created_at'] = date('Y-m-d H:i:s');
         $input['updated_at'] = date('Y-m-d H:i:s');
+		$input['status'] = 1;
         AMC::insert($input);
+        
         return redirect('/admin/amc')->with("success","AMC is successfully created !!");
     }
 
@@ -84,6 +86,7 @@ class AMCController extends Controller
         unset($input['_token']);
         unset($input['_method']);
         $input['updated_at'] = date('Y-m-d H:i:s');
+        
         AMC::where('id','=',$id)->update($input);
         return redirect('/admin/amc')->with("success","AMC is successfully updated !!");
     }
@@ -96,7 +99,7 @@ class AMCController extends Controller
      */
     public function destroy($id)
     {
-         AMC::where('id','=',$id)->delete();
+         AMC::where('id','=',$id)->update(['status'=>2]);
          return true;
     }
 }
