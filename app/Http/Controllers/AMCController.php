@@ -68,7 +68,7 @@ class AMCController extends Controller
         $input['expiry_date'] = $expiryyear;
 
         $input['is_sign_upload'] = 1;
-        $input['is_pdf_generate'] = 1;
+        // $input['is_pdf_generate'] = 1;
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
@@ -78,16 +78,16 @@ class AMCController extends Controller
 
             $body =  TraderApply::where("id", "=", $request->id)->first();
 
-            $pdf = PDF::loadview('email.pdf', compact('body'));
+            // $pdf = PDF::loadview('email.pdf', compact('body'));
 
             //   $body->email = "ydvipin99@gmail"
-            Mail::send('email.license', ['body' => $body], function($m) use ($body) {
+            // Mail::send('email.license', ['body' => $body], function($m) use ($body) {
 
-                $m->to($body->email,$body->name)->subject('License Generate');
-                 $pdf = PDF::loadview('email.pdf', compact('body'));
-                 $m->attachData($pdf->output(), 'license,pdf');
+            //     $m->to($body->email,$body->name)->subject('License Generate');
+            //      $pdf = PDF::loadview('email.pdf', compact('body'));
+            //      $m->attachData($pdf->output(), 'license,pdf');
 
-            } );
+            // } );
 
 
             $log = array(
@@ -152,7 +152,7 @@ class AMCController extends Controller
     public function caViewDetails($id)
     {
 
-        $cadata = CAApply::where("application_id", '=', $id)->first();
+        $cadata = CAApply::with('partners')->where("application_id", '=', $id)->first();
         $calog = Calog::where("application_id", '=', $cadata->id)->get();
         return view('amc.caviewdetails', compact('cadata', 'calog'));
     }
@@ -195,7 +195,7 @@ class AMCController extends Controller
 
         
         $input['is_sign_upload'] = 1;
-        $input['is_pdf_generate'] = 1;
+       // $input['is_pdf_generate'] = 1;
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
@@ -203,13 +203,13 @@ class AMCController extends Controller
             $input['issue_date'] = date('Y-m-d');
             $data = CAApply::where("id", "=", $request->id)->update($input);
             $body =  CAApply::where("id", "=", $request->id)->first();
-            Mail::send('email.license', ['body' => $body], function($m) use ($body) {
+            // Mail::send('email.license', ['body' => $body], function($m) use ($body) {
 
-                 $m->to($body->email,$body->name)->subject('License Generate');
-                 $pdf = PDF::loadview('email.capdf', compact('body'));
-                 $m->attachData($pdf->output(), 'license,pdf');
+            //      $m->to($body->email,$body->name)->subject('License Generate');
+            //      $pdf = PDF::loadview('email.capdf', compact('body'));
+            //      $m->attachData($pdf->output(), 'license,pdf');
 
-            } );
+            // } );
             $log = array(
 
                 'user_id' => Auth::user()->id,

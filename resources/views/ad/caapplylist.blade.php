@@ -40,8 +40,8 @@
 										@if($row->status == 1 ||  $row->status == 5||  $row->status == 7)
 										<a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
 									  @endif
-									  @if($row->is_pdf_generate == 1) 
-									  <a href="{{url('/')}}/capdfdownload/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-download"></i></a> 
+									 @if($row->is_pdf_generate == 1) 
+									  <a href="{{url('/')}}/public/uploads/{{$row->attested_pdf}}" class="btn btn-icon btn-info" download><i class="priya-download"></i></a> 
 									  
 									  @endif
 									  </td>

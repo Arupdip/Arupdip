@@ -16,6 +16,7 @@ use App\Models\District;
 use DB;
 use Auth;
 use App\Models\Traderlog;
+use Mail;
 class CommissionerController extends Controller
 {
 
@@ -114,6 +115,67 @@ class CommissionerController extends Controller
         return view('commissioner.tradermodal', compact('trader','traderold'));
  
      } 
+
+
+     public function uploadattested(Request $request){
+        $input['is_pdf_generate'] = 1;
+ if ($file = $request->file('upload_signature')) {
+            $input['attested_pdf'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['attested_pdf']);
+            $data = CAApply::where("id", "=", $request->id)->update($input);
+            $body =  CAApply::where("id", "=", $request->id)->first();
+            Mail::send('email.license', ['body' => $body], function($m) use ($body, $input) {
+
+                 $m->to($body->email,$body->name)->subject('License Generate');
+                
+                 $m->attach(public_path('uploads').'/'.$input['attested_pdf']);
+
+            } );
+            $log = array(
+
+                'user_id' => Auth::user()->id,
+                'application_id' => $request->id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'comment' => 'Attested Upload'
+            );
+            
+            Calog::insertGetId($log);
+        }
+
+        return redirect()->back();
+
+     }
+
+
+ public function traderuploadattested(Request $request){
+        $input['is_pdf_generate'] = 1;
+ if ($file = $request->file('upload_signature')) {
+            $input['attested_pdf'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $input['attested_pdf']);
+            $data = CAApply::where("id", "=", $request->id)->update($input);
+            $body =  CAApply::where("id", "=", $request->id)->first();
+            Mail::send('email.license', ['body' => $body], function($m) use ($body, $input) {
+
+                 $m->to($body->email,$body->name)->subject('License Generate');
+                
+                 $m->attach(public_path('uploads').'/'.$input['attested_pdf']);
+
+            } );
+            $log = array(
+
+                'user_id' => Auth::user()->id,
+                'application_id' => $request->id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'comment' => 'Attested Upload'
+            );
+            
+            Calog::insertGetId($log);
+        }
+
+        return redirect()->back();
+
+     }
+
 
      public function submitcomplyca(Request $request){
 

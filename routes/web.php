@@ -75,7 +75,7 @@ Route::get('trader-regpay-success/{id}', [TraderController::class, 'traderRegPay
 
 Route::get('trader-final-payment/{id}', [TraderController::class, 'traderFinalPay']);
 Route::get('trader-final-payment-success/{id}', [TraderController::class, 'traderFinalPaySuccess']);
-
+Route::get('capdfdownload/{id}', [HomeController::class, 'capdfdownload']);
 /*
 / Web Routes for ADMIN(super admin) with CaController 
 /
@@ -214,6 +214,10 @@ Route::group(['prefix' => 'commissioner', 'middleware' => 'commissioner'], funct
 
 	Route::get('/caviewdetails/{id}', [CommissionerController::class, 'caViewDetails']);
 	Route::post('/caapprovesubmit', [CommissionerController::class, 'caApproveSubmit']);
+
+	Route::post('/upload-attested', [CommissionerController::class, 'uploadattested']);
+
+	Route::post('/trader-upload-attested', [CommissionerController::class, 'traderuploadattested']);
 });
 
 

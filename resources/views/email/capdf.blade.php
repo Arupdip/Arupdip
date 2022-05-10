@@ -121,30 +121,19 @@
 				<th>Share</th>
 				<th>PAN/Aadhar Number</th>
 			</tr>
+
+			
+                                @foreach($body->partners as $k=> $p)
+                               
 			<tr>
-				<td align="center">1</td>
-				<td>Sri Gorijavolu nanda kishore</td>
-				<td align="center"><strong>40</strong></td>
-				<td align="center"><strong>6715 0922 2431</strong></td>
+				<td align="center">{{$k+1}}</td>
+				<td>{{$p->name}}</td>
+				<td align="center"><strong>{{$p->share}}</strong></td>
+				<td align="center"><strong>{{$p->document}}</strong></td>
 			</tr>
-			<tr>
-				<td align="center">2</td>
-				<td>Smt. Gorijavolu Anantha Lakshmi</td>
-				<td align="center"><strong>30</strong></td>
-				<td align="center"><strong>6302 3486 8659</strong></td>
-			</tr>
-			<tr>
-				<td align="center">3</td>
-				<td>Sri Panchumarthi Upendra Chowdary</td>
-				<td align="center"><strong>10</strong></td>
-				<td align="center"><strong>7216 0390 1611</strong></td>
-			</tr>
-			<tr>
-				<td align="center">4</td>
-				<td>Podila Ramakotesware Rao</td>
-				<td align="center"><strong>20</strong></td>
-				<td align="center"><strong>5566 0141 8655</strong></td>
-			</tr>
+
+			@endforeach
+			
 		</table>
 		<div style="margin: 10px 0;">
 			<strong>Place: Guntur</strong><br/>

@@ -41,7 +41,7 @@
 										<a href="#" onClick="editcomply({{$row->id}})" class="btn btn-icon btn-info" title="View Details"><i class="priya-edit"></i></a> 
 									  @endif
 									  @if($row->is_pdf_generate == 1) 
-									  <a href="{{url('/')}}/capdfdownload/{{$row->application_id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-download"></i></a> 
+									  <a href="{{url('/')}}/public/uploads/{{$row->attested_pdf}}" class="btn btn-icon btn-info" download><i class="priya-download"></i></a> 
 									  
 									  @endif
 	                                  </td>

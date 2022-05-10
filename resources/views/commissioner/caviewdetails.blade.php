@@ -260,7 +260,56 @@
                 </div>
             </card>
           
-          
+           <card class="card no-gap mt-3">
+                <h5 class="card-header">Partner Details</h5>
+                <div class="card-body">
+                   <div class="table-responsive">
+                        <table class="table table-stripped table-bordered theme-tbl">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Aadhar/Pan No</th>
+                                    <th>Share</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i=0;?>
+                                @foreach($cadata->partners as $p)
+                                 <?php $i++;?>
+<tr>
+    <td>{{$i}}</td>
+    <td>{{$p->name}}</td>
+     <td>{{$p->document}}</td>
+      <td>{{$p->share}}</td>
+</tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </card>
+
+              @if($cadata->is_sign_upload == 1) 
+
+<card class="card no-gap mt-3">
+                <h5 class="card-header">Upload Attested Licence <a href="{{url('/')}}/capdfdownload/{{$cadata->application_id}}">Download License</a></h5>
+                <div class="card-body">
+                     <form name="" id="sign-upload-form" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('commissioner/upload-attested')}}" >
+                                        @csrf
+                                        <input type="hidden" value="{{$cadata->id}}" name="id">
+                                        <img src="" class="img" alt="" accept="image/*" style="max-height: 70px; object-fit:contain">
+                                        <input type="file" name="upload_signature" id="upload_signature" class="sign " onchange="javascript: document.getElementById('upload_signature').src = window.URL.createObjectURL(this.files[0])">
+
+                                        <button class="btn btn-primary" type="submit">Upload</button>
+                                      </form>
+                </div>
+            </card>
+
+
+              @endif
+
+
             <div class="mt-3 text-center">
                 @if($cadata->status == 6 || $cadata->status == 8) 
               <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button> @endif

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Tempuser;
+use App\Models\CaPartners;
 use App\Models\State;
 use App\Models\District;
 use App\Models\Licensetype;
@@ -150,9 +151,30 @@ class CaController extends Controller
         }
 
 
+        unset($input['partner_name']);
+        unset($input['partner_document']);
+        unset($input['partner_share']);
 
+        $id = DB::table('temp_causer')->insertGetId($input);
 
-        DB::table('temp_causer')->insertGetId($input);
+        $partner_name = $request->partner_name;
+        $partner_document = $request->partner_document;
+        $partner_share = $request->partner_share;
+
+        for($i=0; $i<count($partner_name); $i++){
+
+            if($partner_name[$i] !='' && $partner_document[$i]!= '' && $partner_share[$i]!='')
+            {
+            $inp = array(
+                "name" => $partner_name[$i],
+                "document" => $partner_document[$i],
+                "share" => $partner_share[$i],
+                "ca_apply_id" => $id);
+
+             DB::table('ca_partners_temp')->insertGetId($inp);
+        }
+
+        }
 
         $returnArr['success'] = true;
         $returnArr['message'] = $randomid;
@@ -299,11 +321,27 @@ class CaController extends Controller
             $result['is_submit'] = 1;
             $result['is_reg_pay'] = 1;
             $result['application_id']  = Str::random(211);
+
+             $partners = DB::table('ca_partners_temp')->where('ca_apply_id','=',$result['id'])->get();
             unset($result['id']);
             unset($result['old_application_id']);
             $result['created_at'] = date('Y-m-d H:i:s');
             $result['updated_at'] = date('Y-m-d H:i:s');
-            CAApply::insert($result);
+            $caid = CAApply::insertGetId($result);
+
+            foreach($partners as $p)
+            {
+                $res = [];
+
+            
+                 $res['name'] = $p->name;
+                  $res['document'] = $p->document;
+                   $res['share'] = $p->share;
+            
+            $res['ca_apply_id'] = $caid; 
+            unset($res['id']);
+             CaPartners::insertGetId($res);
+            }
             DB::table('temp_causer')->where("user_temp_id", "=", $id)->delete();
             Auth::loginUsingId($user_id);
 

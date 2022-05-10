@@ -21,6 +21,13 @@ class CAApply extends Model
     }
 
 
+	public function partners()
+	{
+		
+  return $this->hasMany('App\Models\CaPartners','ca_apply_id'); 
+	}
+
+
 	public function state()
 	{
 		return $this->belongsTo('App\Models\State','state_id', 'state_id');

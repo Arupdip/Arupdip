@@ -285,6 +285,27 @@
                     </div>
                 </div>
             </card>
+
+              @if($traderview->is_sign_upload == 1) 
+
+<card class="card no-gap mt-3">
+                <h5 class="card-header">Upload Attested Licence <a href="{{url('/')}}/pdfdownload/{{$traderview->application_id}}">Download License</a></h5>
+                <div class="card-body">
+                     <form name="" id="sign-upload-form" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('commissioner/trader-upload-attested')}}" >
+                                        @csrf
+                                        <input type="hidden" value="{{$traderview->id}}" name="id">
+                                        <img src="" class="img" alt="" accept="image/*" style="max-height: 70px; object-fit:contain">
+                                        <input type="file" name="upload_signature" id="upload_signature" class="sign " onchange="javascript: document.getElementById('upload_signature').src = window.URL.createObjectURL(this.files[0])">
+
+                                        <button class="btn btn-primary" type="submit">Upload</button>
+                                      </form>
+                </div>
+            </card>
+
+
+              @endif
+
+
             <div class="mt-3 text-center">
                 @if($traderview->status == 6 || $traderview->status == 8) 
               <button class="btn btn-success" type="button" onclick="helpModal('#approve-pop')">Approve <i class="priya-mail-forward"></i></button>

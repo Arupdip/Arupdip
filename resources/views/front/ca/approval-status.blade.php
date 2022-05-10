@@ -213,6 +213,37 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                 <card class="card no-gap mt-3">
+                <h5 class="card-header">Partner Details</h5>
+                <div class="card-body">
+                   <div class="table-responsive">
+                        <table class="table table-stripped table-bordered theme-tbl">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Aadhar/Pan No</th>
+                                    <th>Share</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i=0;?>
+                                @foreach($row->partners as $p)
+                                 <?php $i++;?>
+<tr>
+    <td>{{$i}}</td>
+    <td>{{$p->name}}</td>
+     <td>{{$p->document}}</td>
+      <td>{{$p->share}}</td>
+</tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </card>
+
                             </fieldset>
                         </form>
                     </div>
