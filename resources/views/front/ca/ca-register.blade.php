@@ -1,6 +1,16 @@
 @extends('layouts.frontlayout')
 
 @section('content')
+
+<style>
+	.partner .input-group {
+		border-radius: 4px;
+		box-shadow: 1px 1px 5px #0003 inset;
+		background: #ced6da;
+	}
+</style>
+
+
 <div class="container-fluid bdy">
     <div class="card my-5">
         <div class="card-head">
@@ -20,11 +30,11 @@
         <div class="card-body pt-0">
             <div class="p-2">
                 <ul id="progressbar">
-                    <li class="active priya-cubes">Collect Trader Details</li>
+                    <li class="active priya-cubes">Collect CA Details</li>
                     <li class="priya-hourglass-2">Process Payment</li>
-                    <li class="priya-file-text-o">Department Approval</li>
+                    <li class="priya-file-text-o">Department Approval</li><!--
                     <li class="priya-bell-o">Notify Trader</li>
-                    <li class="priya-check">Resolve</li>
+                    <li class="priya-check">Resolve</li>-->
                 </ul>
                 <form name="" id="ca-register-form" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('save-ca-details')}}" >
                     @csrf
@@ -75,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group">
+								<div class="form-group partner">
                                     <label>Do you have any other firm/Business or Are you a partner of any firm/business<span class="text-danger">*</span></label>
                                     <div>
                                         <label class="pri-radio">
@@ -86,22 +96,25 @@
                                         </label>
                                     </div>
                                     <div class="pri-collapsed">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                
-                                        <input type="file" name="upladedotherfirmfile" class="form-control pri-form" />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <button  class="btn btn-success" type="button" onclick="add_partner(this)">Add</button>
-                                            </div>
-                                         </div>
-                                       
+
+                                        <label>Attach File<span class="text-danger">*</span></label>
+										<div class="input-group mb-3">
+											<input type="file" name="upladedotherfirmfile" class="form-control pri-form" />
+											<div class="input-group-append " style="cursor: pointer;">
+												<span class="input-group-text text-white bg-success" id="basic-addon2" onclick="add_partner(this)">Add Partner</span>
+											</div>
+										</div>
                                         
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                             <div class="row">
+                                <div class="col-md-12">
+                                <h3>Business partner details </h3>
+                                </div>
                              <div class="col-md-12 partner_class">
 
                                  
@@ -112,6 +125,9 @@
 
                             <!--------------------------------->
                              <div class="row">
+                                <div class="col-md-12">
+                                <h3>Other details </h3>
+                                </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Aadhar No.<span class="text-danger">*</span></label>
@@ -134,8 +150,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Full Name<span class="text-danger">*</span></label>
-                                    <input type="text" id="name"  name="name"
-                                        class="form-control pri-form" aria-="true" />
+                                    <input type="text" id="name"  name="name" class="form-control pri-form" aria-="true" />
                                     <span class="text-danger" id="err_dup_error"></span>
                                 </div>
                             </div>
