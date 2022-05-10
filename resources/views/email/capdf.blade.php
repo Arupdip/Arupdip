@@ -8,7 +8,7 @@
 		<table width="100%" cellpadding="5" cellspacing="0" border="1">
 			<tr>
 				<td rowspan="2" width="26%" align="center">
-					<img src="{{asset('images/trader-logo.jpg')}}" alt="">
+					<img src="{{asset('public/images/trader-logo.jpg')}}" alt="">
 				</td>
 				<td colspan="2" align="center">
 					<h3 style="margin: 0;">FORM 8-C<br/>[See Rule 49]</h3>

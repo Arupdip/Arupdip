@@ -6,7 +6,7 @@
 <body style="padding: 0; margin: 0;">
 	<div style="padding: 15px; font-family: 'Arial'; font-size: 14px; line-height: 22px;">
 		<div style="text-align: center;">
-			<img src="{{asset('images/trader-logo.jpg')}}" alt="">
+			<img src="{{asset('public/images/trader-logo.jpg')}}" alt="">
 			<h3 style="color: #27ae60; margin-top: 0;">Agricultural Marketing Department<br/>Government of Andhra Pradesh</h3>
 			<h4>FORM 8-A</h4>
 			<h4>(See Rule 48)</h4>
