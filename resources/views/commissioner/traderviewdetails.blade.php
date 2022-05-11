@@ -1,4 +1,4 @@
-@extends('amc.layouts.app')
+@extends('commissioner.layouts.app')
 
 @section('content')
 

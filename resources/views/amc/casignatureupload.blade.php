@@ -29,6 +29,7 @@
                                     <th>Full Name</th>
                                     <th>Aadhar No.</th>
                                     <th>Signature</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,17 +41,22 @@
                                   <td>{{$key+1}}</td>
                                   <td>{{$row->name}}</td>
                                   <td>{{$row->aadhar_no}}</td>
+                                  <form name="" id="sign-upload-form-{{$row->id}}" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('amc/upload-ca-sign')}}" >
+                                    @csrf
                                   <td>
                                   <div class="photoupload">
-                                    <form name="" id="sign-upload-form-{{$row->id}}" class="clearfix" enctype="multipart/form-data" method="post" action="{{url('amc/upload-ca-sign')}}" >
-                                        @csrf
                                         <input type="hidden" value="{{$row->id}}" name="id">
                                         <img src="" class="img" id="id_{{$row->id}}" alt="" accept="image/*" style="max-height: 70px; object-fit:contain">
                                         <input type="file" name="upload_signature" id="upload_signature" class="sign sign_{{$row->id}}" onchange="javascript: document.getElementById('id_{{$row->id}}').src = window.URL.createObjectURL(this.files[0])">
-                                      </form>
-                                    
                                     </div>
                                   </td>
+                                  <td>
+                                    <div class="photoupload">
+                                    <img src="" class="img" id="idimage_{{$row->id}}" alt="" accept="image/*" style="max-height: 70px; object-fit:contain">
+                                    <input type="file" name="upload_image" id="upload_signature" class="sign image_{{$row->id}}" onchange="javascript: document.getElementById('idimage_{{$row->id}}').src = window.URL.createObjectURL(this.files[0])">
+                                    </div>
+                                  </td>
+                                </form>
                                   <td align="center">
                                     <a href="#" onClick="submitform({{$row->id}})" title="Approve"  class="btn btn-icon btn-info"><i class="priya-check"></i> </a>
                                   </td>
@@ -75,7 +81,7 @@
 
 function submitform(id)
 {
-    if($(".sign_"+id).val()!='')
+    if($(".sign_"+id).val()!='' && $(".image_"+id).val()!='')
     $("#sign-upload-form-"+id).submit();
 }
 </script>

@@ -72,6 +72,12 @@ class AMCController extends Controller
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
+
+        if( $request->file('upload_image')){
+            $input['image'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+            $request->file('upload_image')->move(public_path('uploads'), $input['image']);
+            }
+
             $input['liscence_no'] = rand(10000000000,99999999999);
             $input['issue_date'] = date('Y-m-d');
             $data = TraderApply::where("id", "=", $request->id)->update($input);
@@ -100,7 +106,7 @@ class AMCController extends Controller
             Traderlog::insertGetId($log);
         }
 
-        return redirect()->back()->with('success', 'Signature Upload succesfully');
+        return redirect()->back()->with('success', 'Signature & Image Upload succesfully');
     }
 
 
@@ -157,6 +163,7 @@ class AMCController extends Controller
         return view('amc.caviewdetails', compact('cadata', 'calog'));
     }
 
+
     public function caApproveSubmit(Request $request)
     {
 
@@ -199,6 +206,13 @@ class AMCController extends Controller
         if ($file = $request->file('upload_signature')) {
             $input['signature_file'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['signature_file']);
+
+        if( $request->file('upload_image')){
+        $input['image'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
+        $request->file('upload_image')->move(public_path('uploads'), $input['image']);
+        }
+           
+
             $input['liscence_no'] = rand(10000000000,99999999999);
             $input['issue_date'] = date('Y-m-d');
             $data = CAApply::where("id", "=", $request->id)->update($input);
@@ -215,7 +229,7 @@ class AMCController extends Controller
                 'user_id' => Auth::user()->id,
                 'application_id' => $request->id,
                 'created_at' => date('Y-m-d H:i:s'),
-                'comment' => 'Signature Upload'
+                'comment' => 'Signature & Image Upload'
             );
             
             Calog::insertGetId($log);

@@ -16,7 +16,7 @@
 		<table width="100%">
 			<tr>
 				<td width="25%">
-					<img src="{{asset('public/uploads/'.$body->image)}}" alt="" height="150px">
+					<img style="width: 150px; height:175px" src="{{asset('public/uploads/'.$body->image)}}" alt="" height="150px">
 				</td>
 				<td>
 					<table width="100%" cellpadding="0" cellspacing="0" border="1">

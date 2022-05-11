@@ -111,8 +111,8 @@
                             </div>
                         </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
+                            <div class="row partner_class_head">
+                                <div class="col-md-12 partner_class_mini" style="display:none">
                                 <h3>Business partner details </h3>
                                 </div>
                              <div class="col-md-12 partner_class">
@@ -356,14 +356,31 @@
 
 <script type="text/javascript">
     function add_partner(clrt) {
+
+   
        
         $(".partner_class").append('<div class="row partner_mini"><div class="col-md-4"><div class="form-group"><label>Partner Name<span class="text-danger">*</span></label><input type="text" id="partner_name" name="partner_name[]"class="form-control  pri-form " maxlength="16" value="" /></div></div><div class="col-md-4"><div class="form-group"><label>Aadhar/PAN No.<span class="text-danger">*</span></label><input type="text" id="partner_document" name="partner_document[]"class="form-control  pri-form partner_document" maxlength="16" value="" /></div> </div><div class="col-md-3"><div class="form-group"><label> Share<span class="text-danger">*</span></label><input type="number" id="partner_share" name="partner_share[]"class="form-control  pri-form partner_share" maxlength="16" value="" /></div></div><div class="col-md-1"><div class="form-group"><button class="btn btn-danger" onclick="remove_partner(this)" style="margin-top: 31px;" >Remove</button></div> </div></div>');
+
+       checktitledisplay();
       
     }
 
     function remove_partner(clrt) {
        
         $(clrt).parents('.partner_mini').remove();
+        checktitledisplay();
+    }
+
+    function checktitledisplay()
+    {
+        if($(".partner_mini").length == 0)
+       {
+        $(".partner_class_mini").hide();
+       }
+       else
+       {
+        $(".partner_class_mini").show();
+       }
     }
 </script>
 <script>
