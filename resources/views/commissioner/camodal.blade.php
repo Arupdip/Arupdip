@@ -353,6 +353,18 @@ else{
                 </dl>
             </div>
 
+            <div class="col-md-3">
+                <dl>
+                    <dt> Partner</dt>
+                    {{-- <dd>{{$trader->power_attorney}}</dd> --}}
+                    <label class="give-comply">
+                        <i class="priya-mail-reply btn btn-warning btn-sm"></i>
+                        <input type="radio" />
+                        <?php echo getfield('partner', $log); ?>
+                    </label>
+                </dl>
+            </div>
+
 
             
 

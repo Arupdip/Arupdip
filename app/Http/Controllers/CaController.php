@@ -431,6 +431,35 @@ class CaController extends Controller
 
         $input['status'] = 3;
 
+if(isset( $request->partner_name)){
+        unset($input['partner_name']);
+        unset($input['partner_document']);
+        unset($input['partner_share']);
+
+   
+        $partner_name = $request->partner_name;
+        $partner_document = $request->partner_document;
+        $partner_share = $request->partner_share;
+
+      $cpl =   CAApply::where('application_id', '=', $request->id)->first();
+        DB::table('ca_partners')->where('ca_apply_id', '=', $cpl->id)->delete();
+    
+        for($i=0; $i<count($partner_name); $i++){
+
+            if($partner_name[$i] !='' && $partner_document[$i]!= '' && $partner_share[$i]!='')
+            {
+            $inp = array(
+                "name" => $partner_name[$i],
+                "document" => $partner_document[$i],
+                "share" => $partner_share[$i],
+                "ca_apply_id" =>  $cpl->id);
+
+             DB::table('ca_partners')->insertGetId($inp);
+        }
+
+        }
+    }
+
 
         CAApply::where('application_id', '=', $request->id)->update($input);
         $tt =   CAApply::where('application_id', '=', $request->id)->first();
