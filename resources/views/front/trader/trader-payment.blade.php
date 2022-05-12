@@ -55,22 +55,15 @@
                         <h6>Terms &amp; Conditions</h6>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>Suspendisse ac eleifend sem. Aliquam pretium ligula est, eget imperdiet justo
-                                    suscipit a. Nulla aliquam orci at massa fringilla porttitor. Class aptent
-                                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                                    himenaeos. Maecenas sodales, nisl ut pharetra scelerisque, odio urna
-                                    faucibus orci, in congue velit justo imperdiet libero. Nunc non mi nec enim
-                                    pretium lobortis. Praesent faucibus cursus est eget viverra. Ut maximus
-                                    consequat erat quis vulputate. In dictum finibus bibendum. Nulla nisi lorem,
-                                    tincidunt et commodo id, auctor ut risus. Sed sed fringilla urna. Integer
-                                    justo mauris, varius eget neque ut, accumsan tristique neque. Pellentesque
-                                    ac porta lacus. Nam tincidunt vulputate lobortis. Vivamus at urna odio.
-                                    Proin a consequat ipsum, nec vestibulum ipsum.</p>
-                                <p>Donec finibus neque sed gravida rutrum. Maecenas eget commodo purus, at
-                                    ullamcorper neque. Etiam ac tristique neque. Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit. Quisque pharetra eros at gravida imperdiet.
-                                    Nulla venenatis nunc sit amet erat iaculis iaculis. Nulla in faucibus ipsum,
-                                    vitae lobortis leo. Phasellus egestas non libero at elementum.</p>
+								<p> 1. 	I/We agree to abide by the Andhra Pradesh (Agricultural Produce & Live Stock) Markets Act 1966 And Rules 1969 and by laws made there under and amendments made to it from time and the directions or orders issued by the Director of Marketing from time to time.</p>
+								<p> 2. 	I/We agree to keep all the necessary records and information about the functioning  of our business and to cooperate to produce whatever information or documents will be asked for inspection by appropriate authority.</p>
+								<p> 3.	I/We agree to pay whatever charges of fees  or amounts liable and due from me legally.</p>
+								<p> 4.	I/We agree to avoid business with the persons doing illegal business and will co-operate in taking legal actions against such persons.</p>
+								<p> 5.	I/We have not been guilty of any offence or misconduct in any of the market comiittees in any state.</p>
+								<p> 6.	I/We are not partners to whom the license has been refused.</p>
+								<p> 7.	I/We have not applied for this license just to avail the advantages accuring there form.</p>
+								<p> 8.	I/We have not caused any distrubances hither to for the smooth and healthy  functioning of any market Committee or entered into any disreputable and fradulent translation with any Person in the state.</p>
+								
                             </div>
                             <div class="col-md-12">
                                 <label class="pri-check">
