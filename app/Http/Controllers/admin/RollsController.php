@@ -43,7 +43,7 @@ class RollsController extends Controller
     {
 		if (empty($request->amc)) {
 			return redirect('/admin/rolls/'.$request->user_id.'/edit')->with("error","Please select AMC !!");
-		}
+		}       	
         	
 		$roll=array(
 			'user_id'=>$request->user_id,
@@ -69,7 +69,8 @@ class RollsController extends Controller
      */
     public function show($id)
     {
-		echo $id;
+		$user = User::find($id);
+		return view('admin.rolls.view',compact('user'));
     }
 
     /**

@@ -65,12 +65,14 @@
 											@if($val->amc_list != NULL)
 												@php
 													$un_s = unserialize($val->amc_list);
-													print_r($un_s);
+													echo count($un_s);
 												@endphp
+											@else
+												NA
 											@endif
 										</td>
 										<td align="center">
-											<a href="{{url('/')}}/admin/rolls/{{$val->id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a>
+<!--											<a href="{{url('/')}}/admin/rolls/{{$val->id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a>-->
 											<a href="{{url('/')}}/admin/rolls/{{$val->id}}/edit" class="btn btn-icon btn-warning" title="Manage Rolls"><i class="priya-edit"></i></a>											
 										</td>
 									</tr>

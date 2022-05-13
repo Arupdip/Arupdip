@@ -27,8 +27,8 @@ class AMCController extends Controller
      */
     public function create()
     {
-    	$district = District::get();
-          return view('admin.amc.create', compact('district'));
+		$district = District::orderBy('name','ASC')-> get();
+        return view('admin.amc.create', compact('district'));
     }
 
     /**
@@ -68,7 +68,7 @@ class AMCController extends Controller
      */
     public function edit($id)
     {
-    	$district = District::get();
+		$district = District::orderBy('name','ASC')-> get();
     	$amc = AMC::find($id);
         return view('admin.amc.edit', compact('amc', 'district'));
     }

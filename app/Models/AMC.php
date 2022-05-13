@@ -13,4 +13,8 @@ class AMC extends Model
 	{
 		return $this->belongsTo('App\Models\District','district_id');
 	}
+	public function amcNameById($id)
+	{
+		return AMC::find($id);
+	}
 }

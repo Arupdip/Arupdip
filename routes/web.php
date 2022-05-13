@@ -59,6 +59,7 @@ Route::any('logout', function () {
 Route::get('ca-register', [CaController::class, 'caRegister']);
 Route::post('save-ca-details', [CaController::class, 'saveCaDetails']);
 Route::post('fetch-districts', [CaController::class, 'fetchDistricts']);
+Route::post('fetch-amc-by-district', [CaController::class, 'fetchAmcByDistrict']);
 Route::get('ca-payment/{id}', [CaController::class, 'capayment']);
 Route::get('ca-regpay-success/{id}', [CaController::class, 'caRegPaySuccess']);
 
