@@ -59,14 +59,18 @@
 										<td class="text-center">
 											@if($val->amc_list != '')
 												@php
+
 											
 													$un_s = explode(',',$val->amc_list);
 												echo count($un_s);
+
 												@endphp
+											@else
+												NA
 											@endif
 										</td>
 										<td align="center">
-											<a href="{{url('/')}}/admin/rolls/{{$val->id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a>
+<!--											<a href="{{url('/')}}/admin/rolls/{{$val->id}}" class="btn btn-icon btn-info" title="View Details"><i class="priya-eye"></i></a>-->
 											<a href="{{url('/')}}/admin/rolls/{{$val->id}}/edit" class="btn btn-icon btn-warning" title="Manage Rolls"><i class="priya-edit"></i></a>											
 										</td>
 									</tr>

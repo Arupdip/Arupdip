@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="pri-collapsed">
                                         <label>Attach File<span class="text-danger">*</span></label>
-                                        <input type="file" name="traderlicensefile" class="form-control pri-form" />
+                                        <input type="file" name="traderlicensefile"  class="form-control pri-form" />
                                     </div>
                                     {{-- <div class="pri-collapsed">
                                         <label>Partener Details<span class="text-danger">*</span></label>
@@ -177,12 +177,26 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Address<span class="text-danger">*</span></label>
-                                    <textarea name="address"  class="form-control pri-form"></textarea>
-                                </div>
-                            </div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>State<span class="text-danger">*</span></label>
+									<select name="state_id"  id="state-dd" class="form-control pri-form">
+										<option value="">-- Select --</option>
+										@foreach($states as $state)
+										<option value="{{$state->state_id}}">{{$state->state_title}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>District<span class="text-danger">*</span></label>
+									<select name="district_id" id="district-dd" class="form-control pri-form">
+										<option value="">-- Select --</option>
+									</select>
+								</div>
+							</div>
                             {{-- new start --}}
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -254,6 +268,12 @@
                             {{-- new End --}}
 
 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Address<span class="text-danger">*</span></label>
+                                    <textarea name="address"  class="form-control pri-form"></textarea>
+                                </div>
+                            </div>
                             
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -282,25 +302,6 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>State<span class="text-danger">*</span></label>
-                                    <select name="state_id"  id="state-dd" class="form-control pri-form">
-                                        <option value="">-- Select --</option>
-                                         @foreach($states as $state)
-                                        <option value="{{$state->state_id}}">{{$state->state_title}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>District<span class="text-danger">*</span></label>
-                                    <select name="district_id"   id="district-dd" class="form-control pri-form">
-                                        <option value="">-- Select --</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label>GSTIN<span class="text-danger">*</span></label>
 									<input type="text" name="gstin"  class="form-control pri-form"  maxlength="15"/>
                                 </div>
@@ -319,11 +320,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>AMC Name<span class="text-danger">*</span></label>
-                                    <select name="amc_id"  class="form-control pri-form">
-                                        <option value="">-- Select --</option>
-                                          @foreach($amc as $r)
-                                        <option value="{{$r->id}}">{{$r->name}}</option>
-                                        @endforeach
+                                    <select name="amc_id" id="amc_list" class="form-control pri-form">
+                                        <option value="">-- Select  --</option>
                                     </select>
                                 </div>
                             </div>
@@ -454,6 +452,26 @@
 				}
 			});
 		});
+		
+		$('#district-dd').on('change',function(){
+			var districtId = $(this).val();
+			$("#amc_list").html('');
+			$.ajax({
+				url: "{{url('fetch-amc-by-district')}}",
+				type: "POST",
+				data: {
+					district_id: districtId,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('#amc_list').html('<option value="">Select AMC</option>');
+					$.each(res.amc, function (key, value) {
+						$("#amc_list").append('<option value="' + value.id + '">' + value.name + '</option>');
+					});
+				}
+			});
+		})
 
 
 		var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
@@ -467,6 +485,7 @@
 			rules: {
 				isfamilymemberholdca: "required",
 				familymemberholdcafile: "required",
+				traderlicensefile: "required",
 				isotherfirm: "required",
 				upladedotherfirmfile: "required",
 

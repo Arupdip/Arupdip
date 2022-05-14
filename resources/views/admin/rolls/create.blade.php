@@ -58,24 +58,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
 									<label>Designation<span class="text-danger">*</span></label>
-									<select name="user_type" class="form-control pri-form" autocomplete="off" required>
+									<select name="user_type" class="form-control pri-form" autocomplete="off"  required>
 										<option selected="" disabled="">Designation</option>
 
+
 										@foreach($usertype as $type)
-										<option value="{{$type->type}}">{{$type->name}}</option>
+										<option value="{{$type->id}}" @if($type->id == $user->user_type) selected @endif>{{$type->name}}</option>
 
 
 
 										@endforeach
-										{{-- @if(empty($user->user_type) || $user->user_type == 3)
-											<option value="3">AMC Officer</option>
-										@endif
-										@if(empty($user->user_type) || $user->user_type == 3 || $user->user_type == 4)
-											<option value="4">AD Officer</option>
-										@endif
-										@if(empty($user->user_type) || $user->user_type == 3 || $user->user_type == 4 || $user->user_type == 5)
-											<option value="5">Commissioner</option>
-										@endif									 --}}
+									
 									</select>
                                 </div>
                             </div>
@@ -84,7 +77,18 @@
 									<label>AMC<span class="text-danger">*</span></label>
 									<select name="amc[]" class="form-control pri-form" multiple id="amc" autocomplete="off" required>
 										@foreach ($amc as $key=>$val)
-										<option value="{{$val->id}}">{{$val->name}}</option>
+											@if($user->amc_list != NULL)
+												@php
+													$un_s = unserialize($user->amc_list);
+													if (in_array($val->id, $un_s)){
+														echo '<option value="'.$val->id.'" selected>'.$val->name.'</option>';
+													}else{
+														echo '<option value="'.$val->id.'">'.$val->name.'</option>';
+													}
+												@endphp
+											@else
+												<option value="{{$val->id}}">{{$val->name}}</option>
+											@endif										
 										@endforeach
 									</select>
                                 </div>
@@ -93,7 +97,10 @@
                             <div class="col-md-12 text-center">
                               
                                     <label>&nbsp;</label>
-                                    <div><button class="btn" type="submit">Save</button></div>
+                                    <div>
+										<button onclick="window.history.back()" class="btn btn-warning" type="button">Back</button>
+                                   	 	<button class="btn" type="submit">Save</button>
+                                    </div>
                               
                             </div>
                         </div>
@@ -106,14 +113,13 @@
 </div>
 
 <script>
-	
+
 	$('#amc').multiselect({
 		columns: 1,
 		placeholder: 'Select AMC',
 		search: true,
 		selectAll: true
 	});
-	
 	
 	$("#user_roll").validate({		
 		submitHandler : function(form) {
