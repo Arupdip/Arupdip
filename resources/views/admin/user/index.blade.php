@@ -51,12 +51,7 @@
 										<td>{{$val->email}}</td>
 										<td class="text-center">{{$val->phone}}</td>
 										<td >
-											@if($val->user_type == 3)
-											AMC Officer
-											@elseif($val->user_type == 4)
-											AD Officer
-											@elseif($val->user_type == 5)
-											Commissioner
+											@if($val->usertype->name){{$val->usertype->name}} 
 											@else
 											<span class="text-center text-warning">NO</span>
 											@endif

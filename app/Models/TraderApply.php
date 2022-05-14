@@ -16,9 +16,19 @@ class TraderApply extends Model
         parent::boot();
      
         // Order by name ASC
-        static::addGlobalScope('order', function (Builder $builder) {
+       if(Auth::check() && (Auth::user()->user_type ==3 || Auth::user()->user_type ==4 || Auth::user()->user_type ==5 ))
+       {
+       	$amc_list = explode(',',Auth::user()->amc_list);
+        static::addGlobalScope('order', function (Builder $builder) use ($amc_list) {
+            $builder->whereIn('amc_id',$amc_list)->orderBy('id', 'desc');
+        });
+    	}
+    	else
+    	{
+    		 static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('id', 'desc');
         });
+    	}
     }
 
 

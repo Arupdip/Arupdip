@@ -46,13 +46,7 @@
         <div class="py-5 section">
             <card class="card">
 				<h5 class="card-header">{{$user->name}}
-					@if($user->user_type == 3)
-					(AMC Officer)
-					@elseif($user->user_type == 4)
-					(AD Officer)
-					@elseif($user->user_type == 5)
-					(Commissioner)
-					@endif
+					@isset($user->usertype->name){{$user->usertype->name}} @endisset
 					Manage Rolls
                     <div class="btn-grp"><btn onclick="window.history.back()" title="Back"><i class="priya-arrow-left"></i></btn><btn onclick="" title="Dashboard"><i class="priya-dashboard"></i></btn><btn onclick="helpModal('#add-dist-help')" title="Help"><i class="priya-info"></i></btn> <btn onclick="" title="History"><i class="priya-history"></i></btn></div>
                 </h5>
@@ -66,7 +60,14 @@
 									<label>Designation<span class="text-danger">*</span></label>
 									<select name="user_type" class="form-control pri-form" autocomplete="off" required>
 										<option selected="" disabled="">Designation</option>
-										@if(empty($user->user_type) || $user->user_type == 3)
+
+										@foreach($usertype as $type)
+										<option value="{{$type->type}}">{{$type->name}}</option>
+
+
+
+										@endforeach
+										{{-- @if(empty($user->user_type) || $user->user_type == 3)
 											<option value="3">AMC Officer</option>
 										@endif
 										@if(empty($user->user_type) || $user->user_type == 3 || $user->user_type == 4)
@@ -74,14 +75,14 @@
 										@endif
 										@if(empty($user->user_type) || $user->user_type == 3 || $user->user_type == 4 || $user->user_type == 5)
 											<option value="5">Commissioner</option>
-										@endif									
+										@endif									 --}}
 									</select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
 									<label>AMC<span class="text-danger">*</span></label>
-									<select name="amc" class="form-control pri-form" multiple id="amc" autocomplete="off" required>
+									<select name="amc[]" class="form-control pri-form" multiple id="amc" autocomplete="off" required>
 										@foreach ($amc as $key=>$val)
 										<option value="{{$val->id}}">{{$val->name}}</option>
 										@endforeach

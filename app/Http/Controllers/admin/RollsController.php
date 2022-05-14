@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AMC;
 use App\Models\User;
 use App\Models\UserRoll;
+use App\Models\UserType;
 use Auth;
 
 class RollsController extends Controller
@@ -48,7 +49,7 @@ class RollsController extends Controller
 		$roll=array(
 			'user_id'=>$request->user_id,
 			'user_type'=>$request->user_type,
-			'amc_list'=>serialize($request->amc),
+			'amc_list'=>implode(',',$request->amc),
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'status' => 1,
@@ -56,7 +57,7 @@ class RollsController extends Controller
 		
 		UserRoll::insert($roll);
 		
-		USer::where('id','=',$request->user_id)->update(['amc_list'=>serialize($request->amc),'user_type'=>$request->user_type]);
+		USer::where('id','=',$request->user_id)->update(['amc_list'=>implode(',',$request->amc),'user_type'=>$request->user_type]);
         
 		return redirect('/admin/rolls')->with("success","User roll is successfully created !!");
     }
@@ -82,7 +83,8 @@ class RollsController extends Controller
     {
 		$user = User::find($id);
 		$amc = AMC::where('status','=',1)->get();
-		return view('admin.rolls.create', compact('user','amc'));
+    $usertype =UserType::where('type','>',2)->get();
+		return view('admin.rolls.create', compact('user','amc','usertype'));
     }
 
     /**
