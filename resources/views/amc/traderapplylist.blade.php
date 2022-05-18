@@ -33,8 +33,8 @@
 	                              <?php $i++;?>
 	                                <tr>
 	                                  <td>{{$i}}</td>
-	                                  <td>-</td>
 	                                  <td>{{$row->name}}</td>
+	                                  <td>{{$row->created_at}}</td>
 	                                  <td>{{$row->aadhar_no}}</td>
 	                                  <td>{{$row->gstin}}</td>
 	                                  <td>{{getStatus($row->status)}}</td>

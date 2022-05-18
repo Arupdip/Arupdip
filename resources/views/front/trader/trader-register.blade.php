@@ -474,6 +474,27 @@
 		});
 
 
+
+        $('#firmdistrict_id').on('change',function(){
+			var districtId = $(this).val();
+			$("#amc_list").html('');
+			$.ajax({
+				url: "{{url('fetch-amc-by-district')}}",
+				type: "POST",
+				data: {
+					district_id: districtId,
+					_token: '{{csrf_token()}}'
+				},
+				dataType: 'json',
+				success: function (res) {
+					$('#amc_list').html('<option value="">Select AMC</option>');
+					$.each(res.amc, function (key, value) {
+						$("#amc_list").append('<option value="' + value.id + '">' + value.name + '</option>');
+					});
+				}
+			});
+		})
+
 		var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
 		$.validator.addMethod("pan_no_valid", function(value, element) {
 			return this.optional( element ) || regpan.test( $('input[name="pan_no"]').val() );
