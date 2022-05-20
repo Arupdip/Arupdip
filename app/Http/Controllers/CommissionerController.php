@@ -152,8 +152,8 @@ class CommissionerController extends Controller
  if ($file = $request->file('upload_signature')) {
             $input['attested_pdf'] = rand(999999, 9999999999) . date('YmdHis') . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $input['attested_pdf']);
-            $data = CAApply::where("id", "=", $request->id)->update($input);
-            $body =  CAApply::where("id", "=", $request->id)->first();
+            $data = TraderApply::where("id", "=", $request->id)->update($input);
+            $body =  TraderApply::where("id", "=", $request->id)->first();
             Mail::send('email.license', ['body' => $body], function($m) use ($body, $input) {
 
                  $m->to($body->email,$body->name)->subject('License Generate');
@@ -169,7 +169,7 @@ class CommissionerController extends Controller
                 'comment' => 'Attested Upload'
             );
             
-            Calog::insertGetId($log);
+            Traderlog::insertGetId($log);
         }
 
         return redirect()->back();

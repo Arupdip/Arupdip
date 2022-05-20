@@ -82,6 +82,21 @@ class CaController extends Controller
 		return response()->json($data);
 	}
 
+
+     /**
+     * To save details of commision agent in User model.
+     *
+     * @return view
+     */
+public function fetchAmcByDistrict(Request $request){
+   $data['amc'] =  AMC::where('district_id',$request->district_id)->get();
+    return response()->json($data);
+
+
+
+
+
+}
     /**
      * To save details of commision agent in User model.
      *
