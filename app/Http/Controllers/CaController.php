@@ -71,6 +71,16 @@ class CaController extends Controller
         $data['districts'] = District::where("state_id", $request->state_id)->get(["name", "id"]);
         return response()->json($data);
     }
+	/**
+	* To return AMC on behalf of district id.
+	*
+	* @return view
+	*/
+	public function fetchAmcByDistrict(Request $request)
+	{
+		$data['amc'] = AMC::where("district_id", $request->district_id)->get(["name", "id"]);
+		return response()->json($data);
+	}
 
 
      /**
