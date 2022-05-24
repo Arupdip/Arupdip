@@ -194,7 +194,7 @@ class CommissionerController extends Controller
 		if ($value == false) {
 			return redirect()->back()->with('error','Commply field is empty !!');
 		}else{
-
+            
 	        $input['created_at'] = date('Y-m-d H:i:s');
 	        $input['application_id'] = $request->id;
 	        $input['old_data'] = json_encode(CAApply::with('state','district','amc','liscencetype','user')->where("id",'=',$request->id)->first());
@@ -219,9 +219,20 @@ class CommissionerController extends Controller
 	        if(Auth::user()->user_type == 4)
 	        	CAApply::where("id",'=',$request->id)->update(['status'=>4]);
 
-	        if(Auth::user()->user_type == 3)
+	        if(Auth::user()->user_type == 3) {
 	        	CAApply::where("id",'=',$request->id)->update(['status'=>2]);
-	        
+
+                // for sending email to user for their comply
+                $body = CAApply::where("id",'=',$request->id)->first();
+            
+                Mail::send('email.comply', ['body' => $body], function($m) use ($body) {
+
+                    $m->to($body->email,$body->name)->subject('Comply in Registration');
+                   
+               } );
+                
+            }
+                	        
 	        return redirect()->back()->with('success','Commply succesfully sent !!');
      	}
      }
@@ -254,8 +265,19 @@ class CommissionerController extends Controller
         if(Auth::user()->user_type == 4)
         TraderApply::where("id",'=',$request->id)->update(['status'=>4]);
 
-        if(Auth::user()->user_type == 3)
+        if(Auth::user()->user_type == 3){
         TraderApply::where("id",'=',$request->id)->update(['status'=>2]);
+
+            // for sending email to user for their comply
+            $body = TraderApply::where("id",'=',$request->id)->first();
+
+            Mail::send('email.comply', ['body' => $body], function($m) use ($body) {
+
+                $m->to($body->email,$body->name)->subject('Comply in Registration');
+
+            } );
+
+        }
         return redirect()->back()->with('success','Commply succesfully sent !!');
      }
 
