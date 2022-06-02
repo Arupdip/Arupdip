@@ -88,7 +88,7 @@ class CaController extends Controller
      *
      * @return view
      */
-public function fetchAmcByDistrict(Request $request){
+/*public function fetchAmcByDistrict(Request $request){
    $data['amc'] =  AMC::where('district_id',$request->district_id)->get();
     return response()->json($data);
 
@@ -96,7 +96,7 @@ public function fetchAmcByDistrict(Request $request){
 
 
 
-}
+	}*/
     /**
      * To save details of commision agent in User model.
      *
@@ -186,20 +186,22 @@ public function fetchAmcByDistrict(Request $request){
         $partner_document = $request->partner_document;
         $partner_share = $request->partner_share;
 
-        for($i=0; $i<count($partner_name); $i++){
+		if (isset($request->partner_name)) {
+			for ($i=0; $i<count($partner_name); $i++) {
 
-            if($partner_name[$i] !='' && $partner_document[$i]!= '' && $partner_share[$i]!='')
-            {
-            $inp = array(
-                "name" => $partner_name[$i],
-                "document" => $partner_document[$i],
-                "share" => $partner_share[$i],
-                "ca_apply_id" => $id);
+				if ($partner_name[$i] !='' && $partner_document[$i]!= '' && $partner_share[$i]!='') {
+					$inp = array(
+					"name" => $partner_name[$i],
+					"document" => $partner_document[$i],
+					"share" => $partner_share[$i],
+					"ca_apply_id" => $id);
 
-             DB::table('ca_partners_temp')->insertGetId($inp);
-        }
+					DB::table('ca_partners_temp')->insertGetId($inp);
+				}
 
-        }
+			}
+		}
+        
 
         $returnArr['success'] = true;
         $returnArr['message'] = $randomid;
